@@ -92,7 +92,7 @@
             try {
                 await signInWithPopup(auth, provider);
                 showNotification('Google sign-in successful!');
-                setTimeout(() => window.location.href = 'index.html', 1000);
+                window.location.href = 'index.html';
             } catch (error) {
                 showNotification('Google sign-in failed: ' + error.message);
             }
