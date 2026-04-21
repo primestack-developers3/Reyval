@@ -46,12 +46,6 @@
             box-shadow: 0 6px 25px rgba(212, 175, 55, .4);
             transform: translateY(-2px)
         }
-
-        input:focus {
-            outline: none;
-            border-color: var(--gold);
-            box-shadow: 0 0 0 2px rgba(212, 175, 55, .2);
-        }
     </style>
 </head>
 <body class="h-full flex items-center justify-center">
@@ -61,57 +55,9 @@
             <p class="text-xs opacity-50 uppercase tracking-widest">Access exclusive collections</p>
         </div>
 
-        <div id="loginForm">
-            <form onsubmit="handleLogin(event)">
-                <div class="mb-4">
-                    <label for="email" class="block text-sm font-medium mb-2">Email</label>
-                    <input type="email" id="email" required class="w-full px-4 py-3 bg-white/5 border border-white/10 rounded-xl text-cream placeholder-white/30 focus:border-[#D4AF37]">
-                </div>
-                <div class="mb-6">
-                    <label for="password" class="block text-sm font-medium mb-2">Password</label>
-                    <input type="password" id="password" required class="w-full px-4 py-3 bg-white/5 border border-white/10 rounded-xl text-cream placeholder-white/30 focus:border-[#D4AF37]">
-                </div>
-                <button type="submit" class="w-full btn-gold py-4 rounded-xl font-medium mb-4">Sign In</button>
-            </form>
-            <button onclick="toggleMode()" class="w-full py-3 border border-white/10 rounded-xl text-xs uppercase tracking-[0.2em] hover:bg-white/5 transition mb-4">
-                Don't have an account? Sign Up
-            </button>
-        </div>
-
-        <div id="signupForm" class="hidden">
-            <form onsubmit="handleSignup(event)">
-                <div class="mb-4">
-                    <label for="signupEmail" class="block text-sm font-medium mb-2">Email</label>
-                    <input type="email" id="signupEmail" required class="w-full px-4 py-3 bg-white/5 border border-white/10 rounded-xl text-cream placeholder-white/30 focus:border-[#D4AF37]">
-                </div>
-                <div class="mb-4">
-                    <label for="signupPassword" class="block text-sm font-medium mb-2">Password</label>
-                    <input type="password" id="signupPassword" required minlength="6" class="w-full px-4 py-3 bg-white/5 border border-white/10 rounded-xl text-cream placeholder-white/30 focus:border-[#D4AF37]">
-                </div>
-                <div class="mb-6">
-                    <label for="confirmPassword" class="block text-sm font-medium mb-2">Confirm Password</label>
-                    <input type="password" id="confirmPassword" required minlength="6" class="w-full px-4 py-3 bg-white/5 border border-white/10 rounded-xl text-cream placeholder-white/30 focus:border-[#D4AF37]">
-                </div>
-                <button type="submit" class="w-full btn-gold py-4 rounded-xl font-medium mb-4">Sign Up</button>
-            </form>
-            <button onclick="toggleMode()" class="w-full py-3 border border-white/10 rounded-xl text-xs uppercase tracking-[0.2em] hover:bg-white/5 transition mb-4">
-                Already have an account? Sign In
-            </button>
-        </div>
-
-        <div class="flex items-center gap-4 my-6 opacity-30">
-            <div class="h-[1px] bg-white flex-1"></div>
-            <span class="text-xs">OR</span>
-            <div class="h-[1px] bg-white flex-1"></div>
-        </div>
-
         <button onclick="handleGoogleSignIn()" class="w-full flex items-center justify-center gap-4 bg-white text-black py-4 rounded-xl font-medium hover:bg-gray-100 transition-all mb-4 shadow-lg group">
             <svg class="w-6 h-6 group-hover:scale-110 transition" viewBox="0 0 48 48"><path fill="#EA4335" d="M24 9.5c3.54 0 6.71 1.22 9.21 3.6l6.85-6.85C35.9 2.38 30.47 0 24 0 14.62 0 6.51 5.38 2.56 13.22l7.98 6.19C12.43 13.72 17.74 9.5 24 9.5z"/><path fill="#4285F4" d="M46.98 24.55c0-1.57-.15-3.09-.38-4.55H24v9.02h12.94c-.58 2.96-2.26 5.48-4.78 7.18l7.73 6c4.51-4.18 7.09-10.36 7.09-17.65z"/><path fill="#FBBC05" d="M10.53 28.59c-.48-1.45-.76-2.99-.76-4.59s.27-3.14.76-4.59l-7.98-6.19C.92 16.46 0 20.12 0 24c0 3.88.92 7.54 2.56 10.78l7.97-6.19z"/><path fill="#34A853" d="M24 48c6.48 0 11.93-2.13 15.89-5.81l-7.73-6c-2.15 1.45-4.92 2.3-8.16 2.3-6.26 0-11.57-4.22-13.47-9.91l-7.98 6.19C6.51 42.62 14.62 48 24 48z"/><path fill="none" d="M0 0h48v48H0z"/></svg>
             Sign in with Google
-        </button>
-
-        <button onclick="handleAnonymousSignIn()" class="w-full py-4 border border-white/10 rounded-xl text-xs uppercase tracking-[0.2em] hover:bg-white/5 transition">
-            Continue as Guest
         </button>
 
         <div class="text-center mt-6">
@@ -123,7 +69,7 @@
         // Import the functions you need from the SDKs you need
         import { initializeApp } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-app.js";
         import { getAnalytics } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-analytics.js";
-        import { getAuth, signInWithEmailAndPassword, createUserWithEmailAndPassword, signInWithPopup, GoogleAuthProvider, signInAnonymously } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-auth.js";
+        import { getAuth, signInWithPopup, GoogleAuthProvider } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-auth.js";
 
         // Your web app's Firebase configuration
         const firebaseConfig = {
@@ -142,40 +88,6 @@
         const auth = getAuth(app);
         const provider = new GoogleAuthProvider();
 
-        window.handleLogin = async (event) => {
-            event.preventDefault();
-            const email = document.getElementById('email').value;
-            const password = document.getElementById('password').value;
-
-            try {
-                await signInWithEmailAndPassword(auth, email, password);
-                showNotification('Login successful!');
-                setTimeout(() => window.location.href = 'index.html', 1000);
-            } catch (error) {
-                showNotification('Login failed: ' + error.message);
-            }
-        };
-
-        window.handleSignup = async (event) => {
-            event.preventDefault();
-            const email = document.getElementById('signupEmail').value;
-            const password = document.getElementById('signupPassword').value;
-            const confirmPassword = document.getElementById('confirmPassword').value;
-
-            if (password !== confirmPassword) {
-                showNotification('Passwords do not match');
-                return;
-            }
-
-            try {
-                await createUserWithEmailAndPassword(auth, email, password);
-                showNotification('Account created successfully!');
-                setTimeout(() => window.location.href = 'index.html', 1000);
-            } catch (error) {
-                showNotification('Signup failed: ' + error.message);
-            }
-        };
-
         window.handleGoogleSignIn = async () => {
             try {
                 await signInWithPopup(auth, provider);
@@ -184,23 +96,6 @@
             } catch (error) {
                 showNotification('Google sign-in failed: ' + error.message);
             }
-        };
-
-        window.handleAnonymousSignIn = async () => {
-            try {
-                await signInAnonymously(auth);
-                showNotification('Signed in as guest!');
-                setTimeout(() => window.location.href = 'index.html', 1000);
-            } catch (error) {
-                showNotification('Guest sign-in failed: ' + error.message);
-            }
-        };
-
-        window.toggleMode = () => {
-            const loginForm = document.getElementById('loginForm');
-            const signupForm = document.getElementById('signupForm');
-            loginForm.classList.toggle('hidden');
-            signupForm.classList.toggle('hidden');
         };
 
         window.showNotification = (msg) => {
