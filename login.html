@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login - Reyval</title>
+    <script src="https://cdn.tailwindcss.com/3.4.17"></script>
+    <script src="https://cdn.jsdelivr.net/npm/lucide@0.263.0/dist/umd/lucide.min.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --emerald: #0F3D2E;
+            --gold: #D4AF37;
+            --cream: #F5F5DC;
+            --dark: #0a0a0a;
+            --card-bg: #111a14
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box }
+
+        html, body {
+            height: 100%;
+            font-family: 'Jost', sans-serif;
+            background: var(--dark);
+            color: var(--cream);
+            overflow-x: hidden;
+        }
+
+        .font-display { font-family: 'Cormorant Garamond', serif }
+
+        .gold-gradient {
+            background: linear-gradient(135deg, #D4AF37, #f0d060, #D4AF37);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent
+        }
+
+        .btn-gold {
+            background: linear-gradient(135deg, #D4AF37, #c49b2f);
+            color: #0a0a0a;
+            transition: all .3s;
+            box-shadow: 0 4px 15px rgba(212, 175, 55, .2)
+        }
+
+        .btn-gold:hover {
+            background: linear-gradient(135deg, #e0c050, #D4AF37);
+            box-shadow: 0 6px 25px rgba(212, 175, 55, .4);
+            transform: translateY(-2px)
+        }
+
+        input:focus {
+            outline: none;
+            border-color: var(--gold);
+            box-shadow: 0 0 0 2px rgba(212, 175, 55, .2);
+        }
+    </style>
+</head>
+<body class="h-full flex items-center justify-center">
+    <div class="w-full max-w-md bg-[#111a14] p-10 rounded-3xl border border-[#D4AF37]/20 shadow-2xl">
+        <div class="text-center mb-10">
+            <div class="font-display text-3xl gold-gradient mb-2">Welcome to Reyval</div>
+            <p class="text-xs opacity-50 uppercase tracking-widest">Access exclusive collections</p>
+        </div>
+
+        <div id="loginForm">
+            <form onsubmit="handleLogin(event)">
+                <div class="mb-4">
+                    <label for="email" class="block text-sm font-medium mb-2">Email</label>
+                    <input type="email" id="email" required class="w-full px-4 py-3 bg-white/5 border border-white/10 rounded-xl text-cream placeholder-white/30 focus:border-[#D4AF37]">
+                </div>
+                <div class="mb-6">
+                    <label for="password" class="block text-sm font-medium mb-2">Password</label>
+                    <input type="password" id="password" required class="w-full px-4 py-3 bg-white/5 border border-white/10 rounded-xl text-cream placeholder-white/30 focus:border-[#D4AF37]">
+                </div>
+                <button type="submit" class="w-full btn-gold py-4 rounded-xl font-medium mb-4">Sign In</button>
+            </form>
+            <button onclick="toggleMode()" class="w-full py-3 border border-white/10 rounded-xl text-xs uppercase tracking-[0.2em] hover:bg-white/5 transition mb-4">
+                Don't have an account? Sign Up
+            </button>
+        </div>
+
+        <div id="signupForm" class="hidden">
+            <form onsubmit="handleSignup(event)">
+                <div class="mb-4">
+                    <label for="signupEmail" class="block text-sm font-medium mb-2">Email</label>
+                    <input type="email" id="signupEmail" required class="w-full px-4 py-3 bg-white/5 border border-white/10 rounded-xl text-cream placeholder-white/30 focus:border-[#D4AF37]">
+                </div>
+                <div class="mb-4">
+                    <label for="signupPassword" class="block text-sm font-medium mb-2">Password</label>
+                    <input type="password" id="signupPassword" required minlength="6" class="w-full px-4 py-3 bg-white/5 border border-white/10 rounded-xl text-cream placeholder-white/30 focus:border-[#D4AF37]">
+                </div>
+                <div class="mb-6">
+                    <label for="confirmPassword" class="block text-sm font-medium mb-2">Confirm Password</label>
+                    <input type="password" id="confirmPassword" required minlength="6" class="w-full px-4 py-3 bg-white/5 border border-white/10 rounded-xl text-cream placeholder-white/30 focus:border-[#D4AF37]">
+                </div>
+                <button type="submit" class="w-full btn-gold py-4 rounded-xl font-medium mb-4">Sign Up</button>
+            </form>
+            <button onclick="toggleMode()" class="w-full py-3 border border-white/10 rounded-xl text-xs uppercase tracking-[0.2em] hover:bg-white/5 transition mb-4">
+                Already have an account? Sign In
+            </button>
+        </div>
+
+        <div class="flex items-center gap-4 my-6 opacity-30">
+            <div class="h-[1px] bg-white flex-1"></div>
+            <span class="text-xs">OR</span>
+            <div class="h-[1px] bg-white flex-1"></div>
+        </div>
+
+        <button onclick="handleGoogleSignIn()" class="w-full flex items-center justify-center gap-4 bg-white text-black py-4 rounded-xl font-medium hover:bg-gray-100 transition-all mb-4 shadow-lg group">
+            <svg class="w-6 h-6 group-hover:scale-110 transition" viewBox="0 0 48 48"><path fill="#EA4335" d="M24 9.5c3.54 0 6.71 1.22 9.21 3.6l6.85-6.85C35.9 2.38 30.47 0 24 0 14.62 0 6.51 5.38 2.56 13.22l7.98 6.19C12.43 13.72 17.74 9.5 24 9.5z"/><path fill="#4285F4" d="M46.98 24.55c0-1.57-.15-3.09-.38-4.55H24v9.02h12.94c-.58 2.96-2.26 5.48-4.78 7.18l7.73 6c4.51-4.18 7.09-10.36 7.09-17.65z"/><path fill="#FBBC05" d="M10.53 28.59c-.48-1.45-.76-2.99-.76-4.59s.27-3.14.76-4.59l-7.98-6.19C.92 16.46 0 20.12 0 24c0 3.88.92 7.54 2.56 10.78l7.97-6.19z"/><path fill="#34A853" d="M24 48c6.48 0 11.93-2.13 15.89-5.81l-7.73-6c-2.15 1.45-4.92 2.3-8.16 2.3-6.26 0-11.57-4.22-13.47-9.91l-7.98 6.19C6.51 42.62 14.62 48 24 48z"/><path fill="none" d="M0 0h48v48H0z"/></svg>
+            Sign in with Google
+        </button>
+
+        <button onclick="handleAnonymousSignIn()" class="w-full py-4 border border-white/10 rounded-xl text-xs uppercase tracking-[0.2em] hover:bg-white/5 transition">
+            Continue as Guest
+        </button>
+
+        <div class="text-center mt-6">
+            <a href="index.html" class="text-xs opacity-50 hover:opacity-100 transition">← Back to Home</a>
+        </div>
+    </div>
+
+    <script type="module">
+        // Import the functions you need from the SDKs you need
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-app.js";
+        import { getAnalytics } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-analytics.js";
+        import { getAuth, signInWithEmailAndPassword, createUserWithEmailAndPassword, signInWithPopup, GoogleAuthProvider, signInAnonymously } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-auth.js";
+
+        // Your web app's Firebase configuration
+        const firebaseConfig = {
+            apiKey: "AIzaSyAWVzmVR5FEY89Mt4F77YOfDB8erQulmo0",
+            authDomain: "reyval-f29a1.firebaseapp.com",
+            projectId: "reyval-f29a1",
+            storageBucket: "reyval-f29a1.firebasestorage.app",
+            messagingSenderId: "369213214446",
+            appId: "1:369213214446:web:5647633b6b6e67571dadff",
+            measurementId: "G-K310ZGC36T"
+        };
+
+        // Initialize Firebase
+        const app = initializeApp(firebaseConfig);
+        const analytics = getAnalytics(app);
+        const auth = getAuth(app);
+        const provider = new GoogleAuthProvider();
+
+        window.handleLogin = async (event) => {
+            event.preventDefault();
+            const email = document.getElementById('email').value;
+            const password = document.getElementById('password').value;
+
+            try {
+                await signInWithEmailAndPassword(auth, email, password);
+                showNotification('Login successful!');
+                setTimeout(() => window.location.href = 'index.html', 1000);
+            } catch (error) {
+                showNotification('Login failed: ' + error.message);
+            }
+        };
+
+        window.handleSignup = async (event) => {
+            event.preventDefault();
+            const email = document.getElementById('signupEmail').value;
+            const password = document.getElementById('signupPassword').value;
+            const confirmPassword = document.getElementById('confirmPassword').value;
+
+            if (password !== confirmPassword) {
+                showNotification('Passwords do not match');
+                return;
+            }
+
+            try {
+                await createUserWithEmailAndPassword(auth, email, password);
+                showNotification('Account created successfully!');
+                setTimeout(() => window.location.href = 'index.html', 1000);
+            } catch (error) {
+                showNotification('Signup failed: ' + error.message);
+            }
+        };
+
+        window.handleGoogleSignIn = async () => {
+            try {
+                await signInWithPopup(auth, provider);
+                showNotification('Google sign-in successful!');
+                setTimeout(() => window.location.href = 'index.html', 1000);
+            } catch (error) {
+                showNotification('Google sign-in failed: ' + error.message);
+            }
+        };
+
+        window.handleAnonymousSignIn = async () => {
+            try {
+                await signInAnonymously(auth);
+                showNotification('Signed in as guest!');
+                setTimeout(() => window.location.href = 'index.html', 1000);
+            } catch (error) {
+                showNotification('Guest sign-in failed: ' + error.message);
+            }
+        };
+
+        window.toggleMode = () => {
+            const loginForm = document.getElementById('loginForm');
+            const signupForm = document.getElementById('signupForm');
+            loginForm.classList.toggle('hidden');
+            signupForm.classList.toggle('hidden');
+        };
+
+        window.showNotification = (msg) => {
+            const n = document.createElement('div');
+            n.className = "fixed bottom-10 left-1/2 -translate-x-1/2 bg-[#D4AF37] text-black px-6 py-3 rounded-full text-xs font-bold z-[200] animate-bounce";
+            n.textContent = msg;
+            document.body.appendChild(n);
+            setTimeout(() => n.remove(), 3000);
+        };
+
+        lucide.createIcons();
+    </script>
+</body>
+</html>
