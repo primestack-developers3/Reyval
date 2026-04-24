@@ -1,10 +1,15 @@
+<!DOCTYPE html>
 <html lang="en" class="h-full">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Reyval — Luxury Fashion</title>
+    <title>Reyval - Luxury Fashion</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preconnect" href="https://www.gstatic.com" crossorigin>
+    <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
     <script src="https://cdn.tailwindcss.com/3.4.17"></script>
-    <script src="https://cdn.jsdelivr.net/npm/lucide@0.263.0/dist/umd/lucide.min.js"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/lucide@0.263.0/dist/umd/lucide.min.js"></script>
     <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet">
     <style>
         :root {
@@ -12,206 +17,365 @@
             --gold: #D4AF37;
             --cream: #F5F5DC;
             --dark: #0a0a0a;
-            --card-bg: #111a14
+            --card-bg: #111a14;
+            --card-border: rgba(255, 255, 255, 0.06);
         }
 
-        * { margin: 0; padding: 0; box-sizing: border-box }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
 
         html, body {
             height: 100%;
-            font-family: 'Jost', sans-serif;
+            font-family: "Jost", sans-serif;
             background: var(--dark);
             color: var(--cream);
             overflow-x: hidden;
         }
 
-        .font-display { font-family: 'Cormorant Garamond', serif }
+        .font-display { font-family: "Cormorant Garamond", serif; }
 
         .gold-gradient {
             background: linear-gradient(135deg, #D4AF37, #f0d060, #D4AF37);
             -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent
+            -webkit-text-fill-color: transparent;
         }
 
         @keyframes fadeUp {
-            from { opacity: 0; transform: translateY(30px) }
-            to { opacity: 1; transform: translateY(0) }
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
         }
 
-        @keyframes fadeIn { from { opacity: 0 } to { opacity: 1 } }
-
-        @keyframes pulse-glow {
-            0%, 100% { box-shadow: 0 0 20px rgba(212, 175, 55, .3) }
-            50% { box-shadow: 0 0 40px rgba(212, 175, 55, .6) }
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
         }
 
-        .anim-up { animation: fadeUp .8s ease both }
-        .anim-up-d1 { animation: fadeUp .8s .15s ease both }
-        .anim-up-d2 { animation: fadeUp .8s .3s ease both }
-        .anim-up-d3 { animation: fadeUp .8s .45s ease both }
+        @keyframes pulseGlow {
+            0%, 100% { box-shadow: 0 0 20px rgba(212, 175, 55, 0.26); }
+            50% { box-shadow: 0 0 36px rgba(212, 175, 55, 0.5); }
+        }
+
+        .anim-up { animation: fadeUp .8s ease both; }
+        .anim-up-d1 { animation: fadeUp .8s .15s ease both; }
+        .anim-up-d2 { animation: fadeUp .8s .3s ease both; }
+        .anim-up-d3 { animation: fadeUp .8s .45s ease both; }
+        .page-transition { animation: fadeIn .35s ease; }
+        .nav-blur { backdrop-filter: blur(20px); background: rgba(10, 10, 10, .86); }
+        .crown-icon { display: inline-block; animation: pulseGlow 2.2s infinite; }
 
         .product-card {
-            transition: transform .4s ease, box-shadow .4s ease, background .3s ease;
-            background: #111a14;
-            border: 1px solid rgba(255,255,255,0.05);
+            background: linear-gradient(180deg, rgba(17, 26, 20, 0.98), rgba(10, 10, 10, 0.96));
+            border: 1px solid var(--card-border);
+            transition: transform .35s ease, box-shadow .35s ease, border-color .25s ease;
+            box-shadow: 0 18px 50px rgba(0, 0, 0, 0.18);
         }
 
         .product-card:hover {
             transform: translateY(-8px);
-            box-shadow: 0 25px 60px rgba(212, 175, 55, .15);
-            background: rgba(212, 175, 55, .05)
+            border-color: rgba(212, 175, 55, 0.28);
+            box-shadow: 0 28px 70px rgba(212, 175, 55, 0.12);
+        }
+
+        .product-badge {
+            width: 5rem;
+            height: 5rem;
+            border-radius: 999px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.25rem;
+            letter-spacing: .28em;
+            text-transform: uppercase;
+            font-weight: 600;
+            background: radial-gradient(circle at 30% 30%, rgba(240, 208, 96, 0.24), rgba(212, 175, 55, 0.08) 45%, rgba(15, 61, 46, 0.78));
+            border: 1px solid rgba(212, 175, 55, 0.24);
+            color: var(--gold);
         }
 
         .btn-gold {
             background: linear-gradient(135deg, #D4AF37, #c49b2f);
             color: #0a0a0a;
-            transition: all .3s;
-            box-shadow: 0 4px 15px rgba(212, 175, 55, .2)
+            transition: transform .25s ease, box-shadow .25s ease, filter .25s ease;
+            box-shadow: 0 4px 15px rgba(212, 175, 55, 0.2);
         }
 
         .btn-gold:hover {
-            background: linear-gradient(135deg, #e0c050, #D4AF37);
-            box-shadow: 0 6px 25px rgba(212, 175, 55, .4);
-            transform: translateY(-2px)
+            filter: brightness(1.06);
+            transform: translateY(-2px);
+            box-shadow: 0 10px 26px rgba(212, 175, 55, 0.34);
         }
 
         .btn-wa {
             background: linear-gradient(135deg, #25d366, #128c4e);
             color: #fff;
-            transition: all .3s;
+            transition: transform .25s ease, box-shadow .25s ease;
         }
 
-        .page-transition { animation: fadeIn .5s ease }
-        .nav-blur { backdrop-filter: blur(20px); background: rgba(10, 10, 10, .85) }
-        .crown-icon { display: inline-block; animation: pulse-glow 2s infinite }
-        
+        .btn-wa:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 12px 28px rgba(37, 211, 102, 0.18);
+        }
+
+        .setup-step { display: none; }
+        .setup-step.active { display: block; animation: fadeIn .35s ease; }
+
+        .auth-hero {
+            background:
+                radial-gradient(circle at top left, rgba(212, 175, 55, 0.22), transparent 34%),
+                radial-gradient(circle at bottom right, rgba(15, 61, 46, 0.9), transparent 46%),
+                linear-gradient(145deg, rgba(10, 10, 10, 0.98), rgba(17, 26, 20, 0.96));
+            border: 1px solid rgba(212, 175, 55, 0.14);
+            box-shadow: 0 30px 90px rgba(0, 0, 0, 0.34);
+        }
+
+        .auth-panel {
+            background: linear-gradient(180deg, rgba(17, 26, 20, 0.98), rgba(10, 10, 10, 0.96));
+            border: 1px solid rgba(212, 175, 55, 0.18);
+            box-shadow: 0 24px 70px rgba(0, 0, 0, 0.36);
+        }
+
+        .auth-tab {
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            background: rgba(255, 255, 255, 0.03);
+            color: rgba(245, 245, 220, 0.62);
+            transition: all .25s ease;
+        }
+
+        .auth-tab.active {
+            border-color: rgba(212, 175, 55, 0.55);
+            background: rgba(212, 175, 55, 0.14);
+            color: var(--cream);
+            box-shadow: inset 0 0 0 1px rgba(212, 175, 55, 0.2);
+        }
+
+        .auth-input {
+            background: rgba(255, 255, 255, 0.04);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            transition: border-color .2s ease, background .2s ease, transform .2s ease;
+        }
+
+        .auth-input:focus {
+            border-color: rgba(212, 175, 55, 0.7);
+            background: rgba(255, 255, 255, 0.06);
+            transform: translateY(-1px);
+        }
+
+        .auth-feedback {
+            border: 1px solid transparent;
+            border-radius: 1rem;
+            padding: .9rem 1rem;
+            font-size: .85rem;
+            line-height: 1.45;
+        }
+
+        .auth-feedback.info {
+            background: rgba(212, 175, 55, 0.08);
+            border-color: rgba(212, 175, 55, 0.22);
+            color: rgba(245, 245, 220, 0.92);
+        }
+
+        .auth-feedback.success {
+            background: rgba(37, 211, 102, 0.08);
+            border-color: rgba(37, 211, 102, 0.2);
+            color: #b9f7d0;
+        }
+
+        .auth-feedback.error {
+            background: rgba(248, 113, 113, 0.1);
+            border-color: rgba(248, 113, 113, 0.25);
+            color: #fecaca;
+        }
+
+        .auth-feedback.warning {
+            background: rgba(250, 204, 21, 0.08);
+            border-color: rgba(250, 204, 21, 0.24);
+            color: #fde68a;
+        }
+
         ::-webkit-scrollbar { width: 6px; }
         ::-webkit-scrollbar-track { background: #0a0a0a; }
         ::-webkit-scrollbar-thumb { background: #D4AF37; border-radius: 3px; }
 
-        #loading-overlay {
-            position: fixed; inset: 0; background: #0a0a0a; z-index: 9999;
-            display: flex; flex-direction: column; align-items: center; justify-content: center;
-            transition: opacity 0.5s;
+        @media (prefers-reduced-motion: reduce) {
+            *, *::before, *::after {
+                animation: none !important;
+                transition: none !important;
+                scroll-behavior: auto !important;
+            }
         }
-
-        .setup-step { display: none; }
-        .setup-step.active { display: block; animation: fadeIn 0.5s ease; }
     </style>
 </head>
 <body class="h-full">
-    <div id="loading-overlay">
-        <div class="font-display text-4xl gold-gradient mb-4">REYVAL</div>
-        <div class="w-12 h-12 border-4 border-[#D4AF37]/20 border-t-[#D4AF37] rounded-full animate-spin"></div>
-    </div>
-
     <div id="app" class="h-full overflow-auto w-full">
         <nav class="nav-blur fixed top-0 left-0 w-full z-50 border-b border-white/5">
             <div class="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between gap-4">
                 <button onclick="navigatePage('home')" class="font-display text-2xl md:text-3xl font-bold tracking-widest gold-gradient hover:opacity-80 transition whitespace-nowrap">REYVAL</button>
                 <div class="hidden md:flex items-center gap-8 text-sm tracking-wider uppercase flex-1" style="color:var(--cream)">
-                    <button onclick="navigatePage('men')" class="hover:text-[#D4AF37] transition py-1">Men</button> 
-                    <button onclick="navigatePage('women')" class="hover:text-[#D4AF37] transition py-1">Women</button> 
-                    <button onclick="navigatePage('kids')" class="hover:text-[#D4AF37] transition py-1">Kids</button> 
-                    <button onclick="navigatePage('accessories')" class="hover:text-[#D4AF37] transition py-1">Accessories</button> 
-                    <button onclick="navigatePage('search')" class="hover:text-[#D4AF37] transition py-1 flex items-center gap-1"><i data-lucide="search" style="width:16px;height:16px"></i>Search</button> 
+                    <button onclick="navigatePage('men')" class="hover:text-[#D4AF37] transition py-1">Men</button>
+                    <button onclick="navigatePage('women')" class="hover:text-[#D4AF37] transition py-1">Women</button>
+                    <button onclick="navigatePage('kids')" class="hover:text-[#D4AF37] transition py-1">Kids</button>
+                    <button onclick="navigatePage('accessories')" class="hover:text-[#D4AF37] transition py-1">Accessories</button>
+                    <button onclick="navigatePage('search')" class="hover:text-[#D4AF37] transition py-1 flex items-center gap-1">
+                        <i data-lucide="search" style="width:16px;height:16px"></i>Search
+                    </button>
                     <button onclick="navigatePage('foryou')" class="hover:text-[#D4AF37] transition py-1">For You</button>
                 </div>
                 <div class="flex items-center gap-3">
                     <button onclick="openCart()" class="relative" style="color:var(--gold)">
                         <i data-lucide="shopping-bag" style="width:24px;height:24px"></i>
                         <span id="cart-badge" class="absolute -top-2 -right-2 w-5 h-5 rounded-full text-[10px] flex items-center justify-center font-bold hidden" style="background:var(--gold);color:#0a0a0a">0</span>
-                    </button> 
-                    <button onclick="toggleUserMenu()" class="relative" style="color:var(--gold)"><i data-lucide="user" style="width:24px;height:24px"></i></button> 
-                    <button onclick="document.getElementById('mobileMenu').classList.toggle('hidden')" class="md:hidden" style="color:var(--gold)"><i data-lucide="menu" style="width:24px;height:24px"></i></button>
+                    </button>
+                    <button id="userMenuButton" onclick="toggleUserMenu()" class="relative" style="color:var(--gold)">
+                        <i data-lucide="user" style="width:24px;height:24px"></i>
+                    </button>
+                    <button id="mobileMenuButton" onclick="toggleMobileMenu()" class="md:hidden" style="color:var(--gold)">
+                        <i data-lucide="menu" style="width:24px;height:24px"></i>
+                    </button>
                 </div>
             </div>
-            <div id="userMenu" class="hidden absolute top-16 right-6 rounded-lg p-3 z-40" style="background:#0d1f16;border:1px solid rgba(212,175,55,.2);min-width:180px">
+
+            <div id="mobileMenu" class="md:hidden hidden border-t border-white/5 px-6 pb-5">
+                <div class="flex flex-col gap-2 pt-4 text-sm uppercase tracking-[0.24em]">
+                    <button onclick="navigatePage('men')" class="text-left py-2 hover:text-[#D4AF37] transition">Men</button>
+                    <button onclick="navigatePage('women')" class="text-left py-2 hover:text-[#D4AF37] transition">Women</button>
+                    <button onclick="navigatePage('kids')" class="text-left py-2 hover:text-[#D4AF37] transition">Kids</button>
+                    <button onclick="navigatePage('accessories')" class="text-left py-2 hover:text-[#D4AF37] transition">Accessories</button>
+                    <button onclick="navigatePage('search')" class="text-left py-2 hover:text-[#D4AF37] transition">Search</button>
+                    <button onclick="navigatePage('foryou')" class="text-left py-2 hover:text-[#D4AF37] transition">For You</button>
+                    <button onclick="navigatePage('login')" class="text-left py-2 hover:text-[#D4AF37] transition">Account</button>
+                </div>
+            </div>
+
+            <div id="userMenu" class="hidden absolute top-16 right-6 rounded-lg p-3 z-40" style="background:#0d1f16;border:1px solid rgba(212,175,55,.2);min-width:220px">
                 <div id="user-menu-content">
-                    <button onclick="window.location.href='login.html'" class="block w-full text-left px-3 py-2 text-sm rounded hover:bg-emerald-900/30 transition">🔑 Sign In</button>
+                    <button onclick="navigatePage('login')" class="block w-full text-left px-3 py-2 text-sm rounded hover:bg-emerald-900/30 transition">Sign In</button>
                 </div>
             </div>
         </nav>
 
         <main id="mainContent">
-            <!-- HOME PAGE -->
             <div id="homePage" class="page-transition">
-                <section class="relative w-full h-screen flex items-center" style="background:linear-gradient(160deg,#0a0a0a 0%,#0F3D2E 50%,#0a0a0a 100%)">
-                    <div class="relative z-10 max-w-7xl mx-auto px-6 text-center w-full">
-                        <div class="anim-up mb-4 tracking-[.4em] text-xs uppercase" style="color:var(--gold)">✦ Est. 2024 ✦</div>
+                <section class="relative w-full min-h-screen flex items-center" style="background:linear-gradient(160deg,#0a0a0a 0%,#0F3D2E 50%,#0a0a0a 100%)">
+                    <div class="relative z-10 max-w-7xl mx-auto px-6 text-center w-full pt-24 pb-12">
+                        <div class="anim-up mb-4 tracking-[.4em] text-xs uppercase" style="color:var(--gold)">Est. 2024</div>
                         <h1 class="font-display text-6xl md:text-9xl font-light tracking-wider anim-up-d1 gold-gradient">REYVAL</h1>
                         <p class="font-display text-xl md:text-3xl italic font-light mt-4 anim-up-d2 opacity-80">Redefine Your Elegance</p>
+                        <p class="max-w-2xl mx-auto mt-6 text-white/70 leading-7 anim-up-d2">
+                            The storefront now loads immediately, and sign-in happens in the background so visitors can start exploring without waiting on a full-screen loader.
+                        </p>
                         <div class="mt-10 anim-up-d3 flex gap-4 flex-wrap justify-center">
                             <button onclick="navigatePage('men')" class="btn-gold px-10 py-4 text-sm tracking-widest uppercase font-medium">Explore Collection</button>
+                            <button onclick="navigatePage('login')" class="px-10 py-4 text-sm tracking-widest uppercase font-medium border border-[#D4AF37]/30 rounded-xl hover:bg-[#D4AF37]/10 transition">Member Login</button>
                         </div>
                     </div>
                 </section>
             </div>
 
-            <!-- LOGIN PAGE -->
-            <div id="loginPage" class="hidden page-transition pt-32 pb-12 px-6 flex items-center justify-center">
-                <div class="w-full max-w-md bg-[#111a14] p-10 rounded-3xl border border-[#D4AF37]/20 shadow-2xl">
-                    <div class="text-center mb-10">
-                        <div class="font-display text-3xl gold-gradient mb-2">Welcome to Reyval</div>
-                        <p class="text-xs opacity-50 uppercase tracking-widest">Access exclusive collections</p>
-                    </div>
-                    <div id="loginForm">
-                        <form onsubmit="handleEmailLogin(event)">
-                            <div class="mb-4">
-                                <label for="email" class="block text-sm font-medium mb-2">Email</label>
-                                <input type="email" id="email" required class="w-full px-4 py-3 bg-white/5 border border-white/10 rounded-xl text-cream placeholder-white/30 focus:border-[#D4AF37] focus:outline-none">
+            <div id="loginPage" class="hidden page-transition pt-28 pb-12 px-6">
+                <div class="max-w-6xl mx-auto grid lg:grid-cols-[1.05fr_.95fr] gap-8 items-stretch">
+                    <section class="auth-hero rounded-[2rem] p-8 md:p-12 flex flex-col justify-between overflow-hidden relative">
+                        <div class="relative z-10">
+                            <p class="text-xs uppercase tracking-[0.38em] text-[#D4AF37] mb-4">Member Access</p>
+                            <h2 class="font-display text-5xl md:text-6xl leading-none gold-gradient">A faster way into Reyval.</h2>
+                            <p class="mt-6 max-w-xl text-base md:text-lg text-white/72 leading-7">
+                                Sign in once and move through the storefront instantly. Your profile, style picks, and checkout-ready bag stay connected to your Firebase account.
+                            </p>
+                        </div>
+                        <div class="grid sm:grid-cols-3 gap-4 mt-10 relative z-10">
+                            <div class="rounded-2xl p-5 bg-black/20 border border-white/10">
+                                <div class="text-xs uppercase tracking-[0.28em] text-white/40 mb-2">Speed</div>
+                                <div class="font-display text-2xl text-[#D4AF37] mb-2">Instant</div>
+                                <p class="text-sm text-white/65">No startup screen blocks the storefront while auth connects.</p>
                             </div>
-                            <div class="mb-6">
-                                <label for="password" class="block text-sm font-medium mb-2">Password</label>
-                                <input type="password" id="password" required class="w-full px-4 py-3 bg-white/5 border border-white/10 rounded-xl text-cream placeholder-white/30 focus:border-[#D4AF37] focus:outline-none">
+                            <div class="rounded-2xl p-5 bg-black/20 border border-white/10">
+                                <div class="text-xs uppercase tracking-[0.28em] text-white/40 mb-2">Security</div>
+                                <div class="font-display text-2xl text-[#D4AF37] mb-2">Firebase</div>
+                                <p class="text-sm text-white/65">Google, email, and guest access all run through your live project credentials.</p>
                             </div>
-                            <button type="submit" class="w-full btn-gold py-4 rounded-xl font-medium mb-4">Sign In</button>
-                        </form>
-                        <button onclick="toggleLoginMode()" class="w-full py-3 border border-white/10 rounded-xl text-xs uppercase tracking-[0.2em] hover:bg-white/5 transition mb-4">
-                            Don't have an account? Sign Up
+                            <div class="rounded-2xl p-5 bg-black/20 border border-white/10">
+                                <div class="text-xs uppercase tracking-[0.28em] text-white/40 mb-2">Personal</div>
+                                <div class="font-display text-2xl text-[#D4AF37] mb-2">Tailored</div>
+                                <p class="text-sm text-white/65">Save preferences once and get a cleaner personal storefront.</p>
+                            </div>
+                        </div>
+                    </section>
+
+                    <section class="auth-panel rounded-[2rem] p-8 md:p-10">
+                        <div class="flex items-start justify-between gap-4 mb-8">
+                            <div>
+                                <div id="authModeTitle" class="font-display text-4xl gold-gradient">Welcome back</div>
+                                <p id="authModeText" class="mt-2 text-sm text-white/55 uppercase tracking-[0.24em]">Use your Reyval member account</p>
+                            </div>
+                            <div class="rounded-full border border-[#D4AF37]/20 bg-[#D4AF37]/10 px-4 py-2 text-[11px] uppercase tracking-[0.28em] text-[#D4AF37]">
+                                Secure Login
+                            </div>
+                        </div>
+
+                        <div class="grid grid-cols-2 gap-3 mb-6">
+                            <button type="button" data-auth-tab="signin" onclick="setAuthMode('signin')" class="auth-tab active rounded-2xl px-4 py-3 text-sm font-medium">Sign In</button>
+                            <button type="button" data-auth-tab="signup" onclick="setAuthMode('signup')" class="auth-tab rounded-2xl px-4 py-3 text-sm font-medium">Create Account</button>
+                        </div>
+
+                        <div id="authFeedback" class="hidden auth-feedback info mb-6"></div>
+
+                        <div id="signInPanel">
+                            <form onsubmit="handleEmailLogin(event)" class="space-y-4">
+                                <div>
+                                    <label for="email" class="block text-sm font-medium mb-2">Email</label>
+                                    <input type="email" id="email" required class="auth-input w-full px-4 py-3 rounded-xl text-cream placeholder-white/30 focus:outline-none" placeholder="name@example.com">
+                                </div>
+                                <div>
+                                    <label for="password" class="block text-sm font-medium mb-2">Password</label>
+                                    <input type="password" id="password" required class="auth-input w-full px-4 py-3 rounded-xl text-cream placeholder-white/30 focus:outline-none" placeholder="Enter your password">
+                                </div>
+                                <button type="submit" data-auth-control class="w-full btn-gold py-4 rounded-xl font-medium">
+                                    <span id="signInSubmitLabel">Sign In</span>
+                                </button>
+                            </form>
+                        </div>
+
+                        <div id="signUpPanel" class="hidden">
+                            <form onsubmit="handleEmailSignup(event)" class="space-y-4">
+                                <div>
+                                    <label for="signupName" class="block text-sm font-medium mb-2">Full Name</label>
+                                    <input type="text" id="signupName" required class="auth-input w-full px-4 py-3 rounded-xl text-cream placeholder-white/30 focus:outline-none" placeholder="Your name">
+                                </div>
+                                <div>
+                                    <label for="signupEmail" class="block text-sm font-medium mb-2">Email</label>
+                                    <input type="email" id="signupEmail" required class="auth-input w-full px-4 py-3 rounded-xl text-cream placeholder-white/30 focus:outline-none" placeholder="name@example.com">
+                                </div>
+                                <div>
+                                    <label for="signupPassword" class="block text-sm font-medium mb-2">Password</label>
+                                    <input type="password" id="signupPassword" required minlength="6" class="auth-input w-full px-4 py-3 rounded-xl text-cream placeholder-white/30 focus:outline-none" placeholder="At least 6 characters">
+                                </div>
+                                <div>
+                                    <label for="confirmPassword" class="block text-sm font-medium mb-2">Confirm Password</label>
+                                    <input type="password" id="confirmPassword" required minlength="6" class="auth-input w-full px-4 py-3 rounded-xl text-cream placeholder-white/30 focus:outline-none" placeholder="Repeat your password">
+                                </div>
+                                <button type="submit" data-auth-control class="w-full btn-gold py-4 rounded-xl font-medium">
+                                    <span id="signUpSubmitLabel">Create Account</span>
+                                </button>
+                            </form>
+                        </div>
+
+                        <div class="flex items-center gap-4 my-7 opacity-35">
+                            <div class="h-[1px] bg-white flex-1"></div>
+                            <span class="text-xs uppercase tracking-[0.28em]">Or</span>
+                            <div class="h-[1px] bg-white flex-1"></div>
+                        </div>
+
+                        <button id="googleSignInBtn" data-auth-control onclick="handleGoogleSignIn()" class="w-full flex items-center justify-center gap-4 bg-white text-black py-4 rounded-xl font-medium hover:bg-gray-100 transition-all mb-4 shadow-lg group">
+                            <svg class="w-6 h-6 group-hover:scale-110 transition" viewBox="0 0 48 48" aria-hidden="true"><path fill="#EA4335" d="M24 9.5c3.54 0 6.71 1.22 9.21 3.6l6.85-6.85C35.9 2.38 30.47 0 24 0 14.62 0 6.51 5.38 2.56 13.22l7.98 6.19C12.43 13.72 17.74 9.5 24 9.5z"/><path fill="#4285F4" d="M46.98 24.55c0-1.57-.15-3.09-.38-4.55H24v9.02h12.94c-.58 2.96-2.26 5.48-4.78 7.18l7.73 6c4.51-4.18 7.09-10.36 7.09-17.65z"/><path fill="#FBBC05" d="M10.53 28.59c-.48-1.45-.76-2.99-.76-4.59s.27-3.14.76-4.59l-7.98-6.19C.92 16.46 0 20.12 0 24c0 3.88.92 7.54 2.56 10.78l7.97-6.19z"/><path fill="#34A853" d="M24 48c6.48 0 11.93-2.13 15.89-5.81l-7.73-6c-2.15 1.45-4.92 2.3-8.16 2.3-6.26 0-11.57-4.22-13.47-9.91l-7.98 6.19C6.51 42.62 14.62 48 24 48z"/><path fill="none" d="M0 0h48v48H0z"/></svg>
+                            Continue with Google
                         </button>
-                    </div>
 
-                    <div id="signupForm" class="hidden">
-                        <form onsubmit="handleEmailSignup(event)">
-                            <div class="mb-4">
-                                <label for="signupEmail" class="block text-sm font-medium mb-2">Email</label>
-                                <input type="email" id="signupEmail" required class="w-full px-4 py-3 bg-white/5 border border-white/10 rounded-xl text-cream placeholder-white/30 focus:border-[#D4AF37] focus:outline-none">
-                            </div>
-                            <div class="mb-4">
-                                <label for="signupPassword" class="block text-sm font-medium mb-2">Password</label>
-                                <input type="password" id="signupPassword" required minlength="6" class="w-full px-4 py-3 bg-white/5 border border-white/10 rounded-xl text-cream placeholder-white/30 focus:border-[#D4AF37] focus:outline-none">
-                            </div>
-                            <div class="mb-6">
-                                <label for="confirmPassword" class="block text-sm font-medium mb-2">Confirm Password</label>
-                                <input type="password" id="confirmPassword" required minlength="6" class="w-full px-4 py-3 bg-white/5 border border-white/10 rounded-xl text-cream placeholder-white/30 focus:border-[#D4AF37] focus:outline-none">
-                            </div>
-                            <button type="submit" class="w-full btn-gold py-4 rounded-xl font-medium mb-4">Sign Up</button>
-                        </form>
-                        <button onclick="toggleLoginMode()" class="w-full py-3 border border-white/10 rounded-xl text-xs uppercase tracking-[0.2em] hover:bg-white/5 transition mb-4">
-                            Already have an account? Sign In
+                        <button type="button" data-auth-control onclick="handleAnonymousSignIn()" class="w-full py-4 border border-white/10 rounded-xl text-xs uppercase tracking-[0.22em] hover:bg-white/5 transition">
+                            Continue as Guest
                         </button>
-                    </div>
-
-                    <div class="flex items-center gap-4 my-6 opacity-30">
-                        <div class="h-[1px] bg-white flex-1"></div>
-                        <span class="text-xs">OR</span>
-                        <div class="h-[1px] bg-white flex-1"></div>
-                    </div>
-
-                    <button id="googleSignInBtn" onclick="handleGoogleSignIn()" class="w-full flex items-center justify-center gap-4 bg-white text-black py-4 rounded-xl font-medium hover:bg-gray-100 transition-all mb-4 shadow-lg group">
-                        <svg class="w-6 h-6 group-hover:scale-110 transition" viewBox="0 0 48 48"><path fill="#EA4335" d="M24 9.5c3.54 0 6.71 1.22 9.21 3.6l6.85-6.85C35.9 2.38 30.47 0 24 0 14.62 0 6.51 5.38 2.56 13.22l7.98 6.19C12.43 13.72 17.74 9.5 24 9.5z"/><path fill="#4285F4" d="M46.98 24.55c0-1.57-.15-3.09-.38-4.55H24v9.02h12.94c-.58 2.96-2.26 5.48-4.78 7.18l7.73 6c4.51-4.18 7.09-10.36 7.09-17.65z"/><path fill="#FBBC05" d="M10.53 28.59c-.48-1.45-.76-2.99-.76-4.59s.27-3.14.76-4.59l-7.98-6.19C.92 16.46 0 20.12 0 24c0 3.88.92 7.54 2.56 10.78l7.97-6.19z"/><path fill="#34A853" d="M24 48c6.48 0 11.93-2.13 15.89-5.81l-7.73-6c-2.15 1.45-4.92 2.3-8.16 2.3-6.26 0-11.57-4.22-13.47-9.91l-7.98 6.19C6.51 42.62 14.62 48 24 48z"/><path fill="none" d="M0 0h48v48H0z"/></svg>
-                        Sign in with Google
-                    </button>
-
-                    <button onclick="handleAnonymousSignIn()" class="w-full py-4 border border-white/10 rounded-xl text-xs uppercase tracking-[0.2em] hover:bg-white/5 transition">
-                        Continue as Guest
-                    </button>
+                    </section>
                 </div>
             </div>
 
-            <!-- ENHANCED SETUP PAGE -->
-             <div id="setupPage" class="hidden page-transition pt-32 pb-12 px-6 flex items-center justify-center">
+            <div id="setupPage" class="hidden page-transition pt-32 pb-12 px-6 flex items-center justify-center">
                 <div class="w-full max-w-md bg-[#111a14] p-10 rounded-3xl border border-[#D4AF37]/20">
                     <div id="setupStep1" class="setup-step active text-center">
                         <h2 class="font-display text-3xl gold-gradient mb-6">First, tell us...</h2>
@@ -232,22 +396,31 @@
                         <h2 class="font-display text-3xl gold-gradient mb-6">Your Aesthetic</h2>
                         <p class="text-sm opacity-60 mb-8">Select your style preference to personalize your showroom.</p>
                         <div class="grid grid-cols-1 gap-3">
-                            <button onclick="completeSetup('Elegant')" class="p-4 border border-white/10 rounded-xl hover:border-[#D4AF37] hover:bg-[#D4AF37]/5 transition text-left">Elegant & Graceful</button>
-                            <button onclick="completeSetup('Trendy')" class="p-4 border border-white/10 rounded-xl hover:border-[#D4AF37] hover:bg-[#D4AF37]/5 transition text-left">Trendy & Bold</button>
-                            <button onclick="completeSetup('Minimal')" class="p-4 border border-white/10 rounded-xl hover:border-[#D4AF37] hover:bg-[#D4AF37]/5 transition text-left">Minimal & Chic</button>
-                            <button onclick="completeSetup('Traditional')" class="p-4 border border-white/10 rounded-xl hover:border-[#D4AF37] hover:bg-[#D4AF37]/5 transition text-left">Traditional & Royal</button>
+                            <button onclick="completeSetup('Elegant')" class="p-4 border border-white/10 rounded-xl hover:border-[#D4AF37] hover:bg-[#D4AF37]/5 transition text-left">Elegant and Graceful</button>
+                            <button onclick="completeSetup('Trendy')" class="p-4 border border-white/10 rounded-xl hover:border-[#D4AF37] hover:bg-[#D4AF37]/5 transition text-left">Trendy and Bold</button>
+                            <button onclick="completeSetup('Minimal')" class="p-4 border border-white/10 rounded-xl hover:border-[#D4AF37] hover:bg-[#D4AF37]/5 transition text-left">Minimal and Chic</button>
+                            <button onclick="completeSetup('Traditional')" class="p-4 border border-white/10 rounded-xl hover:border-[#D4AF37] hover:bg-[#D4AF37]/5 transition text-left">Traditional and Royal</button>
                         </div>
-                        <button onclick="goToStep(1)" class="mt-6 text-xs uppercase tracking-widest opacity-40 hover:opacity-100 transition">← Back</button>
+                        <button onclick="goToStep(1)" class="mt-6 text-xs uppercase tracking-widest opacity-40 hover:opacity-100 transition">&larr; Back</button>
                     </div>
                 </div>
-             </div>
+            </div>
 
-            <div id="categoryPage" class="hidden page-transition pt-28 pb-12 px-6"><div class="max-w-7xl mx-auto"><div class="text-center mb-12"><div id="cat-subtitle" class="tracking-[.3em] text-xs uppercase mb-2 crown-icon" style="color:var(--gold)"></div><h2 id="cat-title" class="font-display text-5xl md:text-6xl font-light"></h2></div><div id="productGrid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8"></div></div></div>
-            
-            <!-- SEARCH PAGE -->
+            <div id="categoryPage" class="hidden page-transition pt-28 pb-12 px-6">
+                <div class="max-w-7xl mx-auto">
+                    <div class="text-center mb-12">
+                        <div id="cat-subtitle" class="tracking-[.3em] text-xs uppercase mb-2 crown-icon" style="color:var(--gold)"></div>
+                        <h2 id="cat-title" class="font-display text-5xl md:text-6xl font-light"></h2>
+                    </div>
+                    <div id="productGrid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8"></div>
+                </div>
+            </div>
+
             <div id="searchPage" class="hidden page-transition pt-28 pb-12 px-6">
                 <div class="max-w-7xl mx-auto">
-                    <div class="text-center mb-8"><h2 class="font-display text-5xl font-light">Search</h2></div>
+                    <div class="text-center mb-8">
+                        <h2 class="font-display text-5xl font-light">Search</h2>
+                    </div>
                     <input type="text" id="searchInput" placeholder="Search by name, style or category..." class="w-full bg-white/5 border border-white/10 px-6 py-4 rounded-xl mb-8 text-cream focus:border-[#D4AF37] outline-none transition" onkeyup="performSearch()">
                     <div id="searchResults" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
                         <p class="col-span-full text-center opacity-30 mt-12">Start typing to explore the collection...</p>
@@ -255,11 +428,22 @@
                 </div>
             </div>
 
-            <div id="foryouPage" class="hidden page-transition pt-28 pb-12 px-6"><div class="max-w-7xl mx-auto text-center"><h2 class="font-display text-5xl font-light mb-12">Tailored For You</h2><div id="foryouGrid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 text-left"></div></div></div>
-            <div id="profilePage" class="hidden page-transition pt-28 pb-12 px-6 flex justify-center"><div class="w-full max-w-lg bg-emerald-900/10 p-8 rounded-2xl border border-white/5"><h2 class="font-display text-4xl font-light text-center mb-8">Member Profile</h2><div id="profile-content" class="space-y-6"></div><button onclick="logout()" class="w-full mt-10 py-3 border border-red-500/50 text-red-500 hover:bg-red-500/10 transition uppercase tracking-widest text-xs">Logout</button></div></div>
+            <div id="foryouPage" class="hidden page-transition pt-28 pb-12 px-6">
+                <div class="max-w-7xl mx-auto text-center">
+                    <h2 class="font-display text-5xl font-light mb-12">Tailored For You</h2>
+                    <div id="foryouGrid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 text-left"></div>
+                </div>
+            </div>
+
+            <div id="profilePage" class="hidden page-transition pt-28 pb-12 px-6 flex justify-center">
+                <div class="w-full max-w-lg bg-emerald-900/10 p-8 rounded-2xl border border-white/5">
+                    <h2 class="font-display text-4xl font-light text-center mb-8">Member Profile</h2>
+                    <div id="profile-content" class="space-y-6"></div>
+                    <button onclick="logout()" class="w-full mt-10 py-3 border border-red-500/50 text-red-400 hover:bg-red-500/10 transition uppercase tracking-widest text-xs">Logout</button>
+                </div>
+            </div>
         </main>
 
-        <!-- CART SIDEBAR -->
         <div id="cartSidebar" class="fixed inset-0 z-[110] hidden bg-black/80 backdrop-blur-sm flex justify-end" onclick="if(event.target===this)closeCart()">
             <div class="w-full max-w-sm h-full bg-[#0d1f16] border-l border-[#D4AF37]/20 flex flex-col">
                 <div class="p-6 flex items-center justify-between border-b border-white/5">
@@ -268,7 +452,10 @@
                 </div>
                 <div id="cartItems" class="flex-1 overflow-auto p-6 space-y-4"></div>
                 <div class="p-6 border-t border-white/5 bg-black/20">
-                    <div class="flex justify-between mb-4 font-display text-xl"><span>Total</span><span id="cart-total" class="text-[#D4AF37]">₹0</span></div>
+                    <div class="flex justify-between mb-4 font-display text-xl">
+                        <span>Total</span>
+                        <span id="cart-total" class="text-[#D4AF37]">Rs. 0</span>
+                    </div>
                     <button onclick="checkout()" class="btn-wa w-full py-4 rounded uppercase tracking-widest font-bold flex items-center justify-center gap-2">Checkout on WhatsApp</button>
                 </div>
             </div>
@@ -276,14 +463,7 @@
     </div>
 
     <script type="module">
-        // Import the functions you need from the SDKs you need
-        import { initializeApp } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-app.js";
-        import { getAnalytics } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-analytics.js";
-        import { getAuth, signInWithCustomToken, signInAnonymously, signInWithPopup, GoogleAuthProvider, signInWithEmailAndPassword, createUserWithEmailAndPassword, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-auth.js";
-        import { getFirestore, doc, setDoc, getDoc } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js";
-
-        // Your web app's Firebase configuration
-        const firebaseConfig = {
+        const firebaseConfig = window.REYVAL_FIREBASE_CONFIG || {
             apiKey: "AIzaSyAWVzmVR5FEY89Mt4F77YOfDB8erQulmo0",
             authDomain: "reyval-f29a1.firebaseapp.com",
             projectId: "reyval-f29a1",
@@ -293,254 +473,746 @@
             measurementId: "G-K310ZGC36T"
         };
 
-        // Initialize Firebase
-        const app = initializeApp(firebaseConfig);
-        const analytics = getAnalytics(app);
-        const auth = getAuth(app);
-        const db = getFirestore(app);
-        const provider = new GoogleAuthProvider();
-        const appId = typeof __app_id !== 'undefined' ? __app_id : 'reyval-fashion';
+        const appId = typeof globalThis.__app_id !== "undefined" && globalThis.__app_id
+            ? globalThis.__app_id
+            : "reyval-fashion";
+        const initialAuthToken = typeof globalThis.__initial_auth_token !== "undefined"
+            ? globalThis.__initial_auth_token
+            : "";
+
+        const categoryCopy = {
+            men: { title: "Men Collection", subtitle: "Tailoring, ceremony, and polished eveningwear" },
+            women: { title: "Women Collection", subtitle: "Drapes, gowns, and statement silhouettes" },
+            kids: { title: "Kids Collection", subtitle: "Occasion-ready styles for the youngest guests" },
+            accessories: { title: "Accessories Collection", subtitle: "Finishing pieces for a complete look" }
+        };
+
+        const products = {
+            men: [
+                { id: "m1", name: "Royal Gold Sherwani", price: "45,000", badge: "RG", style: "Traditional", category: "Men" },
+                { id: "m2", name: "Midnight Bandhgala", price: "32,000", badge: "MB", style: "Elegant", category: "Men" },
+                { id: "m3", name: "Silk Kurta Set", price: "12,500", badge: "SK", style: "Minimal", category: "Men" }
+            ],
+            women: [
+                { id: "w1", name: "Emerald Zari Saree", price: "38,000", badge: "EZ", style: "Traditional", category: "Women" },
+                { id: "w2", name: "Stardust Evening Gown", price: "55,000", badge: "SG", style: "Trendy", category: "Women" },
+                { id: "w3", name: "Chiffon Palazzo Set", price: "18,000", badge: "CP", style: "Minimal", category: "Women" }
+            ],
+            kids: [
+                { id: "k1", name: "Little Prince Tuxedo", price: "8,500", badge: "PT", style: "Elegant", category: "Kids" },
+                { id: "k2", name: "Lehenga Mini", price: "7,200", badge: "LM", style: "Traditional", category: "Kids" }
+            ],
+            accessories: [
+                { id: "a1", name: "Premium Gold Clutch", price: "14,000", badge: "GC", style: "Trendy", category: "Accessories" },
+                { id: "a2", name: "Pashmina Shawl", price: "22,000", badge: "PS", style: "Elegant", category: "Accessories" }
+            ]
+        };
+
+        const allProducts = Object.values(products).flat();
+
+        const pageIds = [
+            "homePage",
+            "categoryPage",
+            "searchPage",
+            "foryouPage",
+            "loginPage",
+            "setupPage",
+            "profilePage"
+        ];
+
+        const ui = {
+            mobileMenu: document.getElementById("mobileMenu"),
+            userMenu: document.getElementById("userMenu"),
+            userMenuContent: document.getElementById("user-menu-content"),
+            productGrid: document.getElementById("productGrid"),
+            catTitle: document.getElementById("cat-title"),
+            catSubtitle: document.getElementById("cat-subtitle"),
+            searchInput: document.getElementById("searchInput"),
+            searchResults: document.getElementById("searchResults"),
+            forYouGrid: document.getElementById("foryouGrid"),
+            profileContent: document.getElementById("profile-content"),
+            cartBadge: document.getElementById("cart-badge"),
+            cartItems: document.getElementById("cartItems"),
+            cartTotal: document.getElementById("cart-total"),
+            cartSidebar: document.getElementById("cartSidebar"),
+            loginPage: document.getElementById("loginPage"),
+            authFeedback: document.getElementById("authFeedback"),
+            authModeTitle: document.getElementById("authModeTitle"),
+            authModeText: document.getElementById("authModeText"),
+            signInPanel: document.getElementById("signInPanel"),
+            signUpPanel: document.getElementById("signUpPanel"),
+            signInSubmitLabel: document.getElementById("signInSubmitLabel"),
+            signUpSubmitLabel: document.getElementById("signUpSubmitLabel")
+        };
 
         window.user = null;
         window.userData = null;
+
+        let currentPage = "home";
+        let currentAuthMode = "signin";
         let tempSetup = { gender: null, style: null };
         let cart = [];
+        let firebaseServices = null;
+        let firebaseInitPromise = null;
+        let authObserverAttached = false;
 
-        const products = {
-            men: [{ id: 'm1', name: "Royal Gold Sherwani", price: "45,000", emoji: "🧥", style: "Traditional" }, { id: 'm2', name: "Midnight Bandhgala", price: "32,000", emoji: "👔", style: "Elegant" }, { id: 'm3', name: "Silk Kurta Set", price: "12,500", emoji: "✨", style: "Minimal" }],
-            women: [{ id: 'w1', name: "Emerald Zari Saree", price: "38,000", emoji: "👘", style: "Traditional" }, { id: 'w2', name: "Stardust Evening Gown", price: "55,000", emoji: "👗", style: "Trendy" }, { id: 'w3', name: "Chiffon Palazzo Set", price: "18,000", emoji: "💃", style: "Minimal" }],
-            kids: [{ id: 'k1', name: "Little Prince Tuxedo", price: "8,500", emoji: "🤵", style: "Elegant" }, { id: 'k2', name: "Lehenga Mini", price: "7,200", emoji: "🎀", style: "Traditional" }],
-            accessories: [{ id: 'a1', name: "Premium Gold Clutch", price: "14,000", emoji: "👛", style: "Trendy" }, { id: 'a2', name: "Pashmina Shawl", price: "22,000", emoji: "🧣", style: "Elegant" }]
-        };
+        function escapeHtml(value = "") {
+            return String(value).replace(/[&<>"']/g, (character) => {
+                const entities = {
+                    "&": "&amp;",
+                    "<": "&lt;",
+                    ">": "&gt;",
+                    "\"": "&quot;",
+                    "'": "&#39;"
+                };
+                return entities[character];
+            });
+        }
 
-        const initAuth = async () => {
-            if (typeof __initial_auth_token !== 'undefined' && __initial_auth_token) {
-                await signInWithCustomToken(auth, __initial_auth_token);
+        function refreshIcons() {
+            if (window.lucide && typeof window.lucide.createIcons === "function") {
+                window.lucide.createIcons();
             }
-        };
+        }
 
-        onAuthStateChanged(auth, async (u) => {
-            window.user = u;
-            if (u) {
-                const userDoc = await getDoc(doc(db, 'artifacts', appId, 'users', u.uid, 'profile', 'data'));
-                if (userDoc.exists()) {
-                    window.userData = userDoc.data();
-                    if(document.getElementById('setupPage').classList.contains('active')) navigatePage('home');
-                } else {
-                    navigatePage('setup');
+        function formatPrice(value) {
+            return `Rs. ${value}`;
+        }
+
+        function parsePrice(value) {
+            return Number(String(value).replace(/,/g, ""));
+        }
+
+        function hideMenus() {
+            ui.userMenu.classList.add("hidden");
+            ui.mobileMenu.classList.add("hidden");
+        }
+
+        function setVisiblePage(pageId) {
+            pageIds.forEach((id) => document.getElementById(id).classList.add("hidden"));
+            document.getElementById(pageId).classList.remove("hidden");
+            window.scrollTo(0, 0);
+            refreshIcons();
+        }
+
+        function showNotification(message, tone = "default") {
+            const toast = document.createElement("div");
+            const toneClassMap = {
+                default: "bg-[#D4AF37] text-black",
+                success: "bg-[#25d366] text-black",
+                warning: "bg-[#facc15] text-black",
+                error: "bg-[#f87171] text-white"
+            };
+
+            toast.className = `fixed bottom-10 left-1/2 -translate-x-1/2 px-6 py-3 rounded-full text-xs font-bold z-[200] shadow-2xl ${toneClassMap[tone] || toneClassMap.default}`;
+            toast.textContent = message;
+            document.body.appendChild(toast);
+            window.setTimeout(() => toast.remove(), 2800);
+        }
+
+        function createCard(product) {
+            return `
+                <div class="product-card p-8 rounded-3xl flex flex-col items-center text-center">
+                    <div class="product-badge mb-6">${escapeHtml(product.badge)}</div>
+                    <h3 class="font-display text-2xl text-[#D4AF37] mb-2">${escapeHtml(product.name)}</h3>
+                    <div class="text-sm opacity-50 italic mb-2">${escapeHtml(product.style)} - ${escapeHtml(product.category)}</div>
+                    <div class="text-xl font-bold mb-6">${formatPrice(product.price)}</div>
+                    <button onclick="addToCart('${product.id}')" class="w-full py-3 border border-[#D4AF37] text-[#D4AF37] text-[10px] uppercase tracking-[.2em] font-bold hover:bg-[#D4AF37] hover:text-black transition rounded-xl">Add to Bag</button>
+                </div>
+            `;
+        }
+
+        function setupCategoryPage(category) {
+            const copy = categoryCopy[category];
+            ui.catTitle.textContent = copy.title;
+            ui.catSubtitle.textContent = copy.subtitle;
+            ui.productGrid.innerHTML = products[category].map(createCard).join("");
+            refreshIcons();
+        }
+
+        function updateCartUI() {
+            ui.cartBadge.textContent = String(cart.length);
+            ui.cartBadge.classList.toggle("hidden", cart.length === 0);
+
+            if (!cart.length) {
+                ui.cartItems.innerHTML = `
+                    <div class="rounded-2xl border border-white/10 bg-white/5 p-5 text-center text-white/55">
+                        Your bag is empty. Add a few picks and checkout will be ready instantly.
+                    </div>
+                `;
+                ui.cartTotal.textContent = "Rs. 0";
+                return;
+            }
+
+            ui.cartItems.innerHTML = cart.map((item, index) => `
+                <div class="flex justify-between items-center bg-white/5 p-4 rounded-xl gap-3">
+                    <div class="flex gap-4 items-center min-w-0">
+                        <div class="w-10 h-10 rounded-full border border-[#D4AF37]/20 flex items-center justify-center text-xs tracking-[0.2em] text-[#D4AF37] bg-black/20 shrink-0">${escapeHtml(item.badge)}</div>
+                        <div class="min-w-0">
+                            <div class="text-sm truncate">${escapeHtml(item.name)}</div>
+                            <div class="text-xs text-[#D4AF37]">${formatPrice(item.price)}</div>
+                        </div>
+                    </div>
+                    <button onclick="removeFromCart(${index})" class="text-white/20 hover:text-red-400 transition text-lg leading-none">x</button>
+                </div>
+            `).join("");
+
+            const total = cart.reduce((sum, item) => sum + parsePrice(item.price), 0);
+            ui.cartTotal.textContent = `Rs. ${total.toLocaleString("en-IN")}`;
+        }
+
+        function setupForYou() {
+            const profile = window.userData;
+            if (!profile) {
+                ui.forYouGrid.innerHTML = '<p class="col-span-full text-center opacity-40">Create a profile first to unlock personalized picks.</p>';
+                return;
+            }
+
+            let filtered = allProducts.filter((product) => product.style === profile.style);
+            if (profile.gender === "Men") {
+                filtered = filtered.filter((product) => product.category === "Men" || product.category === "Accessories");
+            }
+            if (profile.gender === "Women") {
+                filtered = filtered.filter((product) => product.category === "Women" || product.category === "Accessories");
+            }
+
+            ui.forYouGrid.innerHTML = filtered.length
+                ? filtered.map(createCard).join("")
+                : '<p class="col-span-full text-center opacity-40">Finish your style profile to see tailored picks here.</p>';
+        }
+
+        function setupProfile() {
+            const profile = window.userData || {};
+            const isGuest = window.user?.isAnonymous;
+
+            ui.profileContent.innerHTML = `
+                <div class="flex justify-between border-b border-white/5 pb-3"><span class="opacity-50">Name</span><span class="text-[#D4AF37]">${escapeHtml(profile.name || window.user?.displayName || "Guest")}</span></div>
+                <div class="flex justify-between border-b border-white/5 pb-3"><span class="opacity-50">Email</span><span class="text-[#D4AF37]">${escapeHtml(profile.email || (isGuest ? "Guest Session" : window.user?.email || "Not available"))}</span></div>
+                <div class="flex justify-between border-b border-white/5 pb-3"><span class="opacity-50">Preference</span><span class="text-[#D4AF37]">${escapeHtml(profile.gender || "Unisex")}</span></div>
+                <div class="flex justify-between border-b border-white/5 pb-3"><span class="opacity-50">Style Profile</span><span class="text-[#D4AF37]">${escapeHtml(profile.style || "Not set")}</span></div>
+            `;
+        }
+
+        function updateUserNav() {
+            if (window.user) {
+                const displayName = window.user.displayName || window.user.email || "Member";
+                ui.userMenuContent.innerHTML = `
+                    <div class="px-3 pb-2 text-[11px] uppercase tracking-[0.28em] text-white/40">Signed In</div>
+                    <div class="px-3 pb-3 text-sm text-[#D4AF37] border-b border-white/10 break-all">${escapeHtml(displayName)}</div>
+                    <button onclick="navigatePage('profile')" class="block w-full text-left px-3 py-2 text-sm rounded hover:bg-emerald-900/30 mt-2">My Profile</button>
+                    <button onclick="navigatePage('foryou')" class="block w-full text-left px-3 py-2 text-sm rounded hover:bg-emerald-900/30">For You</button>
+                    <button onclick="logout()" class="block w-full text-left px-3 py-2 text-sm rounded hover:bg-red-500/10 text-red-400 mt-1">Logout</button>
+                `;
+            } else {
+                ui.userMenuContent.innerHTML = `
+                    <button onclick="navigatePage('login')" class="block w-full text-left px-3 py-2 text-sm rounded hover:bg-emerald-900/30 transition">Sign In</button>
+                `;
+            }
+        }
+
+        function setAuthFeedback(message = "", tone = "info") {
+            if (!message) {
+                ui.authFeedback.textContent = "";
+                ui.authFeedback.className = "hidden auth-feedback info mb-6";
+                return;
+            }
+
+            ui.authFeedback.textContent = message;
+            ui.authFeedback.className = `auth-feedback ${tone} mb-6`;
+        }
+
+        function setAuthBusy(isBusy) {
+            document.querySelectorAll("#loginPage input, #loginPage [data-auth-control]").forEach((element) => {
+                element.disabled = isBusy;
+                element.classList.toggle("opacity-60", isBusy);
+            });
+
+            ui.signInSubmitLabel.textContent = isBusy && currentAuthMode === "signin" ? "Signing In..." : "Sign In";
+            ui.signUpSubmitLabel.textContent = isBusy && currentAuthMode === "signup" ? "Creating Account..." : "Create Account";
+        }
+
+        function setAuthMode(mode = "signin") {
+            currentAuthMode = mode;
+            const copy = {
+                signin: {
+                    title: "Welcome back",
+                    text: "Use your Reyval member account"
+                },
+                signup: {
+                    title: "Create your account",
+                    text: "Set up Firebase login for Reyval"
                 }
+            };
+
+            ui.authModeTitle.textContent = copy[mode].title;
+            ui.authModeText.textContent = copy[mode].text;
+            ui.signInPanel.classList.toggle("hidden", mode !== "signin");
+            ui.signUpPanel.classList.toggle("hidden", mode !== "signup");
+
+            document.querySelectorAll("[data-auth-tab]").forEach((tab) => {
+                tab.classList.toggle("active", tab.dataset.authTab === mode);
+            });
+        }
+
+        function getFriendlyAuthError(error) {
+            const errorMap = {
+                "auth/email-already-in-use": "That email is already registered. Try signing in instead.",
+                "auth/invalid-email": "Enter a valid email address.",
+                "auth/invalid-credential": "The email or password is incorrect.",
+                "auth/user-disabled": "This account has been disabled in Firebase Auth.",
+                "auth/user-not-found": "No account exists for that email yet.",
+                "auth/wrong-password": "The password is incorrect.",
+                "auth/weak-password": "Choose a stronger password with at least 6 characters.",
+                "auth/popup-closed-by-user": "The Google sign-in window was closed before completion.",
+                "auth/configuration-not-found": "Google sign-in is not enabled in Firebase Authentication yet."
+            };
+
+            return errorMap[error?.code] || error?.message || "Authentication failed. Please try again.";
+        }
+
+        function firebaseConfigReady() {
+            const required = ["apiKey", "authDomain", "projectId", "appId"];
+            return required.every((key) => typeof firebaseConfig[key] === "string" && firebaseConfig[key].trim() !== "");
+        }
+
+        async function ensureFirebase() {
+            if (firebaseServices) {
+                return firebaseServices;
             }
-            updateUserNav();
-            document.getElementById('loading-overlay').style.opacity = '0';
-            setTimeout(() => document.getElementById('loading-overlay').style.display = 'none', 500);
-        });
 
-        window.handleGoogleSignIn = async () => {
-            try { await signInWithPopup(auth, provider); } catch (err) { showNotification("Sign-In failed."); }
-        };
+            if (firebaseInitPromise) {
+                return firebaseInitPromise;
+            }
 
-        window.handleAnonymousSignIn = async () => {
-            try { await signInAnonymously(auth); } catch (err) { showNotification("Guest Sign-In failed."); }
-        };
+            if (!firebaseConfigReady()) {
+                throw new Error("Firebase configuration is missing. Add your project keys before using login.");
+            }
+
+            firebaseInitPromise = Promise.all([
+                import("https://www.gstatic.com/firebasejs/11.6.1/firebase-app.js"),
+                import("https://www.gstatic.com/firebasejs/11.6.1/firebase-auth.js"),
+                import("https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js")
+            ]).then(([appSdk, authSdk, firestoreSdk]) => {
+                const app = appSdk.initializeApp(firebaseConfig);
+                const auth = authSdk.getAuth(app);
+                const db = firestoreSdk.getFirestore(app);
+                const provider = new authSdk.GoogleAuthProvider();
+                provider.setCustomParameters({ prompt: "select_account" });
+
+                firebaseServices = { app, auth, db, provider, authSdk, firestoreSdk };
+                attachAuthObserver();
+
+                if (initialAuthToken) {
+                    authSdk.signInWithCustomToken(auth, initialAuthToken).catch((error) => {
+                        console.error("Custom token sign-in failed:", error);
+                    });
+                }
+
+                return firebaseServices;
+            }).catch((error) => {
+                firebaseInitPromise = null;
+                console.error("Firebase failed to initialize:", error);
+                throw error;
+            });
+
+            return firebaseInitPromise;
+        }
+
+        async function getProfileRef(uid) {
+            const { db, firestoreSdk } = await ensureFirebase();
+            return firestoreSdk.doc(db, "artifacts", appId, "users", uid, "profile", "data");
+        }
+
+        async function loadUserProfile(uid) {
+            try {
+                const { firestoreSdk } = await ensureFirebase();
+                const profileRef = await getProfileRef(uid);
+                const snapshot = await firestoreSdk.getDoc(profileRef);
+                return snapshot.exists() ? snapshot.data() : null;
+            } catch (error) {
+                console.error("Could not load profile:", error);
+                return null;
+            }
+        }
+
+        async function saveUserProfile(profile) {
+            const { firestoreSdk } = await ensureFirebase();
+            const profileRef = await getProfileRef(profile.uid);
+            await firestoreSdk.setDoc(profileRef, profile, { merge: true });
+        }
+
+        function attachAuthObserver() {
+            if (authObserverAttached || !firebaseServices) {
+                return;
+            }
+
+            authObserverAttached = true;
+            const { auth, authSdk } = firebaseServices;
+
+            authSdk.onAuthStateChanged(auth, async (authUser) => {
+                window.user = authUser;
+                window.userData = null;
+                updateUserNav();
+
+                if (!authUser) {
+                    if (["profile", "foryou", "setup"].includes(currentPage)) {
+                        navigatePage("login");
+                    }
+                    return;
+                }
+
+                window.userData = await loadUserProfile(authUser.uid);
+
+                if (!window.userData) {
+                    if (currentPage !== "setup") {
+                        navigatePage("setup");
+                    } else {
+                        setVisiblePage("setupPage");
+                    }
+                    return;
+                }
+
+                tempSetup = {
+                    gender: window.userData.gender || null,
+                    style: window.userData.style || null
+                };
+
+                if (currentPage === "login" || currentPage === "setup") {
+                    navigatePage("home");
+                }
+
+                if (currentPage === "profile") {
+                    setupProfile();
+                }
+
+                if (currentPage === "foryou") {
+                    setupForYou();
+                }
+            });
+        }
+
+        function primeFirebaseConnection() {
+            const start = () => {
+                ensureFirebase().catch((error) => {
+                    if (currentPage === "login") {
+                        setAuthFeedback(error.message, "warning");
+                    }
+                });
+            };
+
+            if ("requestIdleCallback" in window) {
+                window.requestIdleCallback(start, { timeout: 1200 });
+            } else {
+                window.setTimeout(start, 120);
+            }
+        }
 
         window.handleEmailLogin = async (event) => {
             event.preventDefault();
-            const email = document.getElementById('email').value;
-            const password = document.getElementById('password').value;
+            const email = document.getElementById("email").value.trim();
+            const password = document.getElementById("password").value;
+
+            if (!email || !password) {
+                setAuthFeedback("Enter both your email and password.", "warning");
+                return;
+            }
+
+            setAuthBusy(true);
+            setAuthFeedback("Signing you in...", "info");
 
             try {
-                await signInWithEmailAndPassword(auth, email, password);
-                showNotification('Login successful!');
-                navigatePage('home');
+                const { auth, authSdk } = await ensureFirebase();
+                await authSdk.signInWithEmailAndPassword(auth, email, password);
+                setAuthFeedback("Signed in successfully. Loading your profile...", "success");
+                event.target.reset();
             } catch (error) {
-                showNotification('Login failed: ' + error.message);
+                setAuthFeedback(getFriendlyAuthError(error), "error");
+            } finally {
+                setAuthBusy(false);
             }
         };
 
         window.handleEmailSignup = async (event) => {
             event.preventDefault();
-            const email = document.getElementById('signupEmail').value;
-            const password = document.getElementById('signupPassword').value;
-            const confirmPassword = document.getElementById('confirmPassword').value;
+            const name = document.getElementById("signupName").value.trim();
+            const email = document.getElementById("signupEmail").value.trim();
+            const password = document.getElementById("signupPassword").value;
+            const confirmPassword = document.getElementById("confirmPassword").value;
 
-            if (password !== confirmPassword) {
-                showNotification('Passwords do not match');
+            if (!name) {
+                setAuthFeedback("Enter your full name to create the account.", "warning");
                 return;
             }
 
+            if (password !== confirmPassword) {
+                setAuthFeedback("Passwords do not match.", "error");
+                return;
+            }
+
+            setAuthBusy(true);
+            setAuthFeedback("Creating your account...", "info");
+
             try {
-                await createUserWithEmailAndPassword(auth, email, password);
-                showNotification('Account created successfully!');
-                navigatePage('home');
+                const { auth, authSdk } = await ensureFirebase();
+                const credential = await authSdk.createUserWithEmailAndPassword(auth, email, password);
+                await authSdk.updateProfile(credential.user, { displayName: name });
+                setAuthFeedback("Account created. Tell us your style so we can personalize Reyval.", "success");
+                event.target.reset();
             } catch (error) {
-                showNotification('Signup failed: ' + error.message);
+                setAuthFeedback(getFriendlyAuthError(error), "error");
+            } finally {
+                setAuthBusy(false);
             }
         };
 
-        window.toggleLoginMode = () => {
-            const loginForm = document.getElementById('loginForm');
-            const signupForm = document.getElementById('signupForm');
-            loginForm.classList.toggle('hidden');
-            signupForm.classList.toggle('hidden');
+        window.handleGoogleSignIn = async () => {
+            setAuthBusy(true);
+            setAuthFeedback("Opening Google sign in...", "info");
+
+            try {
+                const { auth, authSdk, provider } = await ensureFirebase();
+                await authSdk.signInWithPopup(auth, provider);
+                setAuthFeedback("Google sign in complete.", "success");
+            } catch (error) {
+                setAuthFeedback(getFriendlyAuthError(error), error?.code === "auth/popup-closed-by-user" ? "warning" : "error");
+            } finally {
+                setAuthBusy(false);
+            }
         };
 
-        window.goToStep = (stepNum) => {
-            document.querySelectorAll('.setup-step').forEach(s => s.classList.remove('active'));
-            document.getElementById(`setupStep${stepNum}`).classList.add('active');
-            lucide.createIcons();
+        window.handleAnonymousSignIn = async () => {
+            setAuthBusy(true);
+            setAuthFeedback("Starting a guest session...", "info");
+
+            try {
+                const { auth, authSdk } = await ensureFirebase();
+                await authSdk.signInAnonymously(auth);
+                setAuthFeedback("Guest session ready.", "success");
+            } catch (error) {
+                setAuthFeedback(getFriendlyAuthError(error), "error");
+            } finally {
+                setAuthBusy(false);
+            }
+        };
+
+        window.goToStep = (stepNumber) => {
+            document.querySelectorAll(".setup-step").forEach((step) => step.classList.remove("active"));
+            document.getElementById(`setupStep${stepNumber}`).classList.add("active");
+            refreshIcons();
         };
 
         window.setTempSetup = (key, value, nextStep) => {
             tempSetup[key] = value;
-            if (nextStep) goToStep(nextStep);
+            if (nextStep) {
+                goToStep(nextStep);
+            }
         };
 
         window.completeSetup = async (style) => {
-            if (!window.user) return;
+            if (!window.user) {
+                navigatePage("login");
+                return;
+            }
+
+            if (!tempSetup.gender) {
+                showNotification("Choose who you are shopping for first.", "warning");
+                goToStep(1);
+                return;
+            }
+
             tempSetup.style = style;
+
             const profile = {
                 uid: window.user.uid,
-                name: window.user.displayName || 'Guest User',
-                email: window.user.email || 'N/A',
+                name: window.user.displayName || window.user.email?.split("@")[0] || "Guest User",
+                email: window.user.email || "Guest Session",
                 gender: tempSetup.gender,
                 style: tempSetup.style,
                 updatedAt: new Date().toISOString()
             };
-            await setDoc(doc(db, 'artifacts', appId, 'users', window.user.uid, 'profile', 'data'), profile);
-            window.userData = profile;
-            showNotification(`Welcome to Reyval ✦`);
-            navigatePage('home');
+
+            try {
+                await saveUserProfile(profile);
+                window.userData = profile;
+                showNotification("Welcome to Reyval", "success");
+                navigatePage("home");
+            } catch (error) {
+                console.error("Could not save setup:", error);
+                showNotification("We could not save your profile yet.", "warning");
+            }
         };
 
         window.logout = async () => {
-            await signOut(auth);
-            window.location.reload();
+            try {
+                const { auth, authSdk } = await ensureFirebase();
+                await authSdk.signOut(auth);
+                tempSetup = { gender: null, style: null };
+                hideMenus();
+                navigatePage("home");
+                showNotification("Signed out", "success");
+            } catch (error) {
+                console.error("Logout failed:", error);
+                showNotification("Could not sign out right now.", "warning");
+            }
         };
 
         window.navigatePage = (page) => {
-            const ids = ['homePage', 'categoryPage', 'searchPage', 'foryouPage', 'loginPage', 'setupPage', 'profilePage'];
-            ids.forEach(id => document.getElementById(id).classList.add('hidden'));
-            document.getElementById('userMenu').classList.add('hidden');
+            currentPage = page;
+            hideMenus();
 
-            if (['men', 'women', 'kids', 'accessories'].includes(page)) {
+            if (["men", "women", "kids", "accessories"].includes(page)) {
                 setupCategoryPage(page);
-                document.getElementById('categoryPage').classList.remove('hidden');
-            } else if (page === 'foryou') {
-                if (!window.user) return navigatePage('login');
-                setupForYou();
-                document.getElementById('foryouPage').classList.remove('hidden');
-            } else if (page === 'profile') {
-                if (!window.user) return navigatePage('login');
-                setupProfile();
-                document.getElementById('profilePage').classList.remove('hidden');
-            } else {
-                document.getElementById(`${page}Page`).classList.remove('hidden');
-            }
-            window.scrollTo(0,0);
-            lucide.createIcons();
-        };
-
-        function setupCategoryPage(cat) {
-            document.getElementById('cat-title').textContent = cat.charAt(0).toUpperCase() + cat.slice(1) + " Collection";
-            document.getElementById('productGrid').innerHTML = products[cat].map(p => createCard(p)).join('');
-        }
-
-        function createCard(p) {
-            return `<div class="product-card p-8 rounded-3xl flex flex-col items-center text-center">
-                <div class="text-7xl mb-6">${p.emoji}</div>
-                <h3 class="font-display text-2xl text-[#D4AF37] mb-2">${p.name}</h3>
-                <div class="text-sm opacity-50 italic mb-2">${p.style}</div>
-                <div class="text-xl font-bold mb-6">₹${p.price}</div>
-                <button onclick="addToCart('${p.id}')" class="w-full py-3 border border-[#D4AF37] text-[#D4AF37] text-[10px] uppercase tracking-[.2em] font-bold hover:bg-[#D4AF37] hover:text-black transition">Add to Bag</button>
-            </div>`;
-        }
-
-        window.performSearch = () => {
-            const query = document.getElementById('searchInput').value.toLowerCase().trim();
-            const resultsContainer = document.getElementById('searchResults');
-            
-            if (!query) {
-                resultsContainer.innerHTML = '<p class="col-span-full text-center opacity-30 mt-12">Start typing to explore the collection...</p>';
+                setVisiblePage("categoryPage");
                 return;
             }
 
-            const allProducts = Object.values(products).flat();
-            const filtered = allProducts.filter(p => 
-                p.name.toLowerCase().includes(query) || 
-                p.style.toLowerCase().includes(query)
+            if (page === "foryou") {
+                if (!window.user) {
+                    setAuthMode("signin");
+                    setAuthFeedback("Sign in to view your personalized recommendations.", "info");
+                    currentPage = "login";
+                    setVisiblePage("loginPage");
+                    primeFirebaseConnection();
+                    return;
+                }
+
+                setupForYou();
+                setVisiblePage("foryouPage");
+                return;
+            }
+
+            if (page === "profile") {
+                if (!window.user) {
+                    setAuthMode("signin");
+                    setAuthFeedback("Sign in to access your profile.", "info");
+                    currentPage = "login";
+                    setVisiblePage("loginPage");
+                    primeFirebaseConnection();
+                    return;
+                }
+
+                setupProfile();
+                setVisiblePage("profilePage");
+                return;
+            }
+
+            if (page === "setup") {
+                if (!window.user) {
+                    currentPage = "login";
+                    setVisiblePage("loginPage");
+                    setAuthFeedback("Sign in first, then we will personalize Reyval for you.", "info");
+                    primeFirebaseConnection();
+                    return;
+                }
+
+                goToStep(1);
+                setVisiblePage("setupPage");
+                return;
+            }
+
+            if (page === "login") {
+                setAuthMode(currentAuthMode);
+                setVisiblePage("loginPage");
+
+                if (!firebaseConfigReady()) {
+                    setAuthFeedback("Firebase configuration is missing. Add your project keys to enable login.", "warning");
+                } else if (window.user) {
+                    setAuthFeedback("You are already signed in. Open your profile or keep shopping.", "success");
+                } else {
+                    setAuthFeedback("Sign in with email, Google, or continue as guest.", "info");
+                }
+
+                primeFirebaseConnection();
+                return;
+            }
+
+            setVisiblePage(`${page}Page`);
+        };
+
+        window.performSearch = () => {
+            const query = ui.searchInput.value.toLowerCase().trim();
+
+            if (!query) {
+                ui.searchResults.innerHTML = '<p class="col-span-full text-center opacity-30 mt-12">Start typing to explore the collection...</p>';
+                return;
+            }
+
+            const filtered = allProducts.filter((product) =>
+                product.name.toLowerCase().includes(query) ||
+                product.style.toLowerCase().includes(query) ||
+                product.category.toLowerCase().includes(query)
             );
 
-            if (filtered.length > 0) {
-                resultsContainer.innerHTML = filtered.map(p => createCard(p)).join('');
-            } else {
-                resultsContainer.innerHTML = '<p class="col-span-full text-center opacity-40 mt-12">No products found matching your search.</p>';
-            }
-            lucide.createIcons();
+            ui.searchResults.innerHTML = filtered.length
+                ? filtered.map(createCard).join("")
+                : '<p class="col-span-full text-center opacity-40 mt-12">No products found matching your search.</p>';
         };
 
         window.addToCart = (id) => {
-            const p = Object.values(products).flat().find(x => x.id === id);
-            cart.push(p);
-            updateCartUI();
-            showNotification(`Added to bag`);
-        };
-
-        function updateCartUI() {
-            const b = document.getElementById('cart-badge');
-            b.textContent = cart.length; b.classList.toggle('hidden', cart.length === 0);
-            document.getElementById('cartItems').innerHTML = cart.map((i, idx) => `
-                <div class="flex justify-between items-center bg-white/5 p-4 rounded-xl">
-                    <div class="flex gap-4 items-center"><span>${i.emoji}</span><div><div class="text-sm">${i.name}</div><div class="text-xs text-[#D4AF37]">₹${i.price}</div></div></div>
-                    <button onclick="removeFromCart(${idx})" class="text-white/20 hover:text-red-500 transition">×</button>
-                </div>`).join('');
-            const total = cart.reduce((a,c) => a + parseInt(c.price.replace(/,/g,'')), 0);
-            document.getElementById('cart-total').textContent = `₹${total.toLocaleString('en-IN')}`;
-        }
-
-        window.removeFromCart = (idx) => { cart.splice(idx, 1); updateCartUI(); };
-
-        function setupForYou() {
-            const { style, gender } = window.userData || {};
-            let all = Object.values(products).flat();
-            let filtered = all.filter(p => p.style === style);
-            if (gender === 'Men') filtered = filtered.filter(p => p.id.startsWith('m') || p.id.startsWith('a'));
-            if (gender === 'Women') filtered = filtered.filter(p => p.id.startsWith('w') || p.id.startsWith('a'));
-            document.getElementById('foryouGrid').innerHTML = filtered.length ? filtered.map(p => createCard(p)).join('') : '<p class="col-span-full text-center opacity-40">Add more items to your style profile to see tailored picks.</p>';
-        }
-
-        function setupProfile() {
-            const d = window.userData;
-            document.getElementById('profile-content').innerHTML = `
-                <div class="flex justify-between border-b border-white/5 pb-3"><span class="opacity-50">Name</span><span class="text-[#D4AF37]">${d?.name || 'Guest'}</span></div>
-                <div class="flex justify-between border-b border-white/5 pb-3"><span class="opacity-50">Preference</span><span class="text-[#D4AF37]">${d?.gender || 'Unisex'}</span></div>
-                <div class="flex justify-between border-b border-white/5 pb-3"><span class="opacity-50">Style Profile</span><span class="text-[#D4AF37]">${d?.style || 'None'}</span></div>
-            `;
-        }
-
-        function updateUserNav() {
-            const c = document.getElementById('user-menu-content');
-            if (window.user) {
-                c.innerHTML = `<button onclick="navigatePage('profile')" class="block w-full text-left px-3 py-2 text-sm rounded hover:bg-emerald-900/30">👤 My Profile</button><button onclick="logout()" class="block w-full text-left px-3 py-2 text-sm rounded hover:bg-red-500/10 text-red-400 mt-1">🚪 Logout</button>`;
-            } else {
-                c.innerHTML = `<button onclick="window.location.href='login.html'" class="block w-full text-left px-3 py-2 text-sm rounded hover:bg-emerald-900/30">🔑 Sign In</button>`;
+            const product = allProducts.find((item) => item.id === id);
+            if (!product) {
+                return;
             }
-        }
 
-        window.showNotification = (msg) => {
-            const n = document.createElement('div');
-            n.className = "fixed bottom-10 left-1/2 -translate-x-1/2 bg-[#D4AF37] text-black px-6 py-3 rounded-full text-xs font-bold z-[200] animate-bounce";
-            n.textContent = msg;
-            document.body.appendChild(n);
-            setTimeout(() => n.remove(), 3000);
+            cart.push(product);
+            updateCartUI();
+            showNotification("Added to bag");
         };
 
-        window.toggleUserMenu = () => document.getElementById('userMenu').classList.toggle('hidden');
-        window.openCart = () => { document.getElementById('cartSidebar').classList.remove('hidden'); updateCartUI(); };
-        window.closeCart = () => document.getElementById('cartSidebar').classList.add('hidden');
-        window.checkout = () => window.open(`https://wa.me/919999999999?text=Checkout Request: ${cart.map(i => i.name).join(', ')}`);
+        window.removeFromCart = (index) => {
+            cart.splice(index, 1);
+            updateCartUI();
+        };
 
-        initAuth();
-        lucide.createIcons();
+        window.toggleUserMenu = () => {
+            ui.mobileMenu.classList.add("hidden");
+            ui.userMenu.classList.toggle("hidden");
+        };
+
+        window.toggleMobileMenu = () => {
+            ui.userMenu.classList.add("hidden");
+            ui.mobileMenu.classList.toggle("hidden");
+        };
+
+        window.openCart = () => {
+            hideMenus();
+            ui.cartSidebar.classList.remove("hidden");
+            updateCartUI();
+        };
+
+        window.closeCart = () => {
+            ui.cartSidebar.classList.add("hidden");
+        };
+
+        window.checkout = () => {
+            if (!cart.length) {
+                showNotification("Add at least one product before checkout.", "warning");
+                return;
+            }
+
+            const message = encodeURIComponent(`Checkout Request: ${cart.map((item) => item.name).join(", ")}`);
+            window.open(`https://wa.me/919999999999?text=${message}`, "_blank", "noopener");
+        };
+
+        document.addEventListener("click", (event) => {
+            const userMenuButton = document.getElementById("userMenuButton");
+            const mobileMenuButton = document.getElementById("mobileMenuButton");
+
+            if (!ui.userMenu.contains(event.target) && !userMenuButton.contains(event.target)) {
+                ui.userMenu.classList.add("hidden");
+            }
+
+            if (!ui.mobileMenu.contains(event.target) && !mobileMenuButton.contains(event.target)) {
+                ui.mobileMenu.classList.add("hidden");
+            }
+        });
+
+        setAuthMode("signin");
+        updateUserNav();
+        updateCartUI();
+        refreshIcons();
+        window.addEventListener("load", refreshIcons, { once: true });
+        primeFirebaseConnection();
     </script>
 </body>
 </html>
