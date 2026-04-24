@@ -214,6 +214,7 @@
                     <button onclick="navigatePage('women')" class="hover:text-[#D4AF37] transition py-1">Women</button>
                     <button onclick="navigatePage('kids')" class="hover:text-[#D4AF37] transition py-1">Kids</button>
                     <button onclick="navigatePage('accessories')" class="hover:text-[#D4AF37] transition py-1">Accessories</button>
+                    <button onclick="navigatePage('cosmetics')" class="hover:text-[#D4AF37] transition py-1">Cosmetics</button>
                     <button onclick="navigatePage('search')" class="hover:text-[#D4AF37] transition py-1 flex items-center gap-1">
                         <i data-lucide="search" style="width:16px;height:16px"></i>Search
                     </button>
@@ -239,6 +240,7 @@
                     <button onclick="navigatePage('women')" class="text-left py-2 hover:text-[#D4AF37] transition">Women</button>
                     <button onclick="navigatePage('kids')" class="text-left py-2 hover:text-[#D4AF37] transition">Kids</button>
                     <button onclick="navigatePage('accessories')" class="text-left py-2 hover:text-[#D4AF37] transition">Accessories</button>
+                    <button onclick="navigatePage('cosmetics')" class="text-left py-2 hover:text-[#D4AF37] transition">Cosmetics</button>
                     <button onclick="navigatePage('search')" class="text-left py-2 hover:text-[#D4AF37] transition">Search</button>
                     <button onclick="navigatePage('foryou')" class="text-left py-2 hover:text-[#D4AF37] transition">For You</button>
                     <button onclick="navigatePage('login')" class="text-left py-2 hover:text-[#D4AF37] transition">Account</button>
@@ -341,12 +343,45 @@
                         <h2 class="font-display text-3xl gold-gradient mb-6">Your Aesthetic</h2>
                         <p class="text-sm opacity-60 mb-8">Select your style preference to personalize your showroom.</p>
                         <div class="grid grid-cols-1 gap-3">
-                            <button onclick="completeSetup('Elegant')" class="p-4 border border-white/10 rounded-xl hover:border-[#D4AF37] hover:bg-[#D4AF37]/5 transition text-left">Elegant and Graceful</button>
-                            <button onclick="completeSetup('Trendy')" class="p-4 border border-white/10 rounded-xl hover:border-[#D4AF37] hover:bg-[#D4AF37]/5 transition text-left">Trendy and Bold</button>
-                            <button onclick="completeSetup('Minimal')" class="p-4 border border-white/10 rounded-xl hover:border-[#D4AF37] hover:bg-[#D4AF37]/5 transition text-left">Minimal and Chic</button>
-                            <button onclick="completeSetup('Traditional')" class="p-4 border border-white/10 rounded-xl hover:border-[#D4AF37] hover:bg-[#D4AF37]/5 transition text-left">Traditional and Royal</button>
+                            <button onclick="setTempSetup('style', 'Elegant', 3)" class="p-4 border border-white/10 rounded-xl hover:border-[#D4AF37] hover:bg-[#D4AF37]/5 transition text-left">Elegant and Graceful</button>
+                            <button onclick="setTempSetup('style', 'Trendy', 3)" class="p-4 border border-white/10 rounded-xl hover:border-[#D4AF37] hover:bg-[#D4AF37]/5 transition text-left">Trendy and Bold</button>
+                            <button onclick="setTempSetup('style', 'Minimal', 3)" class="p-4 border border-white/10 rounded-xl hover:border-[#D4AF37] hover:bg-[#D4AF37]/5 transition text-left">Minimal and Chic</button>
+                            <button onclick="setTempSetup('style', 'Traditional', 3)" class="p-4 border border-white/10 rounded-xl hover:border-[#D4AF37] hover:bg-[#D4AF37]/5 transition text-left">Traditional and Royal</button>
                         </div>
                         <button onclick="goToStep(1)" class="mt-6 text-xs uppercase tracking-widest opacity-40 hover:opacity-100 transition">&larr; Back</button>
+                    </div>
+                    <div id="setupStep3" class="setup-step text-center">
+                        <h2 class="font-display text-3xl gold-gradient mb-6">Color Palette</h2>
+                        <p class="text-sm opacity-60 mb-8">What colors resonate with you?</p>
+                        <div class="grid grid-cols-1 gap-3">
+                            <button onclick="setTempSetup('colors', 'Gold & Warm Tones', 4)" class="p-4 border border-white/10 rounded-xl hover:border-[#D4AF37] hover:bg-[#D4AF37]/5 transition text-left">Gold & Warm Tones</button>
+                            <button onclick="setTempSetup('colors', 'Cool Blues & Greens', 4)" class="p-4 border border-white/10 rounded-xl hover:border-[#D4AF37] hover:bg-[#D4AF37]/5 transition text-left">Cool Blues & Greens</button>
+                            <button onclick="setTempSetup('colors', 'Neutral & Earthy', 4)" class="p-4 border border-white/10 rounded-xl hover:border-[#D4AF37] hover:bg-[#D4AF37]/5 transition text-left">Neutral & Earthy</button>
+                            <button onclick="setTempSetup('colors', 'Bold & Vibrant', 4)" class="p-4 border border-white/10 rounded-xl hover:border-[#D4AF37] hover:bg-[#D4AF37]/5 transition text-left">Bold & Vibrant</button>
+                        </div>
+                        <button onclick="goToStep(2)" class="mt-6 text-xs uppercase tracking-widest opacity-40 hover:opacity-100 transition">&larr; Back</button>
+                    </div>
+                    <div id="setupStep4" class="setup-step text-center">
+                        <h2 class="font-display text-3xl gold-gradient mb-6">Occasions</h2>
+                        <p class="text-sm opacity-60 mb-8">What events do you shop for most?</p>
+                        <div class="grid grid-cols-1 gap-3">
+                            <button onclick="setTempSetup('occasions', 'Weddings & Ceremonies', 5)" class="p-4 border border-white/10 rounded-xl hover:border-[#D4AF37] hover:bg-[#D4AF37]/5 transition text-left">Weddings & Ceremonies</button>
+                            <button onclick="setTempSetup('occasions', 'Parties & Events', 5)" class="p-4 border border-white/10 rounded-xl hover:border-[#D4AF37] hover:bg-[#D4AF37]/5 transition text-left">Parties & Events</button>
+                            <button onclick="setTempSetup('occasions', 'Daily Wear', 5)" class="p-4 border border-white/10 rounded-xl hover:border-[#D4AF37] hover:bg-[#D4AF37]/5 transition text-left">Daily Wear</button>
+                            <button onclick="setTempSetup('occasions', 'Special Occasions', 5)" class="p-4 border border-white/10 rounded-xl hover:border-[#D4AF37] hover:bg-[#D4AF37]/5 transition text-left">Special Occasions</button>
+                        </div>
+                        <button onclick="goToStep(3)" class="mt-6 text-xs uppercase tracking-widest opacity-40 hover:opacity-100 transition">&larr; Back</button>
+                    </div>
+                    <div id="setupStep5" class="setup-step text-center">
+                        <h2 class="font-display text-3xl gold-gradient mb-6">Budget Range</h2>
+                        <p class="text-sm opacity-60 mb-8">What's your typical spending range?</p>
+                        <div class="grid grid-cols-1 gap-3">
+                            <button onclick="completeSetup('Budget')" class="p-4 border border-white/10 rounded-xl hover:border-[#D4AF37] hover:bg-[#D4AF37]/5 transition text-left">Under Rs. 10,000</button>
+                            <button onclick="completeSetup('Mid-Range')" class="p-4 border border-white/10 rounded-xl hover:border-[#D4AF37] hover:bg-[#D4AF37]/5 transition text-left">Rs. 10,000 - 30,000</button>
+                            <button onclick="completeSetup('Premium')" class="p-4 border border-white/10 rounded-xl hover:border-[#D4AF37] hover:bg-[#D4AF37]/5 transition text-left">Rs. 30,000 - 50,000</button>
+                            <button onclick="completeSetup('Luxury')" class="p-4 border border-white/10 rounded-xl hover:border-[#D4AF37] hover:bg-[#D4AF37]/5 transition text-left">Above Rs. 50,000</button>
+                        </div>
+                        <button onclick="goToStep(4)" class="mt-6 text-xs uppercase tracking-widest opacity-40 hover:opacity-100 transition">&larr; Back</button>
                     </div>
                 </div>
             </div>
@@ -429,31 +464,82 @@
             men: { title: "Men Collection", subtitle: "Tailoring, ceremony, and polished eveningwear" },
             women: { title: "Women Collection", subtitle: "Drapes, gowns, and statement silhouettes" },
             kids: { title: "Kids Collection", subtitle: "Occasion-ready styles for the youngest guests" },
-            accessories: { title: "Accessories Collection", subtitle: "Finishing pieces for a complete look" }
+            accessories: { title: "Accessories Collection", subtitle: "Finishing pieces for a complete look" },
+            cosmetics: { title: "Cosmetics Collection", subtitle: "Beauty essentials and luxury makeup" }
         };
 
         const products = {
             men: [
                 { id: "m1", name: "Royal Gold Sherwani", price: "45,000", badge: "RG", style: "Traditional", category: "Men" },
                 { id: "m2", name: "Midnight Bandhgala", price: "32,000", badge: "MB", style: "Elegant", category: "Men" },
-                { id: "m3", name: "Silk Kurta Set", price: "12,500", badge: "SK", style: "Minimal", category: "Men" }
+                { id: "m3", name: "Silk Kurta Set", price: "12,500", badge: "SK", style: "Minimal", category: "Men" },
+                { id: "m4", name: "Velvet Sherwani", price: "52,000", badge: "VS", style: "Traditional", category: "Men" },
+                { id: "m5", name: "Designer Jodhpuri", price: "28,000", badge: "DJ", style: "Elegant", category: "Men" },
+                { id: "m6", name: "Cotton Kurta Pajama", price: "8,500", badge: "CK", style: "Minimal", category: "Men" },
+                { id: "m7", name: "Embroidered Achkan", price: "35,000", badge: "EA", style: "Traditional", category: "Men" },
+                { id: "m8", name: "Modern Blazer Set", price: "25,000", badge: "MB", style: "Trendy", category: "Men" },
+                { id: "m9", name: "Linen Suit", price: "30,000", badge: "LS", style: "Elegant", category: "Men" },
+                { id: "m10", name: "Casual Shirt Set", price: "6,500", badge: "CS", style: "Minimal", category: "Men" }
             ],
             women: [
                 { id: "w1", name: "Emerald Zari Saree", price: "38,000", badge: "EZ", style: "Traditional", category: "Women" },
                 { id: "w2", name: "Stardust Evening Gown", price: "55,000", badge: "SG", style: "Trendy", category: "Women" },
-                { id: "w3", name: "Chiffon Palazzo Set", price: "18,000", badge: "CP", style: "Minimal", category: "Women" }
+                { id: "w3", name: "Chiffon Palazzo Set", price: "18,000", badge: "CP", style: "Minimal", category: "Women" },
+                { id: "w4", name: "Banarasi Silk Saree", price: "42,000", badge: "BS", style: "Traditional", category: "Women" },
+                { id: "w5", name: "Designer Lehenga", price: "65,000", badge: "DL", style: "Elegant", category: "Women" },
+                { id: "w6", name: "Cotton Salwar Kameez", price: "12,000", badge: "CS", style: "Minimal", category: "Women" },
+                { id: "w7", name: "Embroidered Anarkali", price: "48,000", badge: "EA", style: "Traditional", category: "Women" },
+                { id: "w8", name: "Party Wear Dress", price: "22,000", badge: "PD", style: "Trendy", category: "Women" },
+                { id: "w9", name: "Velvet Gown", price: "58,000", badge: "VG", style: "Elegant", category: "Women" },
+                { id: "w10", name: "Linen Kurti Set", price: "9,500", badge: "LK", style: "Minimal", category: "Women" }
             ],
             kids: [
                 { id: "k1", name: "Little Prince Tuxedo", price: "8,500", badge: "PT", style: "Elegant", category: "Kids" },
-                { id: "k2", name: "Lehenga Mini", price: "7,200", badge: "LM", style: "Traditional", category: "Kids" }
+                { id: "k2", name: "Lehenga Mini", price: "7,200", badge: "LM", style: "Traditional", category: "Kids" },
+                { id: "k3", name: "Princess Dress", price: "6,800", badge: "PD", style: "Elegant", category: "Kids" },
+                { id: "k4", name: "Kurta Pajama Set", price: "4,500", badge: "KP", style: "Traditional", category: "Kids" },
+                { id: "k5", name: "Casual T-Shirt", price: "2,200", badge: "CT", style: "Minimal", category: "Kids" },
+                { id: "k6", name: "Party Suit", price: "9,500", badge: "PS", style: "Trendy", category: "Kids" },
+                { id: "k7", name: "Sherwani Junior", price: "12,000", badge: "SJ", style: "Traditional", category: "Kids" },
+                { id: "k8", name: "Designer Frocks", price: "8,000", badge: "DF", style: "Elegant", category: "Kids" },
+                { id: "k9", name: "Cotton Playsuit", price: "3,500", badge: "CP", style: "Minimal", category: "Kids" },
+                { id: "k10", name: "Festive Outfit", price: "7,500", badge: "FO", style: "Trendy", category: "Kids" }
             ],
             accessories: [
                 { id: "a1", name: "Premium Gold Clutch", price: "14,000", badge: "GC", style: "Trendy", category: "Accessories" },
-                { id: "a2", name: "Pashmina Shawl", price: "22,000", badge: "PS", style: "Elegant", category: "Accessories" }
+                { id: "a2", name: "Pashmina Shawl", price: "22,000", badge: "PS", style: "Elegant", category: "Accessories" },
+                { id: "a3", name: "Diamond Earrings", price: "35,000", badge: "DE", style: "Elegant", category: "Accessories" },
+                { id: "a4", name: "Leather Belt", price: "8,500", badge: "LB", style: "Minimal", category: "Accessories" },
+                { id: "a5", name: "Silk Scarf", price: "12,000", badge: "SS", style: "Traditional", category: "Accessories" },
+                { id: "a6", name: "Designer Watch", price: "28,000", badge: "DW", style: "Trendy", category: "Accessories" },
+                { id: "a7", name: "Gold Necklace", price: "45,000", badge: "GN", style: "Elegant", category: "Accessories" },
+                { id: "a8", name: "Cotton Handbag", price: "6,500", badge: "CH", style: "Minimal", category: "Accessories" },
+                { id: "a9", name: "Embroidered Dupatta", price: "18,000", badge: "ED", style: "Traditional", category: "Accessories" },
+                { id: "a10", name: "Party Clutch", price: "10,000", badge: "PC", style: "Trendy", category: "Accessories" }
+            ],
+            cosmetics: [
+                { id: "c1", name: "Luxury Perfume Set", price: "8,500", badge: "LP", style: "Elegant", category: "Cosmetics" },
+                { id: "c2", name: "Gold Lipstick", price: "2,500", badge: "GL", style: "Trendy", category: "Cosmetics" },
+                { id: "c3", name: "Silk Foundation", price: "4,200", badge: "SF", style: "Minimal", category: "Cosmetics" },
+                { id: "c4", name: "Diamond Face Powder", price: "6,800", badge: "DF", style: "Elegant", category: "Cosmetics" },
+                { id: "c5", name: "Matte Lip Gloss", price: "1,800", badge: "ML", style: "Trendy", category: "Cosmetics" },
+                { id: "c6", name: "Natural Blush", price: "3,200", badge: "NB", style: "Minimal", category: "Cosmetics" },
+                { id: "c7", name: "Pearl Eyeshadow", price: "5,500", badge: "PE", style: "Elegant", category: "Cosmetics" },
+                { id: "c8", name: "Bold Mascara", price: "2,800", badge: "BM", style: "Trendy", category: "Cosmetics" },
+                { id: "c9", name: "Organic Face Cream", price: "7,200", badge: "OF", style: "Minimal", category: "Cosmetics" },
+                { id: "c10", name: "Luxury Nail Polish", price: "1,500", badge: "NP", style: "Trendy", category: "Cosmetics" },
+                { id: "c11", name: "Velvet Lipstick", price: "3,000", badge: "VL", style: "Elegant", category: "Cosmetics" },
+                { id: "c12", name: "Hydrating Moisturizer", price: "4,500", badge: "HM", style: "Minimal", category: "Cosmetics" },
+                { id: "c13", name: "Shimmer Highlighter", price: "3,800", badge: "SH", style: "Trendy", category: "Cosmetics" },
+                { id: "c14", name: "Matte Bronzer", price: "4,200", badge: "MB", style: "Elegant", category: "Cosmetics" },
+                { id: "c15", name: "Clear Lip Balm", price: "1,200", badge: "CL", style: "Minimal", category: "Cosmetics" },
+                { id: "c16", name: "Volume Mascara", price: "3,500", badge: "VM", style: "Trendy", category: "Cosmetics" },
+                { id: "c17", name: "Rose Face Mist", price: "2,800", badge: "RF", style: "Elegant", category: "Cosmetics" },
+                { id: "c18", name: "Nude Eyeshadow Palette", price: "6,500", badge: "NE", style: "Minimal", category: "Cosmetics" },
+                { id: "c19", name: "Glossy Lip Plumper", price: "2,200", badge: "GL", style: "Trendy", category: "Cosmetics" },
+                { id: "c20", name: "Satin Blush", price: "3,900", badge: "SB", style: "Elegant", category: "Cosmetics" }
             ]
         };
-
-        const allProducts = Object.values(products).flat();
 
         const pageIds = [
             "homePage",
@@ -491,7 +577,7 @@
 
         let currentPage = "home";
         let currentAuthMode = "signin";
-        let tempSetup = { gender: null, style: null };
+        let tempSetup = { gender: null, style: null, colors: null, occasions: null, budget: null };
         let cart = [];
         let firebaseServices = null;
         let firebaseInitPromise = null;
@@ -609,16 +695,65 @@
                 return;
             }
 
-            let filtered = allProducts.filter((product) => product.style === profile.style);
+            let filtered = allProducts.slice(); // Start with all products
+
+            // Filter by gender
             if (profile.gender === "Men") {
-                filtered = filtered.filter((product) => product.category === "Men" || product.category === "Accessories");
+                filtered = filtered.filter((product) => product.category === "Men" || product.category === "Accessories" || product.category === "Cosmetics");
+            } else if (profile.gender === "Women") {
+                filtered = filtered.filter((product) => product.category === "Women" || product.category === "Accessories" || product.category === "Cosmetics");
+            } // Unisex keeps all
+
+            // Filter by style
+            if (profile.style) {
+                filtered = filtered.filter((product) => product.style === profile.style);
             }
-            if (profile.gender === "Women") {
-                filtered = filtered.filter((product) => product.category === "Women" || product.category === "Accessories");
+
+            // Adjust for colors preference
+            if (profile.colors) {
+                if (profile.colors === "Gold & Warm Tones") {
+                    filtered = filtered.filter((product) => product.style === "Traditional" || product.style === "Elegant");
+                } else if (profile.colors === "Cool Blues & Greens") {
+                    filtered = filtered.filter((product) => product.style === "Trendy" || product.style === "Minimal");
+                } else if (profile.colors === "Neutral & Earthy") {
+                    filtered = filtered.filter((product) => product.style === "Minimal" || product.style === "Elegant");
+                } else if (profile.colors === "Bold & Vibrant") {
+                    filtered = filtered.filter((product) => product.style === "Trendy");
+                }
+            }
+
+            // Adjust for occasions
+            if (profile.occasions) {
+                if (profile.occasions === "Weddings & Ceremonies") {
+                    filtered = filtered.filter((product) => product.style === "Traditional" || product.style === "Elegant");
+                } else if (profile.occasions === "Parties & Events") {
+                    filtered = filtered.filter((product) => product.style === "Trendy" || product.style === "Elegant");
+                } else if (profile.occasions === "Daily Wear") {
+                    filtered = filtered.filter((product) => product.style === "Minimal" || product.style === "Trendy");
+                } else if (profile.occasions === "Special Occasions") {
+                    filtered = filtered.filter((product) => product.style === "Elegant" || product.style === "Traditional");
+                }
+            }
+
+            // Filter by budget
+            if (profile.budget) {
+                filtered = filtered.filter((product) => {
+                    const price = parsePrice(product.price);
+                    if (profile.budget === "Budget") return price < 10000;
+                    if (profile.budget === "Mid-Range") return price >= 10000 && price < 30000;
+                    if (profile.budget === "Premium") return price >= 30000 && price < 50000;
+                    if (profile.budget === "Luxury") return price >= 50000;
+                    return true;
+                });
+            }
+
+            // If no filters match, show some defaults
+            if (filtered.length === 0) {
+                filtered = allProducts.filter((product) => product.style === profile.style).slice(0, 6);
             }
 
             ui.forYouGrid.innerHTML = filtered.length
-                ? filtered.map(createCard).join("")
+                ? filtered.slice(0, 9).map(createCard).join("") // Limit to 9 products
                 : '<p class="col-span-full text-center opacity-40">Finish your style profile to see tailored picks here.</p>';
         }
 
@@ -631,6 +766,9 @@
                 <div class="flex justify-between border-b border-white/5 pb-3"><span class="opacity-50">Email</span><span class="text-[#D4AF37]">${escapeHtml(profile.email || (isGuest ? "Guest Session" : window.user?.email || "Not available"))}</span></div>
                 <div class="flex justify-between border-b border-white/5 pb-3"><span class="opacity-50">Preference</span><span class="text-[#D4AF37]">${escapeHtml(profile.gender || "Unisex")}</span></div>
                 <div class="flex justify-between border-b border-white/5 pb-3"><span class="opacity-50">Style Profile</span><span class="text-[#D4AF37]">${escapeHtml(profile.style || "Not set")}</span></div>
+                <div class="flex justify-between border-b border-white/5 pb-3"><span class="opacity-50">Color Palette</span><span class="text-[#D4AF37]">${escapeHtml(profile.colors || "Not set")}</span></div>
+                <div class="flex justify-between border-b border-white/5 pb-3"><span class="opacity-50">Occasions</span><span class="text-[#D4AF37]">${escapeHtml(profile.occasions || "Not set")}</span></div>
+                <div class="flex justify-between border-b border-white/5 pb-3"><span class="opacity-50">Budget Range</span><span class="text-[#D4AF37]">${escapeHtml(profile.budget || "Not set")}</span></div>
             `;
         }
 
@@ -806,7 +944,10 @@
 
                 tempSetup = {
                     gender: window.userData.gender || null,
-                    style: window.userData.style || null
+                    style: window.userData.style || null,
+                    colors: window.userData.colors || null,
+                    occasions: window.userData.occasions || null,
+                    budget: window.userData.budget || null
                 };
 
                 if (currentPage === "login" || currentPage === "setup") {
@@ -940,7 +1081,7 @@
             }
         };
 
-        window.completeSetup = async (style) => {
+        window.completeSetup = async (budget) => {
             if (!window.user) {
                 navigatePage("login");
                 return;
@@ -952,7 +1093,25 @@
                 return;
             }
 
-            tempSetup.style = style;
+            if (!tempSetup.style) {
+                showNotification("Select your style preference.", "warning");
+                goToStep(2);
+                return;
+            }
+
+            if (!tempSetup.colors) {
+                showNotification("Choose your color palette.", "warning");
+                goToStep(3);
+                return;
+            }
+
+            if (!tempSetup.occasions) {
+                showNotification("Select your occasions.", "warning");
+                goToStep(4);
+                return;
+            }
+
+            tempSetup.budget = budget;
 
             const profile = {
                 uid: window.user.uid,
@@ -960,6 +1119,9 @@
                 email: window.user.email || "Guest Session",
                 gender: tempSetup.gender,
                 style: tempSetup.style,
+                colors: tempSetup.colors,
+                occasions: tempSetup.occasions,
+                budget: tempSetup.budget,
                 updatedAt: new Date().toISOString()
             };
 
@@ -978,7 +1140,7 @@
             try {
                 const { auth, authSdk } = await ensureFirebase();
                 await authSdk.signOut(auth);
-                tempSetup = { gender: null, style: null };
+                tempSetup = { gender: null, style: null, colors: null, occasions: null, budget: null };
                 hideMenus();
                 navigatePage("home");
                 showNotification("Signed out", "success");
