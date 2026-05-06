@@ -115,6 +115,17 @@
             box-shadow: 0 12px 28px rgba(37, 211, 102, 0.18);
         }
 
+        .btn-ig {
+            background: linear-gradient(135deg, #405DE6, #5B51D8, #833AB4, #C13584, #E1306C, #FD1D1D);
+            color: #fff;
+            transition: transform .25s ease, box-shadow .25s ease;
+        }
+
+        .btn-ig:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 12px 28px rgba(225, 48, 108, 0.25);
+        }
+
         .setup-step { display: none; }
         .setup-step.active { display: block; animation: fadeIn .35s ease; }
 
@@ -436,7 +447,7 @@
                         <span>Total</span>
                         <span id="cart-total" class="text-[#D4AF37]">Rs. 0</span>
                     </div>
-                    <button onclick="checkout()" class="btn-wa w-full py-4 rounded uppercase tracking-widest font-bold flex items-center justify-center gap-2">Checkout on WhatsApp</button>
+                    <button onclick="checkout()" class="btn-ig w-full py-4 rounded uppercase tracking-widest font-bold flex items-center justify-center gap-2">Checkout on Instagram</button>
                 </div>
             </div>
         </div>
@@ -1287,7 +1298,7 @@
             }
 
             const message = encodeURIComponent(`Checkout Request: ${cart.map((item) => item.name).join(", ")}`);
-            window.open(`https://wa.me/919999999999?text=${message}`, "_blank", "noopener");
+            window.open(`https://instagram.com/direct/t/reyvalstore_official`, "_blank", "noopener");
         };
 
         document.addEventListener("click", (event) => {
