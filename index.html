@@ -1301,9 +1301,9 @@
             let orderMessage = "🛍️ ORDER REQUEST\n\n";
             let total = 0;
             cart.forEach((item, index) => {
-                const price = parseInt(item.price.replace(/,/g, ''));
-                total += price * item.quantity;
-                orderMessage += `${index + 1}. ${item.name}\n   Price: Rs. ${item.price}\n   Qty: ${item.quantity}\n\n`;
+                const price = parsePrice(item.price);
+                total += price;
+                orderMessage += `${index + 1}. ${item.name}\n   Price: Rs. ${item.price}\n\n`;
             });
             orderMessage += `\n💰 TOTAL: Rs. ${total.toLocaleString('en-IN')}\n\nPlease confirm availability and proceed with payment. Thank you!`;
 
