@@ -202,6 +202,40 @@
             color: #fde68a;
         }
 
+        .match-pill {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 999px;
+            border: 1px solid rgba(212, 175, 55, 0.26);
+            background: rgba(212, 175, 55, 0.1);
+            color: var(--gold);
+            padding: .4rem .85rem;
+            font-size: .68rem;
+            letter-spacing: .24em;
+            text-transform: uppercase;
+        }
+
+        .insight-chip {
+            display: inline-flex;
+            align-items: center;
+            border-radius: 999px;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            color: rgba(245, 245, 220, 0.78);
+            padding: .38rem .72rem;
+            font-size: .75rem;
+        }
+
+        .occasion-panel {
+            background:
+                radial-gradient(circle at top left, rgba(212, 175, 55, 0.18), transparent 34%),
+                radial-gradient(circle at bottom right, rgba(15, 61, 46, 0.78), transparent 44%),
+                linear-gradient(160deg, rgba(17, 26, 20, 0.98), rgba(10, 10, 10, 0.96));
+            border: 1px solid rgba(212, 175, 55, 0.16);
+            box-shadow: 0 28px 80px rgba(0, 0, 0, 0.26);
+        }
+
         ::-webkit-scrollbar { width: 6px; }
         ::-webkit-scrollbar-track { background: #0a0a0a; }
         ::-webkit-scrollbar-thumb { background: #D4AF37; border-radius: 3px; }
@@ -333,8 +367,8 @@
                 </div>
             </div>
 
-            <div id="setupPage" class="hidden page-transition pt-32 pb-12 px-6 flex items-center justify-center">
-                <div class="w-full max-w-md bg-[#111a14] p-10 rounded-3xl border border-[#D4AF37]/20">
+            <div id="setupPage" class="hidden page-transition pt-32 pb-12 px-6 flex items-center justify-center min-h-screen">
+                <div class="w-full max-w-md bg-[#111a14] p-10 rounded-3xl border border-[#D4AF37]/20 max-h-[85vh] overflow-y-auto">
                     <div id="setupStep1" class="setup-step active text-center">
                         <h2 class="font-display text-3xl gold-gradient mb-6">First, tell us...</h2>
                         <p class="text-sm opacity-60 mb-8">Whose collection are you interested in today?</p>
@@ -420,9 +454,109 @@
             </div>
 
             <div id="foryouPage" class="hidden page-transition pt-28 pb-12 px-6">
-                <div class="max-w-7xl mx-auto text-center">
-                    <h2 class="font-display text-5xl font-light mb-12">Tailored For You</h2>
-                    <div id="foryouGrid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 text-left"></div>
+                <div class="max-w-7xl mx-auto">
+                    <div class="text-center mb-12">
+                        <div class="tracking-[.4em] text-xs uppercase mb-3 text-[#D4AF37]">Curated For Your Profile</div>
+                        <h2 class="font-display text-5xl font-light mb-4">Tailored For You</h2>
+                        <p class="max-w-2xl mx-auto text-white/60 leading-7">
+                            A sharper edit of Reyval pieces matched to your style, occasion, palette, and budget.
+                        </p>
+                    </div>
+
+                    <div id="forYouSummary" class="grid lg:grid-cols-[1.1fr_.9fr] gap-6 mb-12"></div>
+
+                    <section class="mb-16">
+                        <div class="flex flex-col md:flex-row md:items-end md:justify-between gap-4 mb-6">
+                            <div>
+                                <div class="tracking-[.34em] text-xs uppercase text-white/40 mb-2">Personal Edit</div>
+                                <h3 class="font-display text-4xl text-[#D4AF37]">Products picked for your current taste</h3>
+                            </div>
+                            <button onclick="navigatePage('setup')" class="self-start md:self-auto px-5 py-3 border border-[#D4AF37]/25 rounded-xl text-xs uppercase tracking-[.24em] hover:bg-[#D4AF37]/10 transition">
+                                Refine Preferences
+                            </button>
+                        </div>
+                        <div id="foryouGrid" class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-8 text-left"></div>
+                    </section>
+
+                    <section class="occasion-panel rounded-[2rem] p-6 md:p-8">
+                        <div class="grid xl:grid-cols-[.9fr_1.1fr] gap-8 items-start">
+                            <div>
+                                <div class="tracking-[.34em] text-xs uppercase text-[#D4AF37] mb-3">Gemini Stylist</div>
+                                <h3 class="font-display text-4xl mb-4">Right dress, right occasion.</h3>
+                                <p class="text-white/65 leading-7 mb-6">
+                                    Tell Reyval where you are going, how you want to feel, and Gemini will build the best catalog look around your profile.
+                                </p>
+
+                                <div class="rounded-[1.5rem] border border-white/10 bg-black/20 p-5 space-y-4">
+                                    <div>
+                                        <label for="geminiApiKey" class="text-xs uppercase tracking-[.28em] text-white/40">Gemini API Key</label>
+                                        <div class="flex flex-col sm:flex-row gap-3 mt-3">
+                                            <input id="geminiApiKey" type="password" placeholder="Paste your Gemini key" class="flex-1 bg-white/5 border border-white/10 px-4 py-3 rounded-xl text-cream focus:border-[#D4AF37] outline-none transition">
+                                            <button onclick="saveGeminiApiKey()" class="btn-gold px-5 py-3 rounded-xl text-xs uppercase tracking-[.24em] font-medium">Save Key</button>
+                                        </div>
+                                        <p class="text-xs text-white/40 mt-3 leading-5">
+                                            Stored only in this browser. You can also set <span class="text-[#D4AF37]">window.REYVAL_GEMINI_API_KEY</span> before the page loads.
+                                        </p>
+                                    </div>
+                                    <div id="occasionStatus" class="hidden rounded-2xl px-4 py-3 text-sm leading-6"></div>
+                                </div>
+                            </div>
+
+                            <div class="grid gap-5">
+                                <div class="grid md:grid-cols-2 gap-4">
+                                    <div>
+                                        <label for="occasionSelect" class="text-xs uppercase tracking-[.28em] text-white/40">Occasion</label>
+                                        <select id="occasionSelect" class="mt-3 w-full bg-white/5 border border-white/10 px-4 py-3 rounded-xl text-cream focus:border-[#D4AF37] outline-none transition">
+                                            <option>Weddings & Ceremonies</option>
+                                            <option>Parties & Events</option>
+                                            <option>Daily Wear</option>
+                                            <option>Special Occasions</option>
+                                            <option>Reception Dinner</option>
+                                            <option>Festive Family Event</option>
+                                        </select>
+                                    </div>
+                                    <div>
+                                        <label for="dressCodeSelect" class="text-xs uppercase tracking-[.28em] text-white/40">Dress Code</label>
+                                        <select id="dressCodeSelect" class="mt-3 w-full bg-white/5 border border-white/10 px-4 py-3 rounded-xl text-cream focus:border-[#D4AF37] outline-none transition">
+                                            <option>Elegant Formal</option>
+                                            <option>Festive Traditional</option>
+                                            <option>Cocktail Glam</option>
+                                            <option>Minimal Chic</option>
+                                            <option>Relaxed Luxe</option>
+                                        </select>
+                                    </div>
+                                    <div>
+                                        <label for="timeSelect" class="text-xs uppercase tracking-[.28em] text-white/40">Time</label>
+                                        <select id="timeSelect" class="mt-3 w-full bg-white/5 border border-white/10 px-4 py-3 rounded-xl text-cream focus:border-[#D4AF37] outline-none transition">
+                                            <option>Daytime</option>
+                                            <option>Sunset</option>
+                                            <option>Evening</option>
+                                            <option>Late Night</option>
+                                        </select>
+                                    </div>
+                                    <div>
+                                        <label for="dressMoodInput" class="text-xs uppercase tracking-[.28em] text-white/40">Desired Mood</label>
+                                        <input id="dressMoodInput" type="text" placeholder="Graceful, bold, effortless..." class="mt-3 w-full bg-white/5 border border-white/10 px-4 py-3 rounded-xl text-cream focus:border-[#D4AF37] outline-none transition">
+                                    </div>
+                                </div>
+
+                                <div>
+                                    <label for="occasionNotes" class="text-xs uppercase tracking-[.28em] text-white/40">Extra Notes</label>
+                                    <textarea id="occasionNotes" rows="4" placeholder="Example: outdoor event, want movement, keep it polished but comfortable." class="mt-3 w-full bg-white/5 border border-white/10 px-4 py-3 rounded-2xl text-cream focus:border-[#D4AF37] outline-none transition resize-none"></textarea>
+                                </div>
+
+                                <button onclick="requestOccasionRecommendation()" class="btn-gold px-6 py-4 rounded-xl text-sm uppercase tracking-[.24em] font-medium">
+                                    Ask Gemini For The Best Look
+                                </button>
+
+                                <div id="occasionResult" class="rounded-[1.75rem] border border-white/10 bg-black/20 p-6 min-h-[19rem]">
+                                    <div class="text-white/45 leading-7">
+                                        Pick an event above and Gemini will return the strongest Reyval outfit mix for the moment.
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
                 </div>
             </div>
 
@@ -553,6 +687,30 @@
         };
 
         const allProducts = Object.values(products).flat();
+        const GEMINI_MODEL = "gemini-2.5-flash";
+        const GEMINI_STORAGE_KEY = "reyval.gemini.apiKey";
+
+        const styleOccasionMap = {
+            Traditional: ["Weddings & Ceremonies", "Special Occasions"],
+            Elegant: ["Special Occasions", "Parties & Events"],
+            Trendy: ["Parties & Events", "Special Occasions"],
+            Minimal: ["Daily Wear", "Parties & Events"]
+        };
+
+        const dressCodeStyleMap = {
+            "Elegant Formal": ["Elegant", "Traditional"],
+            "Festive Traditional": ["Traditional", "Elegant"],
+            "Cocktail Glam": ["Trendy", "Elegant"],
+            "Minimal Chic": ["Minimal", "Elegant"],
+            "Relaxed Luxe": ["Minimal", "Trendy"]
+        };
+
+        const timeStyleMap = {
+            Daytime: ["Minimal", "Traditional"],
+            Sunset: ["Elegant", "Trendy"],
+            Evening: ["Elegant", "Trendy"],
+            "Late Night": ["Trendy", "Elegant"]
+        };
 
         const pageIds = [
             "homePage",
@@ -573,6 +731,7 @@
             catSubtitle: document.getElementById("cat-subtitle"),
             searchInput: document.getElementById("searchInput"),
             searchResults: document.getElementById("searchResults"),
+            forYouSummary: document.getElementById("forYouSummary"),
             forYouGrid: document.getElementById("foryouGrid"),
             profileContent: document.getElementById("profile-content"),
             cartBadge: document.getElementById("cart-badge"),
@@ -582,7 +741,15 @@
             loginPage: document.getElementById("loginPage"),
             authFeedback: document.getElementById("authFeedback"),
             authModeTitle: document.getElementById("authModeTitle"),
-            authModeText: document.getElementById("authModeText")
+            authModeText: document.getElementById("authModeText"),
+            geminiApiKeyInput: document.getElementById("geminiApiKey"),
+            occasionSelect: document.getElementById("occasionSelect"),
+            dressCodeSelect: document.getElementById("dressCodeSelect"),
+            timeSelect: document.getElementById("timeSelect"),
+            dressMoodInput: document.getElementById("dressMoodInput"),
+            occasionNotes: document.getElementById("occasionNotes"),
+            occasionStatus: document.getElementById("occasionStatus"),
+            occasionResult: document.getElementById("occasionResult")
         };
 
         window.user = null;
@@ -623,6 +790,559 @@
             return Number(String(value).replace(/,/g, ""));
         }
 
+        function normalizeText(value = "") {
+            return String(value).toLowerCase();
+        }
+
+        function uniqueList(values = []) {
+            return [...new Set(values.filter(Boolean))];
+        }
+
+        function budgetMatches(product, budget) {
+            if (!budget) {
+                return false;
+            }
+
+            const price = parsePrice(product.price);
+            if (budget === "Budget") return price < 10000;
+            if (budget === "Mid-Range") return price >= 10000 && price < 30000;
+            if (budget === "Premium") return price >= 30000 && price < 50000;
+            if (budget === "Luxury") return price >= 50000;
+            return false;
+        }
+
+        function getCanonicalOccasion(value = "") {
+            const normalized = normalizeText(value);
+            if (/wedding|ceremony|festive/.test(normalized)) return "Weddings & Ceremonies";
+            if (/party|event|reception|cocktail/.test(normalized)) return "Parties & Events";
+            if (/daily|casual|office|work|relaxed/.test(normalized)) return "Daily Wear";
+            return "Special Occasions";
+        }
+
+        function getProductOccasionTags(product) {
+            const name = normalizeText(product.name);
+            const tags = new Set(styleOccasionMap[product.style] || []);
+
+            if (/sherwani|lehenga|saree|anarkali|bandhgala|jodhpuri|achkan|banarasi|kurta/.test(name)) {
+                tags.add("Weddings & Ceremonies");
+            }
+
+            if (/gown|dress|party|clutch|tuxedo|blazer|mascara|lipstick|highlighter/.test(name)) {
+                tags.add("Parties & Events");
+            }
+
+            if (/cotton|linen|casual|playsuit|kurti|shirt|moisturizer|cream|balm/.test(name)) {
+                tags.add("Daily Wear");
+            }
+
+            if (/velvet|designer|diamond|gold|premium|royal|silk|princess/.test(name)) {
+                tags.add("Special Occasions");
+            }
+
+            if (!tags.size) {
+                tags.add("Special Occasions");
+            }
+
+            return [...tags];
+        }
+
+        function getProductPaletteTags(product) {
+            const name = normalizeText(product.name);
+            const tags = new Set();
+
+            if (/gold|zari|royal|banarasi|diamond|pearl|rose/.test(name) || product.style === "Traditional") {
+                tags.add("Gold & Warm Tones");
+            }
+
+            if (/emerald|midnight|blue|green|pashmina|stardust/.test(name)) {
+                tags.add("Cool Blues & Greens");
+            }
+
+            if (/cotton|linen|natural|organic|nude|clear|matte|leather/.test(name) || product.style === "Minimal") {
+                tags.add("Neutral & Earthy");
+            }
+
+            if (/party|bold|velvet|shimmer|glossy|designer|princess|luxury|volume/.test(name) || product.style === "Trendy") {
+                tags.add("Bold & Vibrant");
+            }
+
+            if (!tags.size) {
+                tags.add("Neutral & Earthy");
+            }
+
+            return [...tags];
+        }
+
+        function getProductKeywords(product) {
+            return uniqueList([
+                ...normalizeText(product.name).split(/[^a-z0-9]+/),
+                normalizeText(product.style),
+                normalizeText(product.category),
+                ...getProductOccasionTags(product).map(normalizeText),
+                ...getProductPaletteTags(product).map(normalizeText)
+            ]);
+        }
+
+        function isCoreProductForProfile(product, profile) {
+            if (!profile?.gender || profile.gender === "Unisex") {
+                return !["Accessories", "Cosmetics"].includes(product.category);
+            }
+
+            return product.category === profile.gender;
+        }
+
+        function getKeywordBoost(product, text) {
+            const normalizedText = normalizeText(text);
+            if (!normalizedText) {
+                return 0;
+            }
+
+            return getProductKeywords(product).reduce((total, keyword) => total + (normalizedText.includes(keyword) ? 1 : 0), 0);
+        }
+
+        function scoreProductMatch(product, profile, context = {}) {
+            const reasons = [];
+            const chips = [];
+            const addReason = (message) => {
+                if (message && !reasons.includes(message)) {
+                    reasons.push(message);
+                }
+            };
+            const addChip = (message) => {
+                if (message && !chips.includes(message)) {
+                    chips.push(message);
+                }
+            };
+
+            let score = 0;
+            const category = product.category;
+            const coreProduct = isCoreProductForProfile(product, profile);
+
+            if (profile.gender === "Men" && !["Men", "Accessories", "Cosmetics"].includes(category)) {
+                return null;
+            }
+
+            if (profile.gender === "Women" && !["Women", "Accessories", "Cosmetics"].includes(category)) {
+                return null;
+            }
+
+            if (coreProduct) {
+                score += 34;
+                addReason(`Aligned with your ${normalizeText(profile.gender === "Unisex" ? "main" : profile.gender)} wardrobe profile.`);
+                addChip("Core fit");
+            } else {
+                score += 12;
+                addReason("Works as a finishing touch around your main outfit.");
+                addChip(category === "Accessories" ? "Add-on" : "Beauty");
+            }
+
+            if (product.style === profile.style) {
+                score += 28;
+                addReason(`Matches your ${normalizeText(profile.style)} style preference.`);
+                addChip(product.style);
+            }
+
+            const occasionTags = getProductOccasionTags(product);
+            if (profile.occasions && occasionTags.includes(profile.occasions)) {
+                score += 24;
+                addReason(`A natural fit for ${normalizeText(profile.occasions)}.`);
+                addChip("Occasion match");
+            }
+
+            const paletteTags = getProductPaletteTags(product);
+            if (profile.colors && paletteTags.includes(profile.colors)) {
+                score += 18;
+                addReason(`Supports your ${normalizeText(profile.colors)} palette.`);
+                addChip("Palette");
+            }
+
+            if (budgetMatches(product, profile.budget)) {
+                score += 18;
+                addReason("Sits inside your current budget range.");
+                addChip("Budget");
+            } else if (profile.budget) {
+                score -= 6;
+            }
+
+            const targetOccasion = getCanonicalOccasion(context.occasion || profile.occasions);
+            if (occasionTags.includes(targetOccasion)) {
+                score += 16;
+                addReason(`Strong option for ${normalizeText(targetOccasion)} styling.`);
+            }
+
+            const preferredStyles = dressCodeStyleMap[context.dressCode] || [];
+            if (preferredStyles.includes(product.style)) {
+                score += 12;
+                addReason(`${context.dressCode} works well with this silhouette.`);
+            }
+
+            const timeStyles = timeStyleMap[context.timeOfDay] || [];
+            if (timeStyles.includes(product.style)) {
+                score += 8;
+                addReason(`${context.timeOfDay} styling suits this piece.`);
+            }
+
+            const keywordBoost = getKeywordBoost(product, `${context.mood || ""} ${context.notes || ""}`);
+            if (keywordBoost > 0) {
+                score += Math.min(14, keywordBoost * 4);
+                addReason("Its details connect nicely with your mood and notes.");
+            }
+
+            if (category === "Accessories" && targetOccasion !== "Daily Wear") {
+                score += 4;
+            }
+
+            const match = Math.max(61, Math.min(98, 55 + Math.round(score * 0.46)));
+
+            return {
+                product,
+                score,
+                match,
+                coreProduct,
+                reasons: reasons.slice(0, 3),
+                chips: chips.slice(0, 4)
+            };
+        }
+
+        function getPersonalizedRecommendations(profile, context = {}, limit = 6) {
+            const scored = allProducts
+                .map((product) => scoreProductMatch(product, profile, context))
+                .filter(Boolean)
+                .sort((left, right) => right.score - left.score || left.product.name.localeCompare(right.product.name));
+
+            const core = scored.filter((item) => item.coreProduct);
+            const accents = scored.filter((item) => !item.coreProduct);
+            const combined = [];
+            const pushUnique = (item) => {
+                if (item && !combined.some((existing) => existing.product.id === item.product.id)) {
+                    combined.push(item);
+                }
+            };
+
+            core.slice(0, Math.min(4, limit)).forEach(pushUnique);
+            accents.slice(0, Math.min(2, limit)).forEach(pushUnique);
+            scored.forEach((item) => {
+                if (combined.length < limit) {
+                    pushUnique(item);
+                }
+            });
+
+            return combined.slice(0, limit);
+        }
+
+        function createRecommendationCard(recommendation) {
+            const reasonCopy = recommendation.reasons.length
+                ? recommendation.reasons.join(" ")
+                : "A polished Reyval pick matched to your current profile.";
+            const chipMarkup = recommendation.chips.length
+                ? `<div class="flex flex-wrap gap-2 mb-4">${recommendation.chips.map((chip) => `<span class="insight-chip">${escapeHtml(chip)}</span>`).join("")}</div>`
+                : "";
+
+            return `
+                <div class="product-card p-7 rounded-[1.9rem] flex flex-col">
+                    <div class="flex items-start justify-between gap-4 mb-5">
+                        <div class="product-badge">${escapeHtml(recommendation.product.badge)}</div>
+                        <div class="match-pill">${recommendation.match}% match</div>
+                    </div>
+                    <h3 class="font-display text-3xl text-[#D4AF37] mb-2">${escapeHtml(recommendation.product.name)}</h3>
+                    <div class="text-sm opacity-55 italic mb-4">${escapeHtml(recommendation.product.style)} - ${escapeHtml(recommendation.product.category)}</div>
+                    ${chipMarkup}
+                    <p class="text-sm text-white/68 leading-6 mb-6">${escapeHtml(reasonCopy)}</p>
+                    <div class="mt-auto flex items-end justify-between gap-4">
+                        <div>
+                            <div class="text-[11px] uppercase tracking-[.26em] text-white/35 mb-2">Reyval Price</div>
+                            <div class="text-xl font-bold">${formatPrice(recommendation.product.price)}</div>
+                        </div>
+                        <button onclick="addToCart('${recommendation.product.id}')" class="px-5 py-3 border border-[#D4AF37] text-[#D4AF37] text-[10px] uppercase tracking-[.2em] font-bold hover:bg-[#D4AF37] hover:text-black transition rounded-xl">
+                            Add To Bag
+                        </button>
+                    </div>
+                </div>
+            `;
+        }
+
+        function renderForYouSummary(profile, recommendations) {
+            const leadRecommendation = recommendations[0];
+            const paletteCopy = profile.colors || "Your palette";
+            const occasionCopy = profile.occasions || "your next outing";
+            const budgetCopy = profile.budget || "your budget";
+
+            ui.forYouSummary.innerHTML = `
+                <div class="rounded-[1.8rem] border border-white/10 bg-white/5 p-6 md:p-7">
+                    <div class="text-xs uppercase tracking-[.3em] text-white/40 mb-3">Profile Lens</div>
+                    <h3 class="font-display text-4xl text-[#D4AF37] mb-3">${escapeHtml(profile.gender || "Unisex")} - ${escapeHtml(profile.style || "Signature Style")}</h3>
+                    <p class="text-white/68 leading-7">
+                        Your feed is tuned for <span class="text-[#D4AF37]">${escapeHtml(occasionCopy)}</span>, built around <span class="text-[#D4AF37]">${escapeHtml(paletteCopy)}</span>, and filtered to fit <span class="text-[#D4AF37]">${escapeHtml(budgetCopy)}</span>.
+                    </p>
+                    <div class="grid sm:grid-cols-2 gap-3 mt-6">
+                        <div class="rounded-2xl border border-white/10 bg-black/20 p-4">
+                            <div class="text-[11px] uppercase tracking-[.28em] text-white/35 mb-2">Main Focus</div>
+                            <div class="text-lg text-cream">${escapeHtml(profile.occasions || "Special moments")}</div>
+                        </div>
+                        <div class="rounded-2xl border border-white/10 bg-black/20 p-4">
+                            <div class="text-[11px] uppercase tracking-[.28em] text-white/35 mb-2">Color Direction</div>
+                            <div class="text-lg text-cream">${escapeHtml(profile.colors || "Balanced neutrals")}</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="rounded-[1.8rem] border border-[#D4AF37]/14 bg-[#D4AF37]/6 p-6 md:p-7">
+                    <div class="text-xs uppercase tracking-[.3em] text-[#D4AF37] mb-3">Lead Recommendation</div>
+                    <h3 class="font-display text-4xl mb-3">${escapeHtml(leadRecommendation?.product.name || "Your Reyval Edit")}</h3>
+                    <p class="text-white/68 leading-7">
+                        ${escapeHtml(leadRecommendation?.reasons?.[0] || "A confident pick from your current profile signals.")}
+                    </p>
+                    <div class="flex flex-wrap gap-2 mt-6">
+                        ${(leadRecommendation?.chips || ["Tailored", "Personalized"]).map((chip) => `<span class="insight-chip">${escapeHtml(chip)}</span>`).join("")}
+                    </div>
+                    <div class="mt-6 flex items-center justify-between gap-4">
+                        <div>
+                            <div class="text-[11px] uppercase tracking-[.28em] text-white/35 mb-2">Match Strength</div>
+                            <div class="text-2xl font-display text-[#D4AF37]">${leadRecommendation?.match || 0}%</div>
+                        </div>
+                        <button onclick="navigatePage('profile')" class="px-5 py-3 border border-[#D4AF37]/25 rounded-xl text-xs uppercase tracking-[.24em] hover:bg-[#D4AF37]/10 transition">
+                            View Profile
+                        </button>
+                    </div>
+                </div>
+            `;
+        }
+
+        function getSavedGeminiApiKey() {
+            if (window.REYVAL_GEMINI_API_KEY) {
+                return String(window.REYVAL_GEMINI_API_KEY).trim();
+            }
+
+            try {
+                return localStorage.getItem(GEMINI_STORAGE_KEY) || "";
+            } catch (error) {
+                return "";
+            }
+        }
+
+        function setOccasionStatus(message = "", tone = "info") {
+            if (!message) {
+                ui.occasionStatus.textContent = "";
+                ui.occasionStatus.className = "hidden rounded-2xl px-4 py-3 text-sm leading-6";
+                return;
+            }
+
+            const toneClassMap = {
+                info: "rounded-2xl px-4 py-3 text-sm leading-6 bg-white/5 border border-white/10 text-white/75",
+                success: "rounded-2xl px-4 py-3 text-sm leading-6 bg-[#25d366]/10 border border-[#25d366]/20 text-[#b9f7d0]",
+                warning: "rounded-2xl px-4 py-3 text-sm leading-6 bg-[#facc15]/10 border border-[#facc15]/20 text-[#fde68a]",
+                error: "rounded-2xl px-4 py-3 text-sm leading-6 bg-[#f87171]/10 border border-[#f87171]/20 text-[#fecaca]"
+            };
+
+            ui.occasionStatus.textContent = message;
+            ui.occasionStatus.className = toneClassMap[tone] || toneClassMap.info;
+        }
+
+        function syncGeminiInput() {
+            if (ui.geminiApiKeyInput) {
+                ui.geminiApiKeyInput.value = getSavedGeminiApiKey();
+            }
+        }
+
+        function syncOccasionForm(profile) {
+            if (!profile) {
+                return;
+            }
+
+            if (ui.occasionSelect) {
+                ui.occasionSelect.value = profile.occasions || ui.occasionSelect.value;
+            }
+
+            if (ui.dressMoodInput && !ui.dressMoodInput.value) {
+                ui.dressMoodInput.value = profile.style || "";
+            }
+
+            if (ui.occasionNotes) {
+                ui.occasionNotes.placeholder = `Example: ${profile.colors || "warm palette"}, ${normalizeText(profile.budget || "balanced")} budget, want comfort and polish.`;
+            }
+
+            if (getSavedGeminiApiKey()) {
+                setOccasionStatus(`Gemini is ready with ${GEMINI_MODEL}.`, "success");
+            } else {
+                setOccasionStatus("Add your Gemini API key to unlock AI occasion styling.", "info");
+            }
+        }
+
+        function buildOccasionFallback(profile, context, recommendations) {
+            const leadProduct = recommendations[0]?.product;
+            const accentProduct = recommendations.find((item) => !item.coreProduct)?.product;
+
+            return {
+                headline: `${context.occasion} Reyval Edit`,
+                dressRecommendation: leadProduct
+                    ? `${leadProduct.name} is the strongest starting point for this plan.`
+                    : "Start with one of the highlighted catalog picks.",
+                whyItWorks: `This local Reyval match leans into your ${normalizeText(profile.style || "preferred")} style, ${normalizeText(context.dressCode || "selected")} dress code, and ${normalizeText(context.timeOfDay || "event")} timing.`,
+                stylingTips: [
+                    `Keep the palette focused around ${profile.colors || "your saved tones"}.`,
+                    `Use ${accentProduct ? accentProduct.name : "one accessory"} as the finishing layer.`,
+                    "Choose comfort details that still keep the silhouette sharp."
+                ],
+                recommendedProductIds: recommendations.slice(0, 3).map((item) => item.product.id)
+            };
+        }
+
+        function extractGeminiText(payload) {
+            return (payload?.candidates || [])
+                .flatMap((candidate) => candidate?.content?.parts || [])
+                .map((part) => part?.text || "")
+                .join("\n")
+                .trim();
+        }
+
+        function parseGeminiJson(text) {
+            if (!text) {
+                return null;
+            }
+
+            const cleaned = text.replace(/```json|```/gi, "").trim();
+
+            try {
+                return JSON.parse(cleaned);
+            } catch (error) {
+                const match = cleaned.match(/\{[\s\S]*\}/);
+                if (!match) {
+                    return null;
+                }
+
+                try {
+                    return JSON.parse(match[0]);
+                } catch (nestedError) {
+                    return null;
+                }
+            }
+        }
+
+        function createOccasionProductCard(product, label = "") {
+            return `
+                <div class="rounded-[1.5rem] border border-white/10 bg-white/5 p-4 flex flex-col">
+                    <div class="flex items-start justify-between gap-3 mb-4">
+                        <div class="product-badge w-12 h-12 text-sm">${escapeHtml(product.badge)}</div>
+                        <div class="match-pill">${escapeHtml(label || product.category)}</div>
+                    </div>
+                    <h4 class="font-display text-2xl text-[#D4AF37] mb-1">${escapeHtml(product.name)}</h4>
+                    <div class="text-sm text-white/50 italic mb-4">${escapeHtml(product.style)} - ${escapeHtml(product.category)}</div>
+                    <div class="text-lg font-bold mb-5">${formatPrice(product.price)}</div>
+                    <button onclick="addToCart('${product.id}')" class="mt-auto py-3 border border-[#D4AF37] text-[#D4AF37] text-[10px] uppercase tracking-[.2em] font-bold hover:bg-[#D4AF37] hover:text-black transition rounded-xl">
+                        Add To Bag
+                    </button>
+                </div>
+            `;
+        }
+
+        function renderOccasionResult(result, recommendations, profile, context) {
+            const recommendationMap = new Map(recommendations.map((item) => [item.product.id, item.product]));
+            const selectedProducts = uniqueList(result?.recommendedProductIds || [])
+                .map((id) => recommendationMap.get(id))
+                .filter(Boolean);
+            const fallbackProducts = selectedProducts.length
+                ? selectedProducts
+                : recommendations.slice(0, 3).map((item) => item.product);
+            const stylingTips = Array.isArray(result?.stylingTips) ? result.stylingTips.slice(0, 3) : [];
+
+            ui.occasionResult.innerHTML = `
+                <div class="space-y-6">
+                    <div>
+                        <div class="text-xs uppercase tracking-[.3em] text-[#D4AF37] mb-3">Occasion Recommendation</div>
+                        <h4 class="font-display text-4xl text-[#D4AF37] mb-3">${escapeHtml(result?.headline || `${context.occasion} Reyval Edit`)}</h4>
+                        <p class="text-white/72 leading-7">${escapeHtml(result?.dressRecommendation || "Gemini prepared a Reyval look based on your occasion inputs.")}</p>
+                    </div>
+                    <div class="rounded-[1.4rem] border border-white/10 bg-black/20 p-5">
+                        <div class="text-xs uppercase tracking-[.28em] text-white/38 mb-3">Why It Works</div>
+                        <p class="text-white/70 leading-7">${escapeHtml(result?.whyItWorks || `Matched to your ${normalizeText(profile.style || "saved")} style and ${normalizeText(context.occasion || "selected")} event details.`)}</p>
+                    </div>
+                    ${stylingTips.length ? `
+                        <div>
+                            <div class="text-xs uppercase tracking-[.28em] text-white/38 mb-3">Styling Notes</div>
+                            <div class="grid gap-3">
+                                ${stylingTips.map((tip) => `<div class="rounded-2xl border border-white/10 bg-white/5 px-4 py-3 text-white/70 leading-6">${escapeHtml(tip)}</div>`).join("")}
+                            </div>
+                        </div>
+                    ` : ""}
+                    <div class="grid md:grid-cols-2 xl:grid-cols-3 gap-4">
+                        ${fallbackProducts.map((product, index) => createOccasionProductCard(product, index === 0 ? "Lead look" : "Finish")).join("")}
+                    </div>
+                </div>
+            `;
+        }
+
+        async function fetchGeminiOccasionPlan(profile, context, recommendations) {
+            const apiKey = getSavedGeminiApiKey();
+            if (!apiKey) {
+                throw new Error("Add a Gemini API key before requesting an AI occasion plan.");
+            }
+
+            const prompt = [
+                "You are Reyval's luxury fashion stylist.",
+                "Use only the provided catalog items.",
+                "Return only valid JSON.",
+                "",
+                `Customer profile: ${profile.gender}, ${profile.style}, ${profile.colors}, ${profile.occasions}, ${profile.budget}.`,
+                `Occasion request: ${context.occasion}; dress code: ${context.dressCode}; time: ${context.timeOfDay}; mood: ${context.mood || "not specified"}; notes: ${context.notes || "none"}.`,
+                "",
+                "Catalog candidates:",
+                ...recommendations.map((item) => {
+                    const product = item.product;
+                    return `- ${product.id} | ${product.name} | ${product.category} | ${product.style} | Rs. ${product.price} | Occasions: ${getProductOccasionTags(product).join(", ")} | Palette: ${getProductPaletteTags(product).join(", ")}`;
+                }),
+                "",
+                "JSON shape:",
+                "{",
+                '  "headline": "short title",',
+                '  "dressRecommendation": "2-3 sentences that name the best lead look first",',
+                '  "whyItWorks": "1-2 sentences",',
+                '  "stylingTips": ["tip 1", "tip 2", "tip 3"],',
+                '  "recommendedProductIds": ["lead outfit id", "optional accessory id", "optional beauty id"]',
+                "}",
+                "",
+                "Rules:",
+                "- Pick 2 to 4 product ids only.",
+                "- The first id must be the main outfit, not an accessory or cosmetic.",
+                "- Keep the advice premium, practical, and specific to the event."
+            ].join("\n");
+
+            const response = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/${GEMINI_MODEL}:generateContent`, {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                    "x-goog-api-key": apiKey
+                },
+                body: JSON.stringify({
+                    contents: [
+                        {
+                            role: "user",
+                            parts: [{ text: prompt }]
+                        }
+                    ],
+                    generationConfig: {
+                        temperature: 0.7,
+                        thinkingConfig: {
+                            thinkingBudget: 0
+                        }
+                    }
+                })
+            });
+
+            if (!response.ok) {
+                const errorText = await response.text();
+                throw new Error(errorText || `Gemini request failed with status ${response.status}.`);
+            }
+
+            const payload = await response.json();
+            const rawText = extractGeminiText(payload);
+            const parsed = parseGeminiJson(rawText);
+
+            if (!parsed) {
+                throw new Error("Gemini returned a response that could not be parsed.");
+            }
+
+            return parsed;
+        }
+
         function hideMenus() {
             ui.userMenu.classList.add("hidden");
             ui.mobileMenu.classList.add("hidden");
@@ -658,12 +1378,12 @@
 
             // Create modal
             const modal = document.createElement("div");
-            modal.className = "bg-[#0d1f16] border-2 border-[#D4AF37] rounded-3xl p-10 max-w-2xl w-11/12 max-h-96 overflow-auto";
+            modal.className = "bg-[#0d1f16] border-2 border-[#D4AF37] rounded-3xl p-10 max-w-2xl w-11/12 max-h-[85vh] overflow-y-auto flex flex-col";
             
             // Header
             const header = document.createElement("div");
             header.className = "flex items-start justify-between mb-6";
-            header.innerHTML = `<h2 class="font-display text-4xl text-[#D4AF37]">Order Ready!</h2>`;
+            header.innerHTML = `<h2 class="font-display text-4xl text-[#D4AF37]">✅ Order Ready!</h2>`;
             
             // Close button in header
             const closeBtn = document.createElement("button");
@@ -672,14 +1392,27 @@
             closeBtn.onclick = () => overlay.remove();
             header.appendChild(closeBtn);
             
+            // Instructions
+            const instructions = document.createElement("div");
+            instructions.className = "bg-[#D4AF37]/10 border border-[#D4AF37]/30 rounded-xl p-4 mb-6 text-cream";
+            instructions.innerHTML = `
+                <div class="text-sm font-bold text-[#D4AF37] mb-2">📋 INSTRUCTIONS:</div>
+                <div class="text-sm leading-relaxed">
+                    <div>✓ Your order has been copied to clipboard</div>
+                    <div>✓ Click "Open Instagram" button below</div>
+                    <div>✓ Paste the order message in the DM</div>
+                    <div>✓ Wait for our confirmation</div>
+                </div>
+            `;
+            
             // Message display
             const messageDiv = document.createElement("div");
-            messageDiv.className = "text-lg text-cream whitespace-pre-wrap mb-8 font-mono bg-black/30 p-6 rounded-xl border border-white/10";
+            messageDiv.className = "text-sm text-cream whitespace-pre-wrap mb-8 font-mono bg-black/30 p-6 rounded-xl border border-white/10";
             messageDiv.textContent = message;
             
             // Button container
             const buttonContainer = document.createElement("div");
-            buttonContainer.className = "flex gap-4";
+            buttonContainer.className = "flex gap-4 flex-col sm:flex-row";
             
             // Close button
             const closeActionBtn = document.createElement("button");
@@ -689,17 +1422,18 @@
             
             // Open Instagram button
             const igBtn = document.createElement("button");
-            igBtn.className = "flex-1 py-4 bg-gradient-to-r from-pink-500 to-rose-500 hover:from-pink-600 hover:to-rose-600 transition uppercase tracking-widest font-bold rounded-xl";
-            igBtn.textContent = "Open Instagram";
+            igBtn.className = "flex-1 py-4 bg-gradient-to-r from-pink-500 to-rose-500 hover:from-pink-600 hover:to-rose-600 transition uppercase tracking-widest font-bold rounded-xl text-white";
+            igBtn.textContent = "📱 Open Instagram DM";
             igBtn.onclick = () => {
                 overlay.remove();
                 window.open('https://instagram.com/direct/t/18096975127879471/', '_blank', 'noopener');
             };
             
-            buttonContainer.appendChild(closeActionBtn);
             buttonContainer.appendChild(igBtn);
+            buttonContainer.appendChild(closeActionBtn);
             
             modal.appendChild(header);
+            modal.appendChild(instructions);
             modal.appendChild(messageDiv);
             modal.appendChild(buttonContainer);
             
@@ -761,44 +1495,23 @@
         function setupForYou() {
             const profile = window.userData;
             if (!profile) {
+                ui.forYouSummary.innerHTML = "";
                 ui.forYouGrid.innerHTML = '<p class="col-span-full text-center opacity-40">Create a profile first to unlock personalized picks.</p>';
                 return;
             }
+            const recommendations = getPersonalizedRecommendations(profile, {}, 6);
+            renderForYouSummary(profile, recommendations);
+            ui.forYouGrid.innerHTML = recommendations.length
+                ? recommendations.map(createRecommendationCard).join("")
+                : '<p class="col-span-full text-center opacity-40">No perfect matches yet. Adjust your preferences or explore our collections.</p>';
 
-            let filtered = allProducts.slice(); // Start with all products
-
-            // Filter by gender
-            if (profile.gender === "Men") {
-                filtered = filtered.filter((product) => product.category === "Men" || product.category === "Accessories" || product.category === "Cosmetics");
-            } else if (profile.gender === "Women") {
-                filtered = filtered.filter((product) => product.category === "Women" || product.category === "Accessories" || product.category === "Cosmetics");
-            } // Unisex keeps all
-
-            // Filter by style - PRIMARY preference
-            if (profile.style) {
-                filtered = filtered.filter((product) => product.style === profile.style);
-            }
-
-            // Filter by budget
-            if (profile.budget) {
-                filtered = filtered.filter((product) => {
-                    const price = parsePrice(product.price);
-                    if (profile.budget === "Budget") return price < 10000;
-                    if (profile.budget === "Mid-Range") return price >= 10000 && price < 30000;
-                    if (profile.budget === "Premium") return price >= 30000 && price < 50000;
-                    if (profile.budget === "Luxury") return price >= 50000;
-                    return true;
-                });
-            }
-
-            // If no products match, show backup: all products in your style range (ignoring budget)
-            if (filtered.length === 0 && profile.style) {
-                filtered = allProducts.filter((product) => product.style === profile.style);
-            }
-
-            ui.forYouGrid.innerHTML = filtered.length
-                ? filtered.slice(0, 9).map(createCard).join("") // Limit to 9 products
-                : '<p class="col-span-full text-center opacity-40">Finish your style profile to see tailored picks here.</p>';
+            syncGeminiInput();
+            syncOccasionForm(profile);
+            ui.occasionResult.innerHTML = `
+                <div class="text-white/45 leading-7">
+                    Pick an event above and Gemini will return the strongest Reyval outfit mix for the moment.
+                </div>
+            `;
         }
 
         function setupProfile() {
@@ -1286,6 +1999,64 @@
                 : '<p class="col-span-full text-center opacity-40 mt-12">No products found matching your search.</p>';
         };
 
+        window.saveGeminiApiKey = () => {
+            const apiKey = ui.geminiApiKeyInput.value.trim();
+
+            try {
+                if (apiKey) {
+                    localStorage.setItem(GEMINI_STORAGE_KEY, apiKey);
+                    setOccasionStatus(`Gemini key saved. ${GEMINI_MODEL} is ready to style occasions.`, "success");
+                } else {
+                    localStorage.removeItem(GEMINI_STORAGE_KEY);
+                    setOccasionStatus("Saved Gemini key cleared from this browser.", "warning");
+                }
+            } catch (error) {
+                setOccasionStatus("This browser could not store the Gemini key locally.", "warning");
+            }
+        };
+
+        window.requestOccasionRecommendation = async () => {
+            const profile = window.userData;
+            if (!profile) {
+                setOccasionStatus("Sign in and finish your profile before using the occasion stylist.", "warning");
+                return;
+            }
+
+            const context = {
+                occasion: ui.occasionSelect.value,
+                dressCode: ui.dressCodeSelect.value,
+                timeOfDay: ui.timeSelect.value,
+                mood: ui.dressMoodInput.value.trim(),
+                notes: ui.occasionNotes.value.trim()
+            };
+
+            const recommendations = getPersonalizedRecommendations(profile, context, 7);
+            const fallbackPlan = buildOccasionFallback(profile, context, recommendations);
+
+            if (!getSavedGeminiApiKey()) {
+                setOccasionStatus("Gemini key missing, so Reyval is showing the best local catalog match instead.", "warning");
+                renderOccasionResult(fallbackPlan, recommendations, profile, context);
+                return;
+            }
+
+            setOccasionStatus("Gemini is building your occasion edit...", "info");
+            ui.occasionResult.innerHTML = `
+                <div class="text-white/55 leading-7">
+                    Styling in progress. Gemini is comparing your profile with Reyval's strongest occasion matches.
+                </div>
+            `;
+
+            try {
+                const result = await fetchGeminiOccasionPlan(profile, context, recommendations);
+                renderOccasionResult(result, recommendations, profile, context);
+                setOccasionStatus("Gemini finished your occasion recommendation.", "success");
+            } catch (error) {
+                console.error("Gemini occasion request failed:", error);
+                renderOccasionResult(fallbackPlan, recommendations, profile, context);
+                setOccasionStatus("Gemini could not answer right now, so Reyval fell back to a local recommendation.", "warning");
+            }
+        };
+
         window.addToCart = (id) => {
             const product = allProducts.find((item) => item.id === id);
             if (!product) {
@@ -1341,10 +2112,22 @@
             // Copy to clipboard and show modal
             navigator.clipboard.writeText(orderMessage).then(() => {
                 showCheckoutModal(orderMessage);
+                // Clear cart after successful checkout
+                setTimeout(() => {
+                    cart = [];
+                    updateCartUI();
+                    ui.cartSidebar.classList.add("hidden");
+                }, 500);
             }).catch(() => {
                 // Fallback if clipboard fails - show fallback message
                 const fallbackMsg = "Your order details have been prepared.\n\nPlease copy your cart details and paste in Instagram DM.\n\nClick 'Open Instagram' below to continue.";
                 showCheckoutModal(fallbackMsg);
+                // Clear cart even if clipboard fails
+                setTimeout(() => {
+                    cart = [];
+                    updateCartUI();
+                    ui.cartSidebar.classList.add("hidden");
+                }, 500);
             });
         };
 
