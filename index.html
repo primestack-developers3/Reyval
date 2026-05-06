@@ -659,18 +659,50 @@
             // Create modal
             const modal = document.createElement("div");
             modal.className = "bg-[#0d1f16] border-2 border-[#D4AF37] rounded-3xl p-10 max-w-2xl w-11/12 max-h-96 overflow-auto";
-            modal.innerHTML = `
-                <div class="flex items-start justify-between mb-6">
-                    <h2 class="font-display text-4xl text-[#D4AF37]">Order Ready!</h2>
-                    <button onclick="document.getElementById('checkoutModal').remove()" class="text-[#D4AF37] hover:text-white transition text-3xl leading-none">×</button>
-                </div>
-                <div class="text-lg text-cream whitespace-pre-wrap mb-8 font-mono bg-black/30 p-6 rounded-xl border border-white/10">${escapeHtml(message)}</div>
-                <div class="flex gap-4">
-                    <button onclick="document.getElementById('checkoutModal').remove()" class="flex-1 py-4 border-2 border-white/20 text-white hover:border-[#D4AF37] hover:bg-[#D4AF37]/10 transition uppercase tracking-widest font-bold rounded-xl">Close</button>
-                    <button onclick="document.getElementById('checkoutModal').remove(); window.open('https://instagram.com/direct/t/18096975127879471/', '_blank', 'noopener')" class="flex-1 py-4 bg-gradient-to-r from-pink-500 to-rose-500 hover:from-pink-600 hover:to-rose-600 transition uppercase tracking-widest font-bold rounded-xl">Open Instagram</button>
-                </div>
-            `;
-
+            
+            // Header
+            const header = document.createElement("div");
+            header.className = "flex items-start justify-between mb-6";
+            header.innerHTML = `<h2 class="font-display text-4xl text-[#D4AF37]">Order Ready!</h2>`;
+            
+            // Close button in header
+            const closeBtn = document.createElement("button");
+            closeBtn.className = "text-[#D4AF37] hover:text-white transition text-3xl leading-none";
+            closeBtn.textContent = "×";
+            closeBtn.onclick = () => overlay.remove();
+            header.appendChild(closeBtn);
+            
+            // Message display
+            const messageDiv = document.createElement("div");
+            messageDiv.className = "text-lg text-cream whitespace-pre-wrap mb-8 font-mono bg-black/30 p-6 rounded-xl border border-white/10";
+            messageDiv.textContent = message;
+            
+            // Button container
+            const buttonContainer = document.createElement("div");
+            buttonContainer.className = "flex gap-4";
+            
+            // Close button
+            const closeActionBtn = document.createElement("button");
+            closeActionBtn.className = "flex-1 py-4 border-2 border-white/20 text-white hover:border-[#D4AF37] hover:bg-[#D4AF37]/10 transition uppercase tracking-widest font-bold rounded-xl";
+            closeActionBtn.textContent = "Close";
+            closeActionBtn.onclick = () => overlay.remove();
+            
+            // Open Instagram button
+            const igBtn = document.createElement("button");
+            igBtn.className = "flex-1 py-4 bg-gradient-to-r from-pink-500 to-rose-500 hover:from-pink-600 hover:to-rose-600 transition uppercase tracking-widest font-bold rounded-xl";
+            igBtn.textContent = "Open Instagram";
+            igBtn.onclick = () => {
+                overlay.remove();
+                window.open('https://instagram.com/direct/t/18096975127879471/', '_blank', 'noopener');
+            };
+            
+            buttonContainer.appendChild(closeActionBtn);
+            buttonContainer.appendChild(igBtn);
+            
+            modal.appendChild(header);
+            modal.appendChild(messageDiv);
+            modal.appendChild(buttonContainer);
+            
             overlay.appendChild(modal);
             document.body.appendChild(overlay);
         }
