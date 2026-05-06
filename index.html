@@ -650,6 +650,31 @@
             window.setTimeout(() => toast.remove(), 2800);
         }
 
+        function showCheckoutModal(message) {
+            // Create overlay
+            const overlay = document.createElement("div");
+            overlay.className = "fixed inset-0 bg-black/80 backdrop-blur-sm flex items-center justify-center z-[300]";
+            overlay.id = "checkoutModal";
+
+            // Create modal
+            const modal = document.createElement("div");
+            modal.className = "bg-[#0d1f16] border-2 border-[#D4AF37] rounded-3xl p-10 max-w-2xl w-11/12 max-h-96 overflow-auto";
+            modal.innerHTML = `
+                <div class="flex items-start justify-between mb-6">
+                    <h2 class="font-display text-4xl text-[#D4AF37]">Order Ready!</h2>
+                    <button onclick="document.getElementById('checkoutModal').remove()" class="text-[#D4AF37] hover:text-white transition text-3xl leading-none">×</button>
+                </div>
+                <div class="text-lg text-cream whitespace-pre-wrap mb-8 font-mono bg-black/30 p-6 rounded-xl border border-white/10">${escapeHtml(message)}</div>
+                <div class="flex gap-4">
+                    <button onclick="document.getElementById('checkoutModal').remove()" class="flex-1 py-4 border-2 border-white/20 text-white hover:border-[#D4AF37] hover:bg-[#D4AF37]/10 transition uppercase tracking-widest font-bold rounded-xl">Close</button>
+                    <button onclick="document.getElementById('checkoutModal').remove(); window.open('https://instagram.com/direct/t/18096975127879471/', '_blank', 'noopener')" class="flex-1 py-4 bg-gradient-to-r from-pink-500 to-rose-500 hover:from-pink-600 hover:to-rose-600 transition uppercase tracking-widest font-bold rounded-xl">Open Instagram</button>
+                </div>
+            `;
+
+            overlay.appendChild(modal);
+            document.body.appendChild(overlay);
+        }
+
         function createCard(product) {
             return `
                 <div class="product-card p-8 rounded-3xl flex flex-col items-center text-center">
@@ -717,35 +742,9 @@
                 filtered = filtered.filter((product) => product.category === "Women" || product.category === "Accessories" || product.category === "Cosmetics");
             } // Unisex keeps all
 
-            // Filter by style
+            // Filter by style - PRIMARY preference
             if (profile.style) {
                 filtered = filtered.filter((product) => product.style === profile.style);
-            }
-
-            // Adjust for colors preference
-            if (profile.colors) {
-                if (profile.colors === "Gold & Warm Tones") {
-                    filtered = filtered.filter((product) => product.style === "Traditional" || product.style === "Elegant");
-                } else if (profile.colors === "Cool Blues & Greens") {
-                    filtered = filtered.filter((product) => product.style === "Trendy" || product.style === "Minimal");
-                } else if (profile.colors === "Neutral & Earthy") {
-                    filtered = filtered.filter((product) => product.style === "Minimal" || product.style === "Elegant");
-                } else if (profile.colors === "Bold & Vibrant") {
-                    filtered = filtered.filter((product) => product.style === "Trendy");
-                }
-            }
-
-            // Adjust for occasions
-            if (profile.occasions) {
-                if (profile.occasions === "Weddings & Ceremonies") {
-                    filtered = filtered.filter((product) => product.style === "Traditional" || product.style === "Elegant");
-                } else if (profile.occasions === "Parties & Events") {
-                    filtered = filtered.filter((product) => product.style === "Trendy" || product.style === "Elegant");
-                } else if (profile.occasions === "Daily Wear") {
-                    filtered = filtered.filter((product) => product.style === "Minimal" || product.style === "Trendy");
-                } else if (profile.occasions === "Special Occasions") {
-                    filtered = filtered.filter((product) => product.style === "Elegant" || product.style === "Traditional");
-                }
             }
 
             // Filter by budget
@@ -760,14 +759,15 @@
                 });
             }
 
-            // If no filters match, show some defaults
-            if (filtered.length === 0) {
-                filtered = allProducts.filter((product) => product.style === profile.style).slice(0, 6);
+            // If no products match, show backup: all products in your style range (ignoring budget)
+            if (filtered.length === 0 && profile.style) {
+                filtered = allProducts.filter((product) => product.style === profile.style);
             }
 
             ui.forYouGrid.innerHTML = filtered.length
                 ? filtered.slice(0, 9).map(createCard).join("") // Limit to 9 products
                 : '<p class="col-span-full text-center opacity-40">Finish your style profile to see tailored picks here.</p>';
+        }
         }
 
         function setupProfile() {
@@ -1307,16 +1307,13 @@
             });
             orderMessage += `\n💰 TOTAL: Rs. ${total.toLocaleString('en-IN')}\n\nPlease confirm availability and proceed with payment. Thank you!`;
 
-            // Copy to clipboard
+            // Copy to clipboard and show modal
             navigator.clipboard.writeText(orderMessage).then(() => {
-                showNotification("Order details copied! Opening Instagram...", "success");
-                setTimeout(() => {
-                    window.open(`https://instagram.com/direct/t/18096975127879471/`, "_blank", "noopener");
-                }, 500);
+                showCheckoutModal(orderMessage);
             }).catch(() => {
-                // Fallback if clipboard fails
-                showNotification("Opening Instagram. Please copy and paste your order details.", "info");
-                window.open(`https://instagram.com/direct/t/18096975127879471/`, "_blank", "noopener");
+                // Fallback if clipboard fails - show fallback message
+                const fallbackMsg = "Your order details have been prepared.\n\nPlease copy your cart details and paste in Instagram DM.\n\nClick 'Open Instagram' below to continue.";
+                showCheckoutModal(fallbackMsg);
             });
         };
 
