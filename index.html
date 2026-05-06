@@ -1297,7 +1297,27 @@
                 return;
             }
 
-            window.open(`https://instagram.com/direct/t/18096975127879471/`, "_blank", "noopener");
+            // Format order message
+            let orderMessage = "🛍️ ORDER REQUEST\n\n";
+            let total = 0;
+            cart.forEach((item, index) => {
+                const price = parseInt(item.price.replace(/,/g, ''));
+                total += price * item.quantity;
+                orderMessage += `${index + 1}. ${item.name}\n   Price: Rs. ${item.price}\n   Qty: ${item.quantity}\n\n`;
+            });
+            orderMessage += `\n💰 TOTAL: Rs. ${total.toLocaleString('en-IN')}\n\nPlease confirm availability and proceed with payment. Thank you!`;
+
+            // Copy to clipboard
+            navigator.clipboard.writeText(orderMessage).then(() => {
+                showNotification("Order details copied! Opening Instagram...", "success");
+                setTimeout(() => {
+                    window.open(`https://instagram.com/direct/t/18096975127879471/`, "_blank", "noopener");
+                }, 500);
+            }).catch(() => {
+                // Fallback if clipboard fails
+                showNotification("Opening Instagram. Please copy and paste your order details.", "info");
+                window.open(`https://instagram.com/direct/t/18096975127879471/`, "_blank", "noopener");
+            });
         };
 
         document.addEventListener("click", (event) => {
