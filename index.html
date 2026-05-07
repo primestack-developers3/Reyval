@@ -126,8 +126,37 @@
             box-shadow: 0 12px 28px rgba(225, 48, 108, 0.25);
         }
 
-        .setup-step { display: none; }
-        .setup-step.active { display: block; animation: fadeIn .35s ease; }
+        .ig-handle-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: .85rem;
+            padding: .85rem 1.05rem;
+            border-radius: 999px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            background:
+                radial-gradient(circle at top left, rgba(255, 255, 255, 0.16), transparent 38%),
+                linear-gradient(135deg, rgba(64, 93, 230, 0.22), rgba(193, 53, 132, 0.24), rgba(253, 29, 29, 0.18));
+            box-shadow: 0 16px 36px rgba(0, 0, 0, 0.24);
+            transition: transform .25s ease, box-shadow .25s ease, border-color .25s ease;
+        }
+
+        .ig-handle-badge:hover {
+            transform: translateY(-2px) scale(1.01);
+            border-color: rgba(255, 255, 255, 0.2);
+            box-shadow: 0 20px 44px rgba(193, 53, 132, 0.2);
+        }
+
+        .ig-handle-icon {
+            width: 2.35rem;
+            height: 2.35rem;
+            border-radius: 999px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: rgba(10, 10, 10, 0.28);
+            color: #fff;
+            box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.08);
+        }
 
         .auth-hero {
             background:
@@ -263,7 +292,7 @@
                     <button onclick="navigatePage('search')" class="hover:text-[#D4AF37] transition py-1 flex items-center gap-1">
                         <i data-lucide="search" style="width:16px;height:16px"></i>Search
                     </button>
-                    <button onclick="navigatePage('foryou')" class="hover:text-[#D4AF37] transition py-1">For You</button>
+                    <button onclick="openOccasionStylist()" class="hover:text-[#D4AF37] transition py-1">Occasion AI</button>
                 </div>
                 <div class="flex items-center gap-3">
                     <button onclick="openCart()" class="relative" style="color:var(--gold)">
@@ -287,7 +316,7 @@
                     <button onclick="navigatePage('accessories')" class="text-left py-2 hover:text-[#D4AF37] transition">Accessories</button>
                     <button onclick="navigatePage('cosmetics')" class="text-left py-2 hover:text-[#D4AF37] transition">Cosmetics</button>
                     <button onclick="navigatePage('search')" class="text-left py-2 hover:text-[#D4AF37] transition">Search</button>
-                    <button onclick="navigatePage('foryou')" class="text-left py-2 hover:text-[#D4AF37] transition">For You</button>
+                    <button onclick="openOccasionStylist()" class="text-left py-2 hover:text-[#D4AF37] transition">Occasion AI</button>
                     <button onclick="navigatePage('login')" class="text-left py-2 hover:text-[#D4AF37] transition">Account</button>
                 </div>
             </div>
@@ -307,12 +336,127 @@
                         <h1 class="font-display text-6xl md:text-9xl font-light tracking-wider anim-up-d1 gold-gradient">REYVAL</h1>
                         <p class="font-display text-xl md:text-3xl italic font-light mt-4 anim-up-d2 opacity-80">Redefine Your Elegance</p>
                         <p class="max-w-2xl mx-auto mt-6 text-white/70 leading-7 anim-up-d2">
-                            The storefront now loads immediately, and sign-in happens in the background so visitors can start exploring without waiting on a full-screen loader.
+                            Explore the collection instantly, then use Gemini to find the best Reyval dress direction for weddings, parties, festive evenings, and more.
                         </p>
                         <div class="mt-10 anim-up-d3 flex gap-4 flex-wrap justify-center">
                             <button onclick="navigatePage('men')" class="btn-gold px-10 py-4 text-sm tracking-widest uppercase font-medium">Explore Collection</button>
-                            <button onclick="navigatePage('login')" class="px-10 py-4 text-sm tracking-widest uppercase font-medium border border-[#D4AF37]/30 rounded-xl hover:bg-[#D4AF37]/10 transition">Member Login</button>
+                            <button onclick="openOccasionStylist()" class="px-10 py-4 text-sm tracking-widest uppercase font-medium border border-[#D4AF37]/30 rounded-xl hover:bg-[#D4AF37]/10 transition">Use Occasion AI</button>
                         </div>
+                        <div class="mt-6 anim-up-d3 flex justify-center">
+                            <button onclick="openInstagramProfile()" class="ig-handle-badge text-left">
+                                <span class="ig-handle-icon">
+                                    <i data-lucide="instagram" class="w-[18px] h-[18px]"></i>
+                                </span>
+                                <span class="flex flex-col items-start leading-tight">
+                                    <span class="text-[10px] uppercase tracking-[.3em] text-white/55">Instagram</span>
+                                    <span class="text-sm md:text-base text-white font-medium">reyvalstore_official</span>
+                                </span>
+                            </button>
+                        </div>
+                    </div>
+                </section>
+
+                <section id="occasionStylistSection" class="pt-8 pb-20 px-6">
+                    <div class="max-w-7xl mx-auto">
+                        <div class="text-center mb-12">
+                            <div class="tracking-[.4em] text-xs uppercase mb-3 text-[#D4AF37]">Gemini Occasion Stylist</div>
+                            <h2 class="font-display text-5xl md:text-6xl font-light mb-4">Find the best dress for the moment.</h2>
+                            <p class="max-w-3xl mx-auto text-white/60 leading-7">
+                                Skip the old style quiz. Tell Reyval who you are shopping for, what the occasion is, and Gemini will suggest the strongest dress direction from the catalog.
+                            </p>
+                        </div>
+
+                        <section class="occasion-panel rounded-[2rem] p-6 md:p-8">
+                            <div class="grid xl:grid-cols-[.9fr_1.1fr] gap-8 items-start">
+                                <div>
+                                    <div class="tracking-[.34em] text-xs uppercase text-[#D4AF37] mb-3">Gemini Stylist</div>
+                                    <h3 class="font-display text-4xl mb-4">Right dress, right occasion.</h3>
+                                    <p class="text-white/65 leading-7 mb-6">
+                                        Share the event, the mood, and the type of collection you want to browse. Gemini will turn that into a sharp Reyval outfit recommendation with matching add-ons.
+                                    </p>
+
+                                    <div class="rounded-[1.5rem] border border-white/10 bg-black/20 p-5 space-y-4">
+                                        <p class="text-sm text-white/55 leading-6">
+                                            The Gemini connection is configured by Reyval, not by the shopper. If AI styling is unavailable, the page will still show the best local catalog match for the occasion.
+                                        </p>
+                                        <div id="occasionStatus" class="hidden rounded-2xl px-4 py-3 text-sm leading-6"></div>
+                                    </div>
+                                </div>
+
+                                <div class="grid gap-5">
+                                    <div class="grid md:grid-cols-2 gap-4">
+                                        <div>
+                                            <label for="shoppingForSelect" class="text-xs uppercase tracking-[.28em] text-white/40">Shopping For</label>
+                                            <select id="shoppingForSelect" class="mt-3 w-full bg-white/5 border border-white/10 px-4 py-3 rounded-xl text-cream focus:border-[#D4AF37] outline-none transition">
+                                                <option>Women</option>
+                                                <option>Men</option>
+                                                <option>Kids</option>
+                                                <option>All Collections</option>
+                                            </select>
+                                        </div>
+                                        <div>
+                                            <label for="occasionSelect" class="text-xs uppercase tracking-[.28em] text-white/40">Occasion</label>
+                                            <select id="occasionSelect" class="mt-3 w-full bg-white/5 border border-white/10 px-4 py-3 rounded-xl text-cream focus:border-[#D4AF37] outline-none transition">
+                                                <option>Weddings & Ceremonies</option>
+                                                <option>Parties & Events</option>
+                                                <option>Daily Wear</option>
+                                                <option>Special Occasions</option>
+                                                <option>Reception Dinner</option>
+                                                <option>Festive Family Event</option>
+                                            </select>
+                                        </div>
+                                        <div>
+                                            <label for="dressCodeSelect" class="text-xs uppercase tracking-[.28em] text-white/40">Dress Code</label>
+                                            <select id="dressCodeSelect" class="mt-3 w-full bg-white/5 border border-white/10 px-4 py-3 rounded-xl text-cream focus:border-[#D4AF37] outline-none transition">
+                                                <option>Elegant Formal</option>
+                                                <option>Festive Traditional</option>
+                                                <option>Cocktail Glam</option>
+                                                <option>Minimal Chic</option>
+                                                <option>Relaxed Luxe</option>
+                                            </select>
+                                        </div>
+                                        <div>
+                                            <label for="budgetSelect" class="text-xs uppercase tracking-[.28em] text-white/40">Budget</label>
+                                            <select id="budgetSelect" class="mt-3 w-full bg-white/5 border border-white/10 px-4 py-3 rounded-xl text-cream focus:border-[#D4AF37] outline-none transition">
+                                                <option>Any</option>
+                                                <option>Budget</option>
+                                                <option>Mid-Range</option>
+                                                <option>Premium</option>
+                                                <option>Luxury</option>
+                                            </select>
+                                        </div>
+                                        <div>
+                                            <label for="timeSelect" class="text-xs uppercase tracking-[.28em] text-white/40">Time</label>
+                                            <select id="timeSelect" class="mt-3 w-full bg-white/5 border border-white/10 px-4 py-3 rounded-xl text-cream focus:border-[#D4AF37] outline-none transition">
+                                                <option>Daytime</option>
+                                                <option>Sunset</option>
+                                                <option>Evening</option>
+                                                <option>Late Night</option>
+                                            </select>
+                                        </div>
+                                        <div>
+                                            <label for="dressMoodInput" class="text-xs uppercase tracking-[.28em] text-white/40">Desired Mood</label>
+                                            <input id="dressMoodInput" type="text" placeholder="Graceful, bold, effortless..." class="mt-3 w-full bg-white/5 border border-white/10 px-4 py-3 rounded-xl text-cream focus:border-[#D4AF37] outline-none transition">
+                                        </div>
+                                    </div>
+
+                                    <div>
+                                        <label for="occasionNotes" class="text-xs uppercase tracking-[.28em] text-white/40">Extra Notes</label>
+                                        <textarea id="occasionNotes" rows="4" placeholder="Example: outdoor event, want movement, keep it polished but comfortable." class="mt-3 w-full bg-white/5 border border-white/10 px-4 py-3 rounded-2xl text-cream focus:border-[#D4AF37] outline-none transition resize-none"></textarea>
+                                    </div>
+
+                                    <button onclick="requestOccasionRecommendation()" class="btn-gold px-6 py-4 rounded-xl text-sm uppercase tracking-[.24em] font-medium">
+                                        Ask Gemini For The Best Dress
+                                    </button>
+
+                                    <div id="occasionResult" class="rounded-[1.75rem] border border-white/10 bg-black/20 p-6 min-h-[19rem]">
+                                        <div class="text-white/45 leading-7">
+                                            Choose the occasion and Gemini will suggest the best Reyval dress direction for it.
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </section>
                     </div>
                 </section>
             </div>
@@ -324,7 +468,7 @@
                             <p class="text-xs uppercase tracking-[0.38em] text-[#D4AF37] mb-4">Member Access</p>
                             <h2 class="font-display text-5xl md:text-6xl leading-none gold-gradient">A faster way into Reyval.</h2>
                             <p class="mt-6 max-w-xl text-base md:text-lg text-white/72 leading-7">
-                                Sign in once and move through the storefront instantly. Your profile, style picks, and checkout-ready bag stay connected to your Firebase account.
+                                Sign in once and move through the storefront instantly. Your account details and checkout-ready bag stay connected to your Firebase account.
                             </p>
                         </div>
                         <div class="grid sm:grid-cols-3 gap-4 mt-10 relative z-10">
@@ -340,8 +484,8 @@
                             </div>
                             <div class="rounded-2xl p-5 bg-black/20 border border-white/10">
                                 <div class="text-xs uppercase tracking-[0.28em] text-white/40 mb-2">Personal</div>
-                                <div class="font-display text-2xl text-[#D4AF37] mb-2">Tailored</div>
-                                <p class="text-sm text-white/65">Save preferences once and get a cleaner personal storefront.</p>
+                                <div class="font-display text-2xl text-[#D4AF37] mb-2">Flexible</div>
+                                <p class="text-sm text-white/65">Use the Gemini occasion stylist whenever you need a fresh recommendation.</p>
                             </div>
                         </div>
                     </section>
@@ -367,70 +511,6 @@
                 </div>
             </div>
 
-            <div id="setupPage" class="hidden page-transition pt-32 pb-12 px-6 flex items-center justify-center min-h-screen">
-                <div class="w-full max-w-md bg-[#111a14] p-10 rounded-3xl border border-[#D4AF37]/20 max-h-[85vh] overflow-y-auto">
-                    <div id="setupStep1" class="setup-step active text-center">
-                        <h2 class="font-display text-3xl gold-gradient mb-6">First, tell us...</h2>
-                        <p class="text-sm opacity-60 mb-8">Whose collection are you interested in today?</p>
-                        <div class="grid grid-cols-1 gap-3">
-                            <button onclick="setTempSetup('gender', 'Men', 2)" class="p-4 border border-white/10 rounded-xl hover:border-[#D4AF37] hover:bg-[#D4AF37]/5 transition text-left flex items-center justify-between">
-                                <span>Men's Fashion</span> <i data-lucide="chevron-right" class="w-4 h-4"></i>
-                            </button>
-                            <button onclick="setTempSetup('gender', 'Women', 2)" class="p-4 border border-white/10 rounded-xl hover:border-[#D4AF37] hover:bg-[#D4AF37]/5 transition text-left flex items-center justify-between">
-                                <span>Women's Fashion</span> <i data-lucide="chevron-right" class="w-4 h-4"></i>
-                            </button>
-                            <button onclick="setTempSetup('gender', 'Unisex', 2)" class="p-4 border border-white/10 rounded-xl hover:border-[#D4AF37] hover:bg-[#D4AF37]/5 transition text-left flex items-center justify-between">
-                                <span>Explore Both</span> <i data-lucide="chevron-right" class="w-4 h-4"></i>
-                            </button>
-                        </div>
-                    </div>
-                    <div id="setupStep2" class="setup-step text-center">
-                        <h2 class="font-display text-3xl gold-gradient mb-6">Your Aesthetic</h2>
-                        <p class="text-sm opacity-60 mb-8">Select your style preference to personalize your showroom.</p>
-                        <div class="grid grid-cols-1 gap-3">
-                            <button onclick="setTempSetup('style', 'Elegant', 3)" class="p-4 border border-white/10 rounded-xl hover:border-[#D4AF37] hover:bg-[#D4AF37]/5 transition text-left">Elegant and Graceful</button>
-                            <button onclick="setTempSetup('style', 'Trendy', 3)" class="p-4 border border-white/10 rounded-xl hover:border-[#D4AF37] hover:bg-[#D4AF37]/5 transition text-left">Trendy and Bold</button>
-                            <button onclick="setTempSetup('style', 'Minimal', 3)" class="p-4 border border-white/10 rounded-xl hover:border-[#D4AF37] hover:bg-[#D4AF37]/5 transition text-left">Minimal and Chic</button>
-                            <button onclick="setTempSetup('style', 'Traditional', 3)" class="p-4 border border-white/10 rounded-xl hover:border-[#D4AF37] hover:bg-[#D4AF37]/5 transition text-left">Traditional and Royal</button>
-                        </div>
-                        <button onclick="goToStep(1)" class="mt-6 text-xs uppercase tracking-widest opacity-40 hover:opacity-100 transition">&larr; Back</button>
-                    </div>
-                    <div id="setupStep3" class="setup-step text-center">
-                        <h2 class="font-display text-3xl gold-gradient mb-6">Color Palette</h2>
-                        <p class="text-sm opacity-60 mb-8">What colors resonate with you?</p>
-                        <div class="grid grid-cols-1 gap-3">
-                            <button onclick="setTempSetup('colors', 'Gold & Warm Tones', 4)" class="p-4 border border-white/10 rounded-xl hover:border-[#D4AF37] hover:bg-[#D4AF37]/5 transition text-left">Gold & Warm Tones</button>
-                            <button onclick="setTempSetup('colors', 'Cool Blues & Greens', 4)" class="p-4 border border-white/10 rounded-xl hover:border-[#D4AF37] hover:bg-[#D4AF37]/5 transition text-left">Cool Blues & Greens</button>
-                            <button onclick="setTempSetup('colors', 'Neutral & Earthy', 4)" class="p-4 border border-white/10 rounded-xl hover:border-[#D4AF37] hover:bg-[#D4AF37]/5 transition text-left">Neutral & Earthy</button>
-                            <button onclick="setTempSetup('colors', 'Bold & Vibrant', 4)" class="p-4 border border-white/10 rounded-xl hover:border-[#D4AF37] hover:bg-[#D4AF37]/5 transition text-left">Bold & Vibrant</button>
-                        </div>
-                        <button onclick="goToStep(2)" class="mt-6 text-xs uppercase tracking-widest opacity-40 hover:opacity-100 transition">&larr; Back</button>
-                    </div>
-                    <div id="setupStep4" class="setup-step text-center">
-                        <h2 class="font-display text-3xl gold-gradient mb-6">Occasions</h2>
-                        <p class="text-sm opacity-60 mb-8">What events do you shop for most?</p>
-                        <div class="grid grid-cols-1 gap-3">
-                            <button onclick="setTempSetup('occasions', 'Weddings & Ceremonies', 5)" class="p-4 border border-white/10 rounded-xl hover:border-[#D4AF37] hover:bg-[#D4AF37]/5 transition text-left">Weddings & Ceremonies</button>
-                            <button onclick="setTempSetup('occasions', 'Parties & Events', 5)" class="p-4 border border-white/10 rounded-xl hover:border-[#D4AF37] hover:bg-[#D4AF37]/5 transition text-left">Parties & Events</button>
-                            <button onclick="setTempSetup('occasions', 'Daily Wear', 5)" class="p-4 border border-white/10 rounded-xl hover:border-[#D4AF37] hover:bg-[#D4AF37]/5 transition text-left">Daily Wear</button>
-                            <button onclick="setTempSetup('occasions', 'Special Occasions', 5)" class="p-4 border border-white/10 rounded-xl hover:border-[#D4AF37] hover:bg-[#D4AF37]/5 transition text-left">Special Occasions</button>
-                        </div>
-                        <button onclick="goToStep(3)" class="mt-6 text-xs uppercase tracking-widest opacity-40 hover:opacity-100 transition">&larr; Back</button>
-                    </div>
-                    <div id="setupStep5" class="setup-step text-center">
-                        <h2 class="font-display text-3xl gold-gradient mb-6">Budget Range</h2>
-                        <p class="text-sm opacity-60 mb-8">What's your typical spending range?</p>
-                        <div class="grid grid-cols-1 gap-3">
-                            <button onclick="completeSetup('Budget')" class="p-4 border border-white/10 rounded-xl hover:border-[#D4AF37] hover:bg-[#D4AF37]/5 transition text-left">Under Rs. 10,000</button>
-                            <button onclick="completeSetup('Mid-Range')" class="p-4 border border-white/10 rounded-xl hover:border-[#D4AF37] hover:bg-[#D4AF37]/5 transition text-left">Rs. 10,000 - 30,000</button>
-                            <button onclick="completeSetup('Premium')" class="p-4 border border-white/10 rounded-xl hover:border-[#D4AF37] hover:bg-[#D4AF37]/5 transition text-left">Rs. 30,000 - 50,000</button>
-                            <button onclick="completeSetup('Luxury')" class="p-4 border border-white/10 rounded-xl hover:border-[#D4AF37] hover:bg-[#D4AF37]/5 transition text-left">Above Rs. 50,000</button>
-                        </div>
-                        <button onclick="goToStep(4)" class="mt-6 text-xs uppercase tracking-widest opacity-40 hover:opacity-100 transition">&larr; Back</button>
-                    </div>
-                </div>
-            </div>
-
             <div id="categoryPage" class="hidden page-transition pt-28 pb-12 px-6">
                 <div class="max-w-7xl mx-auto">
                     <div class="text-center mb-12">
@@ -450,113 +530,6 @@
                     <div id="searchResults" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
                         <p class="col-span-full text-center opacity-30 mt-12">Start typing to explore the collection...</p>
                     </div>
-                </div>
-            </div>
-
-            <div id="foryouPage" class="hidden page-transition pt-28 pb-12 px-6">
-                <div class="max-w-7xl mx-auto">
-                    <div class="text-center mb-12">
-                        <div class="tracking-[.4em] text-xs uppercase mb-3 text-[#D4AF37]">Curated For Your Profile</div>
-                        <h2 class="font-display text-5xl font-light mb-4">Tailored For You</h2>
-                        <p class="max-w-2xl mx-auto text-white/60 leading-7">
-                            A sharper edit of Reyval pieces matched to your style, occasion, palette, and budget.
-                        </p>
-                    </div>
-
-                    <div id="forYouSummary" class="grid lg:grid-cols-[1.1fr_.9fr] gap-6 mb-12"></div>
-
-                    <section class="mb-16">
-                        <div class="flex flex-col md:flex-row md:items-end md:justify-between gap-4 mb-6">
-                            <div>
-                                <div class="tracking-[.34em] text-xs uppercase text-white/40 mb-2">Personal Edit</div>
-                                <h3 class="font-display text-4xl text-[#D4AF37]">Products picked for your current taste</h3>
-                            </div>
-                            <button onclick="navigatePage('setup')" class="self-start md:self-auto px-5 py-3 border border-[#D4AF37]/25 rounded-xl text-xs uppercase tracking-[.24em] hover:bg-[#D4AF37]/10 transition">
-                                Refine Preferences
-                            </button>
-                        </div>
-                        <div id="foryouGrid" class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-8 text-left"></div>
-                    </section>
-
-                    <section class="occasion-panel rounded-[2rem] p-6 md:p-8">
-                        <div class="grid xl:grid-cols-[.9fr_1.1fr] gap-8 items-start">
-                            <div>
-                                <div class="tracking-[.34em] text-xs uppercase text-[#D4AF37] mb-3">Gemini Stylist</div>
-                                <h3 class="font-display text-4xl mb-4">Right dress, right occasion.</h3>
-                                <p class="text-white/65 leading-7 mb-6">
-                                    Tell Reyval where you are going, how you want to feel, and Gemini will build the best catalog look around your profile.
-                                </p>
-
-                                <div class="rounded-[1.5rem] border border-white/10 bg-black/20 p-5 space-y-4">
-                                    <div>
-                                        <label for="geminiApiKey" class="text-xs uppercase tracking-[.28em] text-white/40">Gemini API Key</label>
-                                        <div class="flex flex-col sm:flex-row gap-3 mt-3">
-                                            <input id="geminiApiKey" type="password" placeholder="Paste your Gemini key" class="flex-1 bg-white/5 border border-white/10 px-4 py-3 rounded-xl text-cream focus:border-[#D4AF37] outline-none transition">
-                                            <button onclick="saveGeminiApiKey()" class="btn-gold px-5 py-3 rounded-xl text-xs uppercase tracking-[.24em] font-medium">Save Key</button>
-                                        </div>
-                                        <p class="text-xs text-white/40 mt-3 leading-5">
-                                            Stored only in this browser. You can also set <span class="text-[#D4AF37]">window.REYVAL_GEMINI_API_KEY</span> before the page loads.
-                                        </p>
-                                    </div>
-                                    <div id="occasionStatus" class="hidden rounded-2xl px-4 py-3 text-sm leading-6"></div>
-                                </div>
-                            </div>
-
-                            <div class="grid gap-5">
-                                <div class="grid md:grid-cols-2 gap-4">
-                                    <div>
-                                        <label for="occasionSelect" class="text-xs uppercase tracking-[.28em] text-white/40">Occasion</label>
-                                        <select id="occasionSelect" class="mt-3 w-full bg-white/5 border border-white/10 px-4 py-3 rounded-xl text-cream focus:border-[#D4AF37] outline-none transition">
-                                            <option>Weddings & Ceremonies</option>
-                                            <option>Parties & Events</option>
-                                            <option>Daily Wear</option>
-                                            <option>Special Occasions</option>
-                                            <option>Reception Dinner</option>
-                                            <option>Festive Family Event</option>
-                                        </select>
-                                    </div>
-                                    <div>
-                                        <label for="dressCodeSelect" class="text-xs uppercase tracking-[.28em] text-white/40">Dress Code</label>
-                                        <select id="dressCodeSelect" class="mt-3 w-full bg-white/5 border border-white/10 px-4 py-3 rounded-xl text-cream focus:border-[#D4AF37] outline-none transition">
-                                            <option>Elegant Formal</option>
-                                            <option>Festive Traditional</option>
-                                            <option>Cocktail Glam</option>
-                                            <option>Minimal Chic</option>
-                                            <option>Relaxed Luxe</option>
-                                        </select>
-                                    </div>
-                                    <div>
-                                        <label for="timeSelect" class="text-xs uppercase tracking-[.28em] text-white/40">Time</label>
-                                        <select id="timeSelect" class="mt-3 w-full bg-white/5 border border-white/10 px-4 py-3 rounded-xl text-cream focus:border-[#D4AF37] outline-none transition">
-                                            <option>Daytime</option>
-                                            <option>Sunset</option>
-                                            <option>Evening</option>
-                                            <option>Late Night</option>
-                                        </select>
-                                    </div>
-                                    <div>
-                                        <label for="dressMoodInput" class="text-xs uppercase tracking-[.28em] text-white/40">Desired Mood</label>
-                                        <input id="dressMoodInput" type="text" placeholder="Graceful, bold, effortless..." class="mt-3 w-full bg-white/5 border border-white/10 px-4 py-3 rounded-xl text-cream focus:border-[#D4AF37] outline-none transition">
-                                    </div>
-                                </div>
-
-                                <div>
-                                    <label for="occasionNotes" class="text-xs uppercase tracking-[.28em] text-white/40">Extra Notes</label>
-                                    <textarea id="occasionNotes" rows="4" placeholder="Example: outdoor event, want movement, keep it polished but comfortable." class="mt-3 w-full bg-white/5 border border-white/10 px-4 py-3 rounded-2xl text-cream focus:border-[#D4AF37] outline-none transition resize-none"></textarea>
-                                </div>
-
-                                <button onclick="requestOccasionRecommendation()" class="btn-gold px-6 py-4 rounded-xl text-sm uppercase tracking-[.24em] font-medium">
-                                    Ask Gemini For The Best Look
-                                </button>
-
-                                <div id="occasionResult" class="rounded-[1.75rem] border border-white/10 bg-black/20 p-6 min-h-[19rem]">
-                                    <div class="text-white/45 leading-7">
-                                        Pick an event above and Gemini will return the strongest Reyval outfit mix for the moment.
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </section>
                 </div>
             </div>
 
@@ -688,7 +661,8 @@
 
         const allProducts = Object.values(products).flat();
         const GEMINI_MODEL = "gemini-2.5-flash";
-        const GEMINI_STORAGE_KEY = "reyval.gemini.apiKey";
+        const INSTAGRAM_DM_THREAD_URL = String(window.REYVAL_INSTAGRAM_DM_URL || "https://instagram.com/direct/t/18096975127879471/").trim();
+        const INSTAGRAM_USERNAME = String(window.REYVAL_INSTAGRAM_USERNAME || "reyvalstore_official").trim().replace(/^@/, "");
 
         const styleOccasionMap = {
             Traditional: ["Weddings & Ceremonies", "Special Occasions"],
@@ -716,9 +690,7 @@
             "homePage",
             "categoryPage",
             "searchPage",
-            "foryouPage",
             "loginPage",
-            "setupPage",
             "profilePage"
         ];
 
@@ -731,8 +703,6 @@
             catSubtitle: document.getElementById("cat-subtitle"),
             searchInput: document.getElementById("searchInput"),
             searchResults: document.getElementById("searchResults"),
-            forYouSummary: document.getElementById("forYouSummary"),
-            forYouGrid: document.getElementById("foryouGrid"),
             profileContent: document.getElementById("profile-content"),
             cartBadge: document.getElementById("cart-badge"),
             cartItems: document.getElementById("cartItems"),
@@ -742,9 +712,10 @@
             authFeedback: document.getElementById("authFeedback"),
             authModeTitle: document.getElementById("authModeTitle"),
             authModeText: document.getElementById("authModeText"),
-            geminiApiKeyInput: document.getElementById("geminiApiKey"),
+            shoppingForSelect: document.getElementById("shoppingForSelect"),
             occasionSelect: document.getElementById("occasionSelect"),
             dressCodeSelect: document.getElementById("dressCodeSelect"),
+            budgetSelect: document.getElementById("budgetSelect"),
             timeSelect: document.getElementById("timeSelect"),
             dressMoodInput: document.getElementById("dressMoodInput"),
             occasionNotes: document.getElementById("occasionNotes"),
@@ -753,12 +724,11 @@
         };
 
         window.user = null;
-        window.userData = null;
 
         let currentPage = "home";
         let currentAuthMode = "signin";
-        let tempSetup = { gender: null, style: null, colors: null, occasions: null, budget: null };
         let cart = [];
+        let latestCheckoutMessage = "";
         let firebaseServices = null;
         let firebaseInitPromise = null;
         let authObserverAttached = false;
@@ -883,12 +853,12 @@
             ]);
         }
 
-        function isCoreProductForProfile(product, profile) {
-            if (!profile?.gender || profile.gender === "Unisex") {
+        function isCoreOccasionProduct(product, shoppingFor) {
+            if (!shoppingFor || shoppingFor === "All Collections") {
                 return !["Accessories", "Cosmetics"].includes(product.category);
             }
 
-            return product.category === profile.gender;
+            return product.category === shoppingFor;
         }
 
         function getKeywordBoost(product, text) {
@@ -900,7 +870,7 @@
             return getProductKeywords(product).reduce((total, keyword) => total + (normalizedText.includes(keyword) ? 1 : 0), 0);
         }
 
-        function scoreProductMatch(product, profile, context = {}) {
+        function scoreOccasionProduct(product, context = {}) {
             const reasons = [];
             const chips = [];
             const addReason = (message) => {
@@ -916,64 +886,51 @@
 
             let score = 0;
             const category = product.category;
-            const coreProduct = isCoreProductForProfile(product, profile);
+            const coreProduct = isCoreOccasionProduct(product, context.shoppingFor);
 
-            if (profile.gender === "Men" && !["Men", "Accessories", "Cosmetics"].includes(category)) {
-                return null;
-            }
-
-            if (profile.gender === "Women" && !["Women", "Accessories", "Cosmetics"].includes(category)) {
-                return null;
-            }
-
-            if (coreProduct) {
-                score += 34;
-                addReason(`Aligned with your ${normalizeText(profile.gender === "Unisex" ? "main" : profile.gender)} wardrobe profile.`);
-                addChip("Core fit");
+            if (context.shoppingFor && context.shoppingFor !== "All Collections") {
+                if (coreProduct) {
+                    score += 34;
+                    addReason(`Strong main look for ${normalizeText(context.shoppingFor)} occasion dressing.`);
+                    addChip(context.shoppingFor);
+                } else if (["Accessories", "Cosmetics"].includes(category)) {
+                    score += 12;
+                    addReason("Works as a finishing touch around the main outfit.");
+                    addChip(category === "Accessories" ? "Add-on" : "Beauty");
+                } else {
+                    return null;
+                }
+            } else if (coreProduct) {
+                score += 28;
+                addReason("Strong core look for the event.");
+                addChip("Core look");
             } else {
                 score += 12;
-                addReason("Works as a finishing touch around your main outfit.");
+                addReason("Works as a finishing touch around the main outfit.");
                 addChip(category === "Accessories" ? "Add-on" : "Beauty");
             }
 
-            if (product.style === profile.style) {
-                score += 28;
-                addReason(`Matches your ${normalizeText(profile.style)} style preference.`);
-                addChip(product.style);
-            }
-
             const occasionTags = getProductOccasionTags(product);
-            if (profile.occasions && occasionTags.includes(profile.occasions)) {
+            const targetOccasion = getCanonicalOccasion(context.occasion);
+            if (occasionTags.includes(targetOccasion)) {
                 score += 24;
-                addReason(`A natural fit for ${normalizeText(profile.occasions)}.`);
+                addReason(`A natural fit for ${normalizeText(targetOccasion)}.`);
                 addChip("Occasion match");
             }
 
-            const paletteTags = getProductPaletteTags(product);
-            if (profile.colors && paletteTags.includes(profile.colors)) {
+            if (context.budget && context.budget !== "Any" && budgetMatches(product, context.budget)) {
                 score += 18;
-                addReason(`Supports your ${normalizeText(profile.colors)} palette.`);
-                addChip("Palette");
-            }
-
-            if (budgetMatches(product, profile.budget)) {
-                score += 18;
-                addReason("Sits inside your current budget range.");
+                addReason("Sits inside your chosen budget range.");
                 addChip("Budget");
-            } else if (profile.budget) {
+            } else if (context.budget && context.budget !== "Any") {
                 score -= 6;
-            }
-
-            const targetOccasion = getCanonicalOccasion(context.occasion || profile.occasions);
-            if (occasionTags.includes(targetOccasion)) {
-                score += 16;
-                addReason(`Strong option for ${normalizeText(targetOccasion)} styling.`);
             }
 
             const preferredStyles = dressCodeStyleMap[context.dressCode] || [];
             if (preferredStyles.includes(product.style)) {
                 score += 12;
                 addReason(`${context.dressCode} works well with this silhouette.`);
+                addChip(product.style);
             }
 
             const timeStyles = timeStyleMap[context.timeOfDay] || [];
@@ -986,6 +943,11 @@
             if (keywordBoost > 0) {
                 score += Math.min(14, keywordBoost * 4);
                 addReason("Its details connect nicely with your mood and notes.");
+            }
+
+            if (coreProduct && /dress|gown|lehenga|saree|anarkali|sherwani|bandhgala|kurta|tuxedo|frocks/.test(normalizeText(product.name))) {
+                score += 8;
+                addReason("A strong dress-first silhouette for the occasion.");
             }
 
             if (category === "Accessories" && targetOccasion !== "Daily Wear") {
@@ -1004,9 +966,9 @@
             };
         }
 
-        function getPersonalizedRecommendations(profile, context = {}, limit = 6) {
+        function getOccasionRecommendations(context = {}, limit = 6) {
             const scored = allProducts
-                .map((product) => scoreProductMatch(product, profile, context))
+                .map((product) => scoreOccasionProduct(product, context))
                 .filter(Boolean)
                 .sort((left, right) => right.score - left.score || left.product.name.localeCompare(right.product.name));
 
@@ -1030,93 +992,8 @@
             return combined.slice(0, limit);
         }
 
-        function createRecommendationCard(recommendation) {
-            const reasonCopy = recommendation.reasons.length
-                ? recommendation.reasons.join(" ")
-                : "A polished Reyval pick matched to your current profile.";
-            const chipMarkup = recommendation.chips.length
-                ? `<div class="flex flex-wrap gap-2 mb-4">${recommendation.chips.map((chip) => `<span class="insight-chip">${escapeHtml(chip)}</span>`).join("")}</div>`
-                : "";
-
-            return `
-                <div class="product-card p-7 rounded-[1.9rem] flex flex-col">
-                    <div class="flex items-start justify-between gap-4 mb-5">
-                        <div class="product-badge">${escapeHtml(recommendation.product.badge)}</div>
-                        <div class="match-pill">${recommendation.match}% match</div>
-                    </div>
-                    <h3 class="font-display text-3xl text-[#D4AF37] mb-2">${escapeHtml(recommendation.product.name)}</h3>
-                    <div class="text-sm opacity-55 italic mb-4">${escapeHtml(recommendation.product.style)} - ${escapeHtml(recommendation.product.category)}</div>
-                    ${chipMarkup}
-                    <p class="text-sm text-white/68 leading-6 mb-6">${escapeHtml(reasonCopy)}</p>
-                    <div class="mt-auto flex items-end justify-between gap-4">
-                        <div>
-                            <div class="text-[11px] uppercase tracking-[.26em] text-white/35 mb-2">Reyval Price</div>
-                            <div class="text-xl font-bold">${formatPrice(recommendation.product.price)}</div>
-                        </div>
-                        <button onclick="addToCart('${recommendation.product.id}')" class="px-5 py-3 border border-[#D4AF37] text-[#D4AF37] text-[10px] uppercase tracking-[.2em] font-bold hover:bg-[#D4AF37] hover:text-black transition rounded-xl">
-                            Add To Bag
-                        </button>
-                    </div>
-                </div>
-            `;
-        }
-
-        function renderForYouSummary(profile, recommendations) {
-            const leadRecommendation = recommendations[0];
-            const paletteCopy = profile.colors || "Your palette";
-            const occasionCopy = profile.occasions || "your next outing";
-            const budgetCopy = profile.budget || "your budget";
-
-            ui.forYouSummary.innerHTML = `
-                <div class="rounded-[1.8rem] border border-white/10 bg-white/5 p-6 md:p-7">
-                    <div class="text-xs uppercase tracking-[.3em] text-white/40 mb-3">Profile Lens</div>
-                    <h3 class="font-display text-4xl text-[#D4AF37] mb-3">${escapeHtml(profile.gender || "Unisex")} - ${escapeHtml(profile.style || "Signature Style")}</h3>
-                    <p class="text-white/68 leading-7">
-                        Your feed is tuned for <span class="text-[#D4AF37]">${escapeHtml(occasionCopy)}</span>, built around <span class="text-[#D4AF37]">${escapeHtml(paletteCopy)}</span>, and filtered to fit <span class="text-[#D4AF37]">${escapeHtml(budgetCopy)}</span>.
-                    </p>
-                    <div class="grid sm:grid-cols-2 gap-3 mt-6">
-                        <div class="rounded-2xl border border-white/10 bg-black/20 p-4">
-                            <div class="text-[11px] uppercase tracking-[.28em] text-white/35 mb-2">Main Focus</div>
-                            <div class="text-lg text-cream">${escapeHtml(profile.occasions || "Special moments")}</div>
-                        </div>
-                        <div class="rounded-2xl border border-white/10 bg-black/20 p-4">
-                            <div class="text-[11px] uppercase tracking-[.28em] text-white/35 mb-2">Color Direction</div>
-                            <div class="text-lg text-cream">${escapeHtml(profile.colors || "Balanced neutrals")}</div>
-                        </div>
-                    </div>
-                </div>
-                <div class="rounded-[1.8rem] border border-[#D4AF37]/14 bg-[#D4AF37]/6 p-6 md:p-7">
-                    <div class="text-xs uppercase tracking-[.3em] text-[#D4AF37] mb-3">Lead Recommendation</div>
-                    <h3 class="font-display text-4xl mb-3">${escapeHtml(leadRecommendation?.product.name || "Your Reyval Edit")}</h3>
-                    <p class="text-white/68 leading-7">
-                        ${escapeHtml(leadRecommendation?.reasons?.[0] || "A confident pick from your current profile signals.")}
-                    </p>
-                    <div class="flex flex-wrap gap-2 mt-6">
-                        ${(leadRecommendation?.chips || ["Tailored", "Personalized"]).map((chip) => `<span class="insight-chip">${escapeHtml(chip)}</span>`).join("")}
-                    </div>
-                    <div class="mt-6 flex items-center justify-between gap-4">
-                        <div>
-                            <div class="text-[11px] uppercase tracking-[.28em] text-white/35 mb-2">Match Strength</div>
-                            <div class="text-2xl font-display text-[#D4AF37]">${leadRecommendation?.match || 0}%</div>
-                        </div>
-                        <button onclick="navigatePage('profile')" class="px-5 py-3 border border-[#D4AF37]/25 rounded-xl text-xs uppercase tracking-[.24em] hover:bg-[#D4AF37]/10 transition">
-                            View Profile
-                        </button>
-                    </div>
-                </div>
-            `;
-        }
-
-        function getSavedGeminiApiKey() {
-            if (window.REYVAL_GEMINI_API_KEY) {
-                return String(window.REYVAL_GEMINI_API_KEY).trim();
-            }
-
-            try {
-                return localStorage.getItem(GEMINI_STORAGE_KEY) || "";
-            } catch (error) {
-                return "";
-            }
+        function getConfiguredGeminiApiKey() {
+            return String(window.REYVAL_GEMINI_API_KEY || "").trim();
         }
 
         function setOccasionStatus(message = "", tone = "info") {
@@ -1137,50 +1014,34 @@
             ui.occasionStatus.className = toneClassMap[tone] || toneClassMap.info;
         }
 
-        function syncGeminiInput() {
-            if (ui.geminiApiKeyInput) {
-                ui.geminiApiKeyInput.value = getSavedGeminiApiKey();
-            }
-        }
-
-        function syncOccasionForm(profile) {
-            if (!profile) {
-                return;
-            }
-
-            if (ui.occasionSelect) {
-                ui.occasionSelect.value = profile.occasions || ui.occasionSelect.value;
-            }
-
-            if (ui.dressMoodInput && !ui.dressMoodInput.value) {
-                ui.dressMoodInput.value = profile.style || "";
-            }
-
-            if (ui.occasionNotes) {
-                ui.occasionNotes.placeholder = `Example: ${profile.colors || "warm palette"}, ${normalizeText(profile.budget || "balanced")} budget, want comfort and polish.`;
-            }
-
-            if (getSavedGeminiApiKey()) {
+        function initializeOccasionStylist() {
+            if (getConfiguredGeminiApiKey()) {
                 setOccasionStatus(`Gemini is ready with ${GEMINI_MODEL}.`, "success");
             } else {
-                setOccasionStatus("Add your Gemini API key to unlock AI occasion styling.", "info");
+                setOccasionStatus("Gemini styling is not configured yet, so Reyval will use the best local catalog match.", "info");
             }
         }
 
-        function buildOccasionFallback(profile, context, recommendations) {
+        function buildOccasionFallback(context, recommendations) {
             const leadProduct = recommendations[0]?.product;
             const accentProduct = recommendations.find((item) => !item.coreProduct)?.product;
+            const budgetCopy = context.budget && context.budget !== "Any"
+                ? `${normalizeText(context.budget)} budget`
+                : "open budget";
+            const noteTip = context.notes
+                ? `Honor this note while styling: ${context.notes}`
+                : "Choose comfort details that still keep the silhouette sharp.";
 
             return {
                 headline: `${context.occasion} Reyval Edit`,
                 dressRecommendation: leadProduct
                     ? `${leadProduct.name} is the strongest starting point for this plan.`
                     : "Start with one of the highlighted catalog picks.",
-                whyItWorks: `This local Reyval match leans into your ${normalizeText(profile.style || "preferred")} style, ${normalizeText(context.dressCode || "selected")} dress code, and ${normalizeText(context.timeOfDay || "event")} timing.`,
+                whyItWorks: `This local Reyval match fits a ${normalizeText(context.occasion || "special")} event, leans ${normalizeText(context.dressCode || "polished")}, and suits ${normalizeText(context.timeOfDay || "the event timing")}.`,
                 stylingTips: [
-                    `Keep the palette focused around ${profile.colors || "your saved tones"}.`,
-                    `Use ${accentProduct ? accentProduct.name : "one accessory"} as the finishing layer.`,
-                    "Choose comfort details that still keep the silhouette sharp."
+                    context.mood ? `Keep the final look feeling ${normalizeText(context.mood)}.` : "Keep the silhouette intentional and event-ready.",
+                    `Build around the lead piece first to stay inside a ${budgetCopy} brief.`,
+                    accentProduct ? `Use ${accentProduct.name} as the finishing layer.` : noteTip
                 ],
                 recommendedProductIds: recommendations.slice(0, 3).map((item) => item.product.id)
             };
@@ -1234,7 +1095,7 @@
             `;
         }
 
-        function renderOccasionResult(result, recommendations, profile, context) {
+        function renderOccasionResult(result, recommendations, context) {
             const recommendationMap = new Map(recommendations.map((item) => [item.product.id, item.product]));
             const selectedProducts = uniqueList(result?.recommendedProductIds || [])
                 .map((id) => recommendationMap.get(id))
@@ -1249,11 +1110,11 @@
                     <div>
                         <div class="text-xs uppercase tracking-[.3em] text-[#D4AF37] mb-3">Occasion Recommendation</div>
                         <h4 class="font-display text-4xl text-[#D4AF37] mb-3">${escapeHtml(result?.headline || `${context.occasion} Reyval Edit`)}</h4>
-                        <p class="text-white/72 leading-7">${escapeHtml(result?.dressRecommendation || "Gemini prepared a Reyval look based on your occasion inputs.")}</p>
+                        <p class="text-white/72 leading-7">${escapeHtml(result?.dressRecommendation || "Gemini prepared a Reyval look based on your occasion brief.")}</p>
                     </div>
                     <div class="rounded-[1.4rem] border border-white/10 bg-black/20 p-5">
                         <div class="text-xs uppercase tracking-[.28em] text-white/38 mb-3">Why It Works</div>
-                        <p class="text-white/70 leading-7">${escapeHtml(result?.whyItWorks || `Matched to your ${normalizeText(profile.style || "saved")} style and ${normalizeText(context.occasion || "selected")} event details.`)}</p>
+                        <p class="text-white/70 leading-7">${escapeHtml(result?.whyItWorks || `Matched to your ${normalizeText(context.occasion || "selected")} event details and ${normalizeText(context.dressCode || "chosen")} dress code.`)}</p>
                     </div>
                     ${stylingTips.length ? `
                         <div>
@@ -1270,10 +1131,10 @@
             `;
         }
 
-        async function fetchGeminiOccasionPlan(profile, context, recommendations) {
-            const apiKey = getSavedGeminiApiKey();
+        async function fetchGeminiOccasionPlan(context, recommendations) {
+            const apiKey = getConfiguredGeminiApiKey();
             if (!apiKey) {
-                throw new Error("Add a Gemini API key before requesting an AI occasion plan.");
+                throw new Error("Gemini is not configured for this storefront.");
             }
 
             const prompt = [
@@ -1281,8 +1142,8 @@
                 "Use only the provided catalog items.",
                 "Return only valid JSON.",
                 "",
-                `Customer profile: ${profile.gender}, ${profile.style}, ${profile.colors}, ${profile.occasions}, ${profile.budget}.`,
-                `Occasion request: ${context.occasion}; dress code: ${context.dressCode}; time: ${context.timeOfDay}; mood: ${context.mood || "not specified"}; notes: ${context.notes || "none"}.`,
+                `Shopper brief: collection ${context.shoppingFor}; budget ${context.budget}; mood ${context.mood || "not specified"}; notes ${context.notes || "none"}.`,
+                `Occasion request: ${context.occasion}; dress code: ${context.dressCode}; time: ${context.timeOfDay}.`,
                 "",
                 "Catalog candidates:",
                 ...recommendations.map((item) => {
@@ -1441,6 +1302,150 @@
             document.body.appendChild(overlay);
         }
 
+        async function copyTextToClipboard(text) {
+            if (navigator.clipboard && typeof navigator.clipboard.writeText === "function") {
+                await navigator.clipboard.writeText(text);
+                return;
+            }
+
+            const textarea = document.createElement("textarea");
+            textarea.value = text;
+            textarea.setAttribute("readonly", "readonly");
+            textarea.style.position = "fixed";
+            textarea.style.opacity = "0";
+            textarea.style.pointerEvents = "none";
+            document.body.appendChild(textarea);
+            textarea.focus();
+            textarea.select();
+
+            const copied = document.execCommand("copy");
+            textarea.remove();
+
+            if (!copied) {
+                throw new Error("Clipboard copy failed.");
+            }
+        }
+
+        function isMobileDevice() {
+            return /android|iphone|ipad|ipod/i.test(navigator.userAgent || "");
+        }
+
+        function getInstagramDmUrl() {
+            if (INSTAGRAM_USERNAME) {
+                return `https://ig.me/m/${encodeURIComponent(INSTAGRAM_USERNAME)}`;
+            }
+
+            return INSTAGRAM_DM_THREAD_URL;
+        }
+
+        function getInstagramProfileUrl() {
+            return `https://instagram.com/${encodeURIComponent(INSTAGRAM_USERNAME)}`;
+        }
+
+        function getInstagramDestinationLabel() {
+            return INSTAGRAM_USERNAME ? `@${INSTAGRAM_USERNAME}` : "Reyval Instagram";
+        }
+
+        function openInstagramProfile() {
+            if (isMobileDevice()) {
+                window.location.assign(getInstagramProfileUrl());
+                return;
+            }
+
+            window.open(getInstagramProfileUrl(), "_blank", "noopener");
+        }
+
+        function openInstagramDm() {
+            showNotification(`Instagram is opening. Paste the copied order bill in the DM to ${getInstagramDestinationLabel()}.`, "success");
+
+            if (isMobileDevice()) {
+                window.location.assign(getInstagramDmUrl());
+                return;
+            }
+
+            window.open(getInstagramDmUrl(), "_blank", "noopener");
+        }
+
+        function showCheckoutHandoffModal(message, copiedToClipboard = false) {
+            const existingModal = document.getElementById("checkoutModal");
+            if (existingModal) {
+                existingModal.remove();
+            }
+
+            const overlay = document.createElement("div");
+            overlay.className = "fixed inset-0 bg-black/80 backdrop-blur-sm flex items-center justify-center z-[300]";
+            overlay.id = "checkoutModal";
+
+            const modal = document.createElement("div");
+            modal.className = "bg-[#0d1f16] border-2 border-[#D4AF37] rounded-3xl p-10 max-w-2xl w-11/12 max-h-[85vh] overflow-y-auto flex flex-col";
+
+            const header = document.createElement("div");
+            header.className = "flex items-start justify-between mb-6";
+            header.innerHTML = `<h2 class="font-display text-4xl text-[#D4AF37]">Order Ready</h2>`;
+
+            const closeBtn = document.createElement("button");
+            closeBtn.className = "text-[#D4AF37] hover:text-white transition text-3xl leading-none";
+            closeBtn.textContent = "x";
+            closeBtn.onclick = () => overlay.remove();
+            header.appendChild(closeBtn);
+
+            const instructions = document.createElement("div");
+            instructions.className = "bg-[#D4AF37]/10 border border-[#D4AF37]/30 rounded-xl p-4 mb-6 text-cream";
+            instructions.innerHTML = `
+                <div class="text-sm font-bold text-[#D4AF37] mb-2">ORDER HANDOFF</div>
+                <div class="text-sm leading-relaxed space-y-2">
+                    <div>1. Tap "Open Instagram DM" below.</div>
+                    <div>2. Paste the order bill shown below into the DM for ${escapeHtml(getInstagramDestinationLabel())}.</div>
+                    <div>3. Send the message and wait for Reyval to confirm your order.</div>
+                    <div>${copiedToClipboard ? "4. The order bill is already copied and ready to paste." : '4. Tap "Copy Order Bill" first if your phone did not copy it automatically.'}</div>
+                </div>
+            `;
+
+            const messageDiv = document.createElement("div");
+            messageDiv.className = "text-sm text-cream whitespace-pre-wrap mb-8 font-mono bg-black/30 p-6 rounded-xl border border-white/10";
+            messageDiv.textContent = message;
+
+            const buttonContainer = document.createElement("div");
+            buttonContainer.className = "flex gap-4 flex-col sm:flex-row";
+
+            const copyBtn = document.createElement("button");
+            copyBtn.className = "flex-1 py-4 border-2 border-[#D4AF37]/40 text-[#D4AF37] hover:bg-[#D4AF37]/10 transition uppercase tracking-widest font-bold rounded-xl";
+            copyBtn.textContent = copiedToClipboard ? "Copy Order Bill Again" : "Copy Order Bill";
+            copyBtn.onclick = async () => {
+                try {
+                    await copyTextToClipboard(message);
+                    showNotification("Order bill copied. Paste it in the Instagram DM.", "success");
+                } catch (error) {
+                    console.error("Clipboard copy failed:", error);
+                    showNotification("Copy failed. Long-press the order bill and copy it manually.", "warning");
+                }
+            };
+
+            const igBtn = document.createElement("button");
+            igBtn.className = "flex-1 py-4 bg-gradient-to-r from-pink-500 to-rose-500 hover:from-pink-600 hover:to-rose-600 transition uppercase tracking-widest font-bold rounded-xl text-white";
+            igBtn.textContent = "Open Instagram DM";
+            igBtn.onclick = () => {
+                openInstagramDm();
+            };
+
+            const closeActionBtn = document.createElement("button");
+            closeActionBtn.className = "flex-1 py-4 border-2 border-white/20 text-white hover:border-[#D4AF37] hover:bg-[#D4AF37]/10 transition uppercase tracking-widest font-bold rounded-xl";
+            closeActionBtn.textContent = "Close";
+            closeActionBtn.onclick = () => overlay.remove();
+
+            buttonContainer.appendChild(copyBtn);
+            buttonContainer.appendChild(igBtn);
+            buttonContainer.appendChild(closeActionBtn);
+
+            modal.appendChild(header);
+            modal.appendChild(instructions);
+            modal.appendChild(messageDiv);
+            modal.appendChild(buttonContainer);
+
+            overlay.appendChild(modal);
+            document.body.appendChild(overlay);
+        }
+
         function createCard(product) {
             return `
                 <div class="product-card p-8 rounded-3xl flex flex-col items-center text-center">
@@ -1492,40 +1497,19 @@
             ui.cartTotal.textContent = `Rs. ${total.toLocaleString("en-IN")}`;
         }
 
-        function setupForYou() {
-            const profile = window.userData;
-            if (!profile) {
-                ui.forYouSummary.innerHTML = "";
-                ui.forYouGrid.innerHTML = '<p class="col-span-full text-center opacity-40">Create a profile first to unlock personalized picks.</p>';
-                return;
-            }
-            const recommendations = getPersonalizedRecommendations(profile, {}, 6);
-            renderForYouSummary(profile, recommendations);
-            ui.forYouGrid.innerHTML = recommendations.length
-                ? recommendations.map(createRecommendationCard).join("")
-                : '<p class="col-span-full text-center opacity-40">No perfect matches yet. Adjust your preferences or explore our collections.</p>';
-
-            syncGeminiInput();
-            syncOccasionForm(profile);
-            ui.occasionResult.innerHTML = `
-                <div class="text-white/45 leading-7">
-                    Pick an event above and Gemini will return the strongest Reyval outfit mix for the moment.
-                </div>
-            `;
-        }
-
         function setupProfile() {
-            const profile = window.userData || {};
             const isGuest = window.user?.isAnonymous;
+            const signedInWith = isGuest ? "Guest Session" : "Firebase Account";
+            const geminiStatus = getConfiguredGeminiApiKey() ? `${GEMINI_MODEL} configured by Reyval` : "Not configured for this storefront";
 
             ui.profileContent.innerHTML = `
-                <div class="flex justify-between border-b border-white/5 pb-3"><span class="opacity-50">Name</span><span class="text-[#D4AF37]">${escapeHtml(profile.name || window.user?.displayName || "Guest")}</span></div>
-                <div class="flex justify-between border-b border-white/5 pb-3"><span class="opacity-50">Email</span><span class="text-[#D4AF37]">${escapeHtml(profile.email || (isGuest ? "Guest Session" : window.user?.email || "Not available"))}</span></div>
-                <div class="flex justify-between border-b border-white/5 pb-3"><span class="opacity-50">Preference</span><span class="text-[#D4AF37]">${escapeHtml(profile.gender || "Unisex")}</span></div>
-                <div class="flex justify-between border-b border-white/5 pb-3"><span class="opacity-50">Style Profile</span><span class="text-[#D4AF37]">${escapeHtml(profile.style || "Not set")}</span></div>
-                <div class="flex justify-between border-b border-white/5 pb-3"><span class="opacity-50">Color Palette</span><span class="text-[#D4AF37]">${escapeHtml(profile.colors || "Not set")}</span></div>
-                <div class="flex justify-between border-b border-white/5 pb-3"><span class="opacity-50">Occasions</span><span class="text-[#D4AF37]">${escapeHtml(profile.occasions || "Not set")}</span></div>
-                <div class="flex justify-between border-b border-white/5 pb-3"><span class="opacity-50">Budget Range</span><span class="text-[#D4AF37]">${escapeHtml(profile.budget || "Not set")}</span></div>
+                <div class="flex justify-between border-b border-white/5 pb-3"><span class="opacity-50">Name</span><span class="text-[#D4AF37]">${escapeHtml(window.user?.displayName || "Guest")}</span></div>
+                <div class="flex justify-between border-b border-white/5 pb-3"><span class="opacity-50">Email</span><span class="text-[#D4AF37]">${escapeHtml(isGuest ? "Guest Session" : window.user?.email || "Not available")}</span></div>
+                <div class="flex justify-between border-b border-white/5 pb-3"><span class="opacity-50">Session</span><span class="text-[#D4AF37]">${escapeHtml(signedInWith)}</span></div>
+                <div class="flex justify-between border-b border-white/5 pb-3"><span class="opacity-50">Occasion AI</span><span class="text-[#D4AF37]">${escapeHtml(geminiStatus)}</span></div>
+                <div class="rounded-2xl border border-white/10 bg-white/5 p-4 text-sm text-white/65 leading-6">
+                    Reyval now uses the occasion stylist directly on the home page, so you no longer need a saved style profile to get dress recommendations.
+                </div>
             `;
         }
 
@@ -1536,7 +1520,7 @@
                     <div class="px-3 pb-2 text-[11px] uppercase tracking-[0.28em] text-white/40">Signed In</div>
                     <div class="px-3 pb-3 text-sm text-[#D4AF37] border-b border-white/10 break-all">${escapeHtml(displayName)}</div>
                     <button onclick="navigatePage('profile')" class="block w-full text-left px-3 py-2 text-sm rounded hover:bg-emerald-900/30 mt-2">My Profile</button>
-                    <button onclick="navigatePage('foryou')" class="block w-full text-left px-3 py-2 text-sm rounded hover:bg-emerald-900/30">For You</button>
+                    <button onclick="openOccasionStylist()" class="block w-full text-left px-3 py-2 text-sm rounded hover:bg-emerald-900/30">Occasion AI</button>
                     <button onclick="logout()" class="block w-full text-left px-3 py-2 text-sm rounded hover:bg-red-500/10 text-red-400 mt-1">Logout</button>
                 `;
             } else {
@@ -1645,29 +1629,6 @@
             return firebaseInitPromise;
         }
 
-        async function getProfileRef(uid) {
-            const { db, firestoreSdk } = await ensureFirebase();
-            return firestoreSdk.doc(db, "artifacts", appId, "users", uid, "profile", "data");
-        }
-
-        async function loadUserProfile(uid) {
-            try {
-                const { firestoreSdk } = await ensureFirebase();
-                const profileRef = await getProfileRef(uid);
-                const snapshot = await firestoreSdk.getDoc(profileRef);
-                return snapshot.exists() ? snapshot.data() : null;
-            } catch (error) {
-                console.error("Could not load profile:", error);
-                return null;
-            }
-        }
-
-        async function saveUserProfile(profile) {
-            const { firestoreSdk } = await ensureFirebase();
-            const profileRef = await getProfileRef(profile.uid);
-            await firestoreSdk.setDoc(profileRef, profile, { merge: true });
-        }
-
         function attachAuthObserver() {
             if (authObserverAttached || !firebaseServices) {
                 return;
@@ -1678,45 +1639,21 @@
 
             authSdk.onAuthStateChanged(auth, async (authUser) => {
                 window.user = authUser;
-                window.userData = null;
                 updateUserNav();
 
                 if (!authUser) {
-                    if (["profile", "foryou", "setup"].includes(currentPage)) {
+                    if (currentPage === "profile") {
                         navigatePage("login");
                     }
                     return;
                 }
 
-                window.userData = await loadUserProfile(authUser.uid);
-
-                if (!window.userData) {
-                    if (currentPage !== "setup") {
-                        navigatePage("setup");
-                    } else {
-                        setVisiblePage("setupPage");
-                    }
-                    return;
-                }
-
-                tempSetup = {
-                    gender: window.userData.gender || null,
-                    style: window.userData.style || null,
-                    colors: window.userData.colors || null,
-                    occasions: window.userData.occasions || null,
-                    budget: window.userData.budget || null
-                };
-
-                if (currentPage === "login" || currentPage === "setup") {
+                if (currentPage === "login") {
                     navigatePage("home");
                 }
 
                 if (currentPage === "profile") {
                     setupProfile();
-                }
-
-                if (currentPage === "foryou") {
-                    setupForYou();
                 }
             });
         }
@@ -1786,7 +1723,7 @@
                 const { auth, authSdk } = await ensureFirebase();
                 const credential = await authSdk.createUserWithEmailAndPassword(auth, email, password);
                 await authSdk.updateProfile(credential.user, { displayName: name });
-                setAuthFeedback("Account created. Tell us your style so we can personalize Reyval.", "success");
+                setAuthFeedback("Account created. You can now use Reyval and the occasion stylist.", "success");
                 event.target.reset();
             } catch (error) {
                 setAuthFeedback(getFriendlyAuthError(error), "error");
@@ -1825,79 +1762,10 @@
             }
         };
 
-        window.goToStep = (stepNumber) => {
-            document.querySelectorAll(".setup-step").forEach((step) => step.classList.remove("active"));
-            document.getElementById(`setupStep${stepNumber}`).classList.add("active");
-            refreshIcons();
-        };
-
-        window.setTempSetup = (key, value, nextStep) => {
-            tempSetup[key] = value;
-            if (nextStep) {
-                goToStep(nextStep);
-            }
-        };
-
-        window.completeSetup = async (budget) => {
-            if (!window.user) {
-                navigatePage("login");
-                return;
-            }
-
-            if (!tempSetup.gender) {
-                showNotification("Choose who you are shopping for first.", "warning");
-                goToStep(1);
-                return;
-            }
-
-            if (!tempSetup.style) {
-                showNotification("Select your style preference.", "warning");
-                goToStep(2);
-                return;
-            }
-
-            if (!tempSetup.colors) {
-                showNotification("Choose your color palette.", "warning");
-                goToStep(3);
-                return;
-            }
-
-            if (!tempSetup.occasions) {
-                showNotification("Select your occasions.", "warning");
-                goToStep(4);
-                return;
-            }
-
-            tempSetup.budget = budget;
-
-            const profile = {
-                uid: window.user.uid,
-                name: window.user.displayName || window.user.email?.split("@")[0] || "Guest User",
-                email: window.user.email || "Guest Session",
-                gender: tempSetup.gender,
-                style: tempSetup.style,
-                colors: tempSetup.colors,
-                occasions: tempSetup.occasions,
-                budget: tempSetup.budget,
-                updatedAt: new Date().toISOString()
-            };
-
-            try {
-                await saveUserProfile(profile);
-                window.userData = profile;
-                showNotification("Welcome to Reyval", "success");
-                navigatePage("home");
-            } catch (error) {
-                console.error("Could not save setup:", error);
-                showNotification("We could not save your profile yet.", "warning");
-            }
-        };
-
         window.logout = async () => {
             try {
                 const { auth, authSdk } = await ensureFirebase();
                 await authSdk.signOut(auth);
-                tempSetup = { gender: null, style: null, colors: null, occasions: null, budget: null };
                 hideMenus();
                 navigatePage("home");
                 showNotification("Signed out", "success");
@@ -1907,28 +1775,20 @@
             }
         };
 
+        window.openOccasionStylist = () => {
+            navigatePage("home");
+            window.requestAnimationFrame(() => {
+                document.getElementById("occasionStylistSection")?.scrollIntoView({ behavior: "smooth", block: "start" });
+            });
+        };
+
         window.navigatePage = (page) => {
             currentPage = page;
             hideMenus();
 
-            if (["men", "women", "kids", "accessories"].includes(page)) {
+            if (["men", "women", "kids", "accessories", "cosmetics"].includes(page)) {
                 setupCategoryPage(page);
                 setVisiblePage("categoryPage");
-                return;
-            }
-
-            if (page === "foryou") {
-                if (!window.user) {
-                    setAuthMode("signin");
-                    setAuthFeedback("Sign in to view your personalized recommendations.", "info");
-                    currentPage = "login";
-                    setVisiblePage("loginPage");
-                    primeFirebaseConnection();
-                    return;
-                }
-
-                setupForYou();
-                setVisiblePage("foryouPage");
                 return;
             }
 
@@ -1944,20 +1804,6 @@
 
                 setupProfile();
                 setVisiblePage("profilePage");
-                return;
-            }
-
-            if (page === "setup") {
-                if (!window.user) {
-                    currentPage = "login";
-                    setVisiblePage("loginPage");
-                    setAuthFeedback("Sign in first, then we will personalize Reyval for you.", "info");
-                    primeFirebaseConnection();
-                    return;
-                }
-
-                goToStep(1);
-                setVisiblePage("setupPage");
                 return;
             }
 
@@ -1999,60 +1845,40 @@
                 : '<p class="col-span-full text-center opacity-40 mt-12">No products found matching your search.</p>';
         };
 
-        window.saveGeminiApiKey = () => {
-            const apiKey = ui.geminiApiKeyInput.value.trim();
-
-            try {
-                if (apiKey) {
-                    localStorage.setItem(GEMINI_STORAGE_KEY, apiKey);
-                    setOccasionStatus(`Gemini key saved. ${GEMINI_MODEL} is ready to style occasions.`, "success");
-                } else {
-                    localStorage.removeItem(GEMINI_STORAGE_KEY);
-                    setOccasionStatus("Saved Gemini key cleared from this browser.", "warning");
-                }
-            } catch (error) {
-                setOccasionStatus("This browser could not store the Gemini key locally.", "warning");
-            }
-        };
-
         window.requestOccasionRecommendation = async () => {
-            const profile = window.userData;
-            if (!profile) {
-                setOccasionStatus("Sign in and finish your profile before using the occasion stylist.", "warning");
-                return;
-            }
-
             const context = {
+                shoppingFor: ui.shoppingForSelect.value,
                 occasion: ui.occasionSelect.value,
                 dressCode: ui.dressCodeSelect.value,
+                budget: ui.budgetSelect.value,
                 timeOfDay: ui.timeSelect.value,
                 mood: ui.dressMoodInput.value.trim(),
                 notes: ui.occasionNotes.value.trim()
             };
 
-            const recommendations = getPersonalizedRecommendations(profile, context, 7);
-            const fallbackPlan = buildOccasionFallback(profile, context, recommendations);
+            const recommendations = getOccasionRecommendations(context, 7);
+            const fallbackPlan = buildOccasionFallback(context, recommendations);
 
-            if (!getSavedGeminiApiKey()) {
-                setOccasionStatus("Gemini key missing, so Reyval is showing the best local catalog match instead.", "warning");
-                renderOccasionResult(fallbackPlan, recommendations, profile, context);
+            if (!getConfiguredGeminiApiKey()) {
+                setOccasionStatus("Gemini is not configured here, so Reyval is showing the best local catalog match instead.", "warning");
+                renderOccasionResult(fallbackPlan, recommendations, context);
                 return;
             }
 
             setOccasionStatus("Gemini is building your occasion edit...", "info");
             ui.occasionResult.innerHTML = `
                 <div class="text-white/55 leading-7">
-                    Styling in progress. Gemini is comparing your profile with Reyval's strongest occasion matches.
+                    Styling in progress. Gemini is comparing your occasion brief with Reyval's strongest catalog matches.
                 </div>
             `;
 
             try {
-                const result = await fetchGeminiOccasionPlan(profile, context, recommendations);
-                renderOccasionResult(result, recommendations, profile, context);
+                const result = await fetchGeminiOccasionPlan(context, recommendations);
+                renderOccasionResult(result, recommendations, context);
                 setOccasionStatus("Gemini finished your occasion recommendation.", "success");
             } catch (error) {
                 console.error("Gemini occasion request failed:", error);
-                renderOccasionResult(fallbackPlan, recommendations, profile, context);
+                renderOccasionResult(fallbackPlan, recommendations, context);
                 setOccasionStatus("Gemini could not answer right now, so Reyval fell back to a local recommendation.", "warning");
             }
         };
@@ -2131,6 +1957,41 @@
             });
         };
 
+        window.checkout = () => {
+            if (!cart.length) {
+                showNotification("Add at least one product before checkout.", "warning");
+                return;
+            }
+
+            let orderMessage = "ORDER REQUEST\n\n";
+            let total = 0;
+            cart.forEach((item, index) => {
+                const price = parsePrice(item.price);
+                total += price;
+                orderMessage += `${index + 1}. ${item.name}\n   Price: Rs. ${item.price}\n\n`;
+            });
+            orderMessage += `\nTOTAL: Rs. ${total.toLocaleString("en-IN")}\n\nPlease confirm availability and proceed with payment. Thank you!`;
+            latestCheckoutMessage = orderMessage;
+
+            copyTextToClipboard(orderMessage).then(() => {
+                showCheckoutHandoffModal(orderMessage, true);
+                setTimeout(() => {
+                    cart = [];
+                    updateCartUI();
+                    ui.cartSidebar.classList.add("hidden");
+                }, 500);
+            }).catch((error) => {
+                console.error("Automatic clipboard copy failed:", error);
+                showCheckoutHandoffModal(orderMessage, false);
+                showNotification("Copy did not complete automatically. Use 'Copy Order Bill' before opening Instagram.", "warning");
+                setTimeout(() => {
+                    cart = [];
+                    updateCartUI();
+                    ui.cartSidebar.classList.add("hidden");
+                }, 500);
+            });
+        };
+
         document.addEventListener("click", (event) => {
             const userMenuButton = document.getElementById("userMenuButton");
             const mobileMenuButton = document.getElementById("mobileMenuButton");
@@ -2147,6 +2008,7 @@
         setAuthMode("signin");
         updateUserNav();
         updateCartUI();
+        initializeOccasionStylist();
         refreshIcons();
         window.addEventListener("load", refreshIcons, { once: true });
         primeFirebaseConnection();
