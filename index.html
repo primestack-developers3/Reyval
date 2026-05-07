@@ -375,12 +375,7 @@
                                         Share the event, the mood, and the type of collection you want to browse. Gemini will turn that into a sharp Reyval outfit recommendation with matching add-ons.
                                     </p>
 
-                                    <div class="rounded-[1.5rem] border border-white/10 bg-black/20 p-5 space-y-4">
-                                        <p class="text-sm text-white/55 leading-6">
-                                            The Gemini connection is configured by Reyval, not by the shopper. If AI styling is unavailable, the page will still show the best local catalog match for the occasion.
-                                        </p>
-                                        <div id="occasionStatus" class="hidden rounded-2xl px-4 py-3 text-sm leading-6"></div>
-                                    </div>
+                                    <div id="occasionStatus" class="hidden rounded-2xl px-4 py-3 text-sm leading-6"></div>
                                 </div>
 
                                 <div class="grid gap-5">
@@ -559,6 +554,10 @@
             </div>
         </div>
     </div>
+
+    <script>
+        window.REYVAL_GEMINI_API_KEY = "AIzaSyBzD9e-dgMnwkxJfIKb0--FaRvwN0hMuGg";
+    </script>
 
     <script type="module">
         const firebaseConfig = window.REYVAL_FIREBASE_CONFIG || {
@@ -1016,9 +1015,9 @@
 
         function initializeOccasionStylist() {
             if (getConfiguredGeminiApiKey()) {
-                setOccasionStatus(`Gemini is ready with ${GEMINI_MODEL}.`, "success");
+                setOccasionStatus();
             } else {
-                setOccasionStatus("Gemini styling is not configured yet, so Reyval will use the best local catalog match.", "info");
+                setOccasionStatus();
             }
         }
 
@@ -1346,25 +1345,29 @@
             return INSTAGRAM_USERNAME ? `@${INSTAGRAM_USERNAME}` : "Reyval Instagram";
         }
 
-        function openInstagramProfile() {
+        function openExternalUrl(url) {
             if (isMobileDevice()) {
-                window.location.assign(getInstagramProfileUrl());
+                window.location.assign(url);
                 return;
             }
 
-            window.open(getInstagramProfileUrl(), "_blank", "noopener");
+            const newWindow = window.open(url, "_blank", "noopener,noreferrer");
+            if (newWindow) {
+                newWindow.opener = null;
+                return;
+            }
+
+            window.location.assign(url);
         }
 
-        function openInstagramDm() {
+        window.openInstagramProfile = () => {
+            openExternalUrl(getInstagramProfileUrl());
+        };
+
+        window.openInstagramDm = () => {
             showNotification(`Instagram is opening. Paste the copied order bill in the DM to ${getInstagramDestinationLabel()}.`, "success");
-
-            if (isMobileDevice()) {
-                window.location.assign(getInstagramDmUrl());
-                return;
-            }
-
-            window.open(getInstagramDmUrl(), "_blank", "noopener");
-        }
+            openExternalUrl(getInstagramDmUrl());
+        };
 
         function showCheckoutHandoffModal(message, copiedToClipboard = false) {
             const existingModal = document.getElementById("checkoutModal");
