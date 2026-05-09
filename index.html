@@ -75,6 +75,49 @@
             box-shadow: 0 28px 70px rgba(212, 175, 55, 0.12);
         }
 
+        .product-media {
+            position: relative;
+            width: 100%;
+            aspect-ratio: 4 / 5;
+            overflow: hidden;
+            border-radius: 1.6rem;
+            margin-bottom: 1.4rem;
+            background:
+                radial-gradient(circle at top, rgba(255, 255, 255, 0.08), transparent 45%),
+                linear-gradient(180deg, rgba(17, 26, 20, 0.96), rgba(10, 10, 10, 0.98));
+            border: 1px solid rgba(255, 255, 255, 0.06);
+        }
+
+        .product-photo {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform .45s ease;
+        }
+
+        .product-card:hover .product-photo {
+            transform: scale(1.05);
+        }
+
+        .product-photo-overlay {
+            position: absolute;
+            inset: 0;
+            background:
+                linear-gradient(180deg, rgba(0, 0, 0, 0.12), transparent 40%),
+                linear-gradient(0deg, rgba(6, 10, 8, 0.82), transparent 42%);
+            pointer-events: none;
+        }
+
+        .product-media-topline {
+            position: absolute;
+            inset: 1rem 1rem auto 1rem;
+            display: flex;
+            align-items: flex-start;
+            justify-content: space-between;
+            gap: .85rem;
+            z-index: 1;
+        }
+
         .product-badge {
             width: 5rem;
             height: 5rem;
@@ -89,6 +132,62 @@
             background: radial-gradient(circle at 30% 30%, rgba(240, 208, 96, 0.24), rgba(212, 175, 55, 0.08) 45%, rgba(15, 61, 46, 0.78));
             border: 1px solid rgba(212, 175, 55, 0.24);
             color: var(--gold);
+        }
+
+        .product-badge--mini {
+            width: 3rem;
+            height: 3rem;
+            font-size: .7rem;
+            letter-spacing: .18em;
+            background: rgba(8, 12, 10, 0.7);
+            backdrop-filter: blur(12px);
+        }
+
+        .discount-chip {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: .45rem .8rem;
+            border-radius: 999px;
+            background: rgba(212, 175, 55, 0.18);
+            border: 1px solid rgba(212, 175, 55, 0.32);
+            color: #f7df87;
+            font-size: .7rem;
+            font-weight: 700;
+            letter-spacing: .16em;
+            text-transform: uppercase;
+            backdrop-filter: blur(12px);
+        }
+
+        .audience-copy {
+            color: rgba(212, 175, 55, 0.82);
+            font-size: .68rem;
+            letter-spacing: .24em;
+            text-transform: uppercase;
+        }
+
+        .product-caption {
+            color: rgba(245, 245, 220, 0.72);
+            line-height: 1.65;
+        }
+
+        .old-price {
+            color: rgba(245, 245, 220, 0.42);
+            text-decoration: line-through;
+            text-decoration-thickness: 1.5px;
+        }
+
+        .discount-note {
+            color: #8de2a7;
+            font-size: .82rem;
+            font-weight: 700;
+            letter-spacing: .06em;
+            text-transform: uppercase;
+        }
+
+        .price-savings {
+            color: rgba(245, 245, 220, 0.52);
+            font-size: .76rem;
         }
 
         .btn-gold {
@@ -578,7 +677,7 @@
             : "";
 
         const categoryCopy = {
-            men: { title: "Men Collection", subtitle: "Tailoring, ceremony, and polished eveningwear" },
+            men: { title: "Men Collection", subtitle: "Fresh branded shirts, premium tees, and everyday denim with sale pricing" },
             women: { title: "Women Collection", subtitle: "Drapes, gowns, and statement silhouettes" },
             kids: { title: "Kids Collection", subtitle: "Occasion-ready styles for the youngest guests" },
             accessories: { title: "Accessories Collection", subtitle: "Finishing pieces for a complete look" },
@@ -587,16 +686,175 @@
 
         const products = {
             men: [
-                { id: "m1", name: "Royal Gold Sherwani", price: "45,000", badge: "RG", style: "Traditional", category: "Men" },
-                { id: "m2", name: "Midnight Bandhgala", price: "32,000", badge: "MB", style: "Elegant", category: "Men" },
-                { id: "m3", name: "Silk Kurta Set", price: "12,500", badge: "SK", style: "Minimal", category: "Men" },
-                { id: "m4", name: "Velvet Sherwani", price: "52,000", badge: "VS", style: "Traditional", category: "Men" },
-                { id: "m5", name: "Designer Jodhpuri", price: "28,000", badge: "DJ", style: "Elegant", category: "Men" },
-                { id: "m6", name: "Cotton Kurta Pajama", price: "8,500", badge: "CK", style: "Minimal", category: "Men" },
-                { id: "m7", name: "Embroidered Achkan", price: "35,000", badge: "EA", style: "Traditional", category: "Men" },
-                { id: "m8", name: "Modern Blazer Set", price: "25,000", badge: "MB", style: "Trendy", category: "Men" },
-                { id: "m9", name: "Linen Suit", price: "30,000", badge: "LS", style: "Elegant", category: "Men" },
-                { id: "m10", name: "Casual Shirt Set", price: "6,500", badge: "CS", style: "Minimal", category: "Men" }
+                {
+                    id: "m1",
+                    name: "Allen Solly Black Casual Shirt",
+                    price: "1,999",
+                    oldPrice: "4,699",
+                    discount: "57% Off",
+                    badge: "AS",
+                    style: "Elegant",
+                    category: "Men",
+                    audience: "Office / Smart casual / Dinner",
+                    caption: "Sharp for office rotations, dinner plans, and shoppers who want a dependable black staple.",
+                    image: "https://rukminim2.flixcart.com/image/612/612/xif0q/shirt/k/x/6/-original-imahfnwyabzeav2r.jpeg?q=70"
+                },
+                {
+                    id: "m2",
+                    name: "Allen Solly Blue Textured Shirt",
+                    price: "2,199",
+                    oldPrice: "4,999",
+                    discount: "56% Off",
+                    badge: "AS",
+                    style: "Elegant",
+                    category: "Men",
+                    audience: "Workwear / Smart evenings / First-job fits",
+                    caption: "Built for young professionals, semi-formal meetups, and men who want texture without loud prints.",
+                    image: "https://rukminim2.flixcart.com/image/612/612/xif0q/shirt/q/j/n/46-assfqmof199995-allen-solly-original-imag2md57rjzmjzt-bb.jpeg?q=70"
+                },
+                {
+                    id: "m3",
+                    name: "U.S. Polo Assn. Beige Regular Shirt",
+                    price: "2,399",
+                    oldPrice: "5,499",
+                    discount: "56% Off",
+                    badge: "UP",
+                    style: "Minimal",
+                    category: "Men",
+                    audience: "Weekend / Travel / Everyday",
+                    caption: "A clean beige pick for brunch crowds, travel dressers, and easy everyday layering.",
+                    image: "https://cdn10.nnnow.com/web-images/medium/styles/067YNLGUI1L/1725358109601/1.jpg"
+                },
+                {
+                    id: "m4",
+                    name: "Peter England Tapered Blue Jeans",
+                    price: "2,299",
+                    oldPrice: "5,299",
+                    discount: "57% Off",
+                    badge: "PE",
+                    style: "Minimal",
+                    category: "Men",
+                    audience: "College / Casual office / Daily wear",
+                    caption: "Made for college days, casual offices, and anyone after a polished dark-denim basic.",
+                    image: "https://rukminim2.flixcart.com/image/612/612/xif0q/jean/y/t/v/32-pjdnastfa24389-peter-england-resized-2-original-imagqp8jfbubcf9k.jpeg?q=70"
+                },
+                {
+                    id: "m5",
+                    name: "The Souled Store Relaxed Fit Jeans",
+                    price: "2,699",
+                    oldPrice: "5,999",
+                    discount: "55% Off",
+                    badge: "TS",
+                    style: "Trendy",
+                    category: "Men",
+                    audience: "Streetwear / Weekend / Creators",
+                    caption: "Relaxed denim for creators, off-duty dressers, and men who want roomier street-led comfort.",
+                    image: "https://assets.myntassets.com/h_720,q_90,w_540/v1/assets/images/2026/FEBRUARY/6/ScTP6qt1_141c1e9bd65a45308f9d7514d117ad5a.jpg"
+                },
+                {
+                    id: "m6",
+                    name: "Levi's Indigo Slim Fit Shirt",
+                    price: "3,299",
+                    oldPrice: "6,999",
+                    discount: "53% Off",
+                    badge: "LV",
+                    style: "Elegant",
+                    category: "Men",
+                    audience: "Premium casual / Date night / Layering",
+                    caption: "An indigo staple for date nights, smart layering, and shoppers who prefer premium classics.",
+                    image: "https://levi.in/cdn/shop/files/006XG0001_01_Styleshot.jpg?v=1767002679"
+                },
+                {
+                    id: "m7",
+                    name: "Puma Essential Raglan Tee",
+                    price: "1,699",
+                    oldPrice: "3,999",
+                    discount: "58% Off",
+                    badge: "PU",
+                    style: "Trendy",
+                    category: "Men",
+                    audience: "Gym / Campus / Athleisure",
+                    caption: "Active-ready for gym commuters, campus wear, and sporty everyday wardrobes.",
+                    image: "https://assets.myntassets.com/h_720,q_90,w_540/v1/assets/images/2025/SEPTEMBER/10/2BkVLd78_e6dad485fece4a47b6edfcd870ea7389.jpg"
+                },
+                {
+                    id: "m8",
+                    name: "Levi's Olive Slim Fit T-Shirt",
+                    price: "1,499",
+                    oldPrice: "3,499",
+                    discount: "57% Off",
+                    badge: "LV",
+                    style: "Minimal",
+                    category: "Men",
+                    audience: "Minimalists / Travel / Everyday",
+                    caption: "Easy olive jersey for minimal dressers, travel packs, and repeat-wear casual days.",
+                    image: "https://assets.ajio.com/medias/sys_master/root/20250326/uvy3/67e3866055340d4b4f8a6c32/-473Wx593H-469698874-olive-MODEL.jpg"
+                },
+                {
+                    id: "m9",
+                    name: "Jack & Jones Floral Trucker Jacket",
+                    price: "3,799",
+                    oldPrice: "7,999",
+                    discount: "53% Off",
+                    badge: "JJ",
+                    style: "Trendy",
+                    category: "Men",
+                    audience: "Street style / Parties / Trend seekers",
+                    caption: "A bold layer for fashion-first buyers, concert nights, and statement streetwear looks.",
+                    image: "https://assets-jiocdn.ajio.com/medias/sys_master/root/20240807/dsHj/66b30b191d763220fa6541ce/jack_%26_jones_white_men_floral_print_regular_fit_trucker_jacket.jpg"
+                },
+                {
+                    id: "m10",
+                    name: "Skinny Low-Rise Blue Jeans",
+                    price: "1,999",
+                    oldPrice: "4,699",
+                    discount: "57% Off",
+                    badge: "DJ",
+                    style: "Trendy",
+                    category: "Men",
+                    audience: "Night out / Youth style / Fitted denim",
+                    caption: "A sharper skinny fit for nightlife plans, younger shoppers, and close-cut denim fans.",
+                    image: "https://rukminim2.flixcart.com/image/612/612/xif0q/jean/4/m/m/-original-imahfupwjv2g7qzv.jpeg?q=70"
+                },
+                {
+                    id: "m11",
+                    name: "Levi's 511 Light Fade Jeans",
+                    price: "3,499",
+                    oldPrice: "7,499",
+                    discount: "53% Off",
+                    badge: "LV",
+                    style: "Elegant",
+                    category: "Men",
+                    audience: "Friday casual / Premium basics / Smart denim",
+                    caption: "Clean light-fade denim for premium casual wardrobes, office Fridays, and effortless styling.",
+                    image: "https://assets.myntassets.com/h_720,q_90,w_540/v1/assets/images/2025/SEPTEMBER/23/uBLdLrp6_7ac51a1de46544de81c0293ab127debf.jpg"
+                },
+                {
+                    id: "m12",
+                    name: "Pepe Jeans Straight Fit Denim",
+                    price: "2,899",
+                    oldPrice: "6,299",
+                    discount: "54% Off",
+                    badge: "PJ",
+                    style: "Minimal",
+                    category: "Men",
+                    audience: "Commuters / Daily wear / Relaxed fit",
+                    caption: "Straight-fit comfort for all-day movers, daily commuters, and shoppers who avoid skinny cuts.",
+                    image: "https://adn-static1.nykaa.com/nykdesignstudio-images/pub/media/catalog/product/d/7/d7881a4PM2084796Q053000Blue_1.jpg"
+                },
+                {
+                    id: "m13",
+                    name: "Peter England Casuals Slim Fit Jeans",
+                    price: "2,399",
+                    oldPrice: "5,499",
+                    discount: "56% Off",
+                    badge: "PE",
+                    style: "Minimal",
+                    category: "Men",
+                    audience: "Everyday / Budget upgrade / Slim fit",
+                    caption: "Dependable slim denim for everyday wardrobes, budget-conscious buyers, and clean casual pairing.",
+                    image: "https://assets.myntassets.com/h_720,q_90,w_540/v1/assets/images/2025/FEBRUARY/4/O2XZttlK_ddf50fc9a12f4586a27a0367c191f4e4.jpg"
+                }
             ],
             women: [
                 { id: "w1", name: "Emerald Zari Saree", price: "38,000", badge: "EZ", style: "Traditional", category: "Women" },
@@ -757,6 +1015,33 @@
 
         function parsePrice(value) {
             return Number(String(value).replace(/,/g, ""));
+        }
+
+        function getProductSavings(product) {
+            if (!product?.oldPrice) {
+                return 0;
+            }
+
+            const savings = parsePrice(product.oldPrice) - parsePrice(product.price);
+            return savings > 0 ? savings : 0;
+        }
+
+        function createPriceMarkup(product, options = {}) {
+            const wrapperClass = options.wrapperClass || "mb-6";
+            const alignClass = options.alignClass || "justify-center";
+            const currentPriceClass = options.currentPriceClass || "text-xl font-bold text-[#F7E29B]";
+            const savings = getProductSavings(product);
+
+            return `
+                <div class="${wrapperClass}">
+                    <div class="flex flex-wrap items-center gap-x-3 gap-y-2 ${alignClass}">
+                        <div class="${currentPriceClass}">${formatPrice(product.price)}</div>
+                        ${product.oldPrice ? `<div class="old-price">${formatPrice(product.oldPrice)}</div>` : ""}
+                        ${product.discount ? `<div class="discount-note">${escapeHtml(product.discount)}</div>` : ""}
+                    </div>
+                    ${savings ? `<div class="price-savings mt-2 ${alignClass === "justify-start" ? "text-left" : "text-center"}">Save Rs. ${savings.toLocaleString("en-IN")}</div>` : ""}
+                </div>
+            `;
         }
 
         function normalizeText(value = "") {
@@ -1086,7 +1371,7 @@
                     </div>
                     <h4 class="font-display text-2xl text-[#D4AF37] mb-1">${escapeHtml(product.name)}</h4>
                     <div class="text-sm text-white/50 italic mb-4">${escapeHtml(product.style)} - ${escapeHtml(product.category)}</div>
-                    <div class="text-lg font-bold mb-5">${formatPrice(product.price)}</div>
+                    ${createPriceMarkup(product, { wrapperClass: "mb-5", currentPriceClass: "text-lg font-bold text-[#F7E29B]" })}
                     <button onclick="addToCart('${product.id}')" class="mt-auto py-3 border border-[#D4AF37] text-[#D4AF37] text-[10px] uppercase tracking-[.2em] font-bold hover:bg-[#D4AF37] hover:text-black transition rounded-xl">
                         Add To Bag
                     </button>
@@ -1450,12 +1735,33 @@
         }
 
         function createCard(product) {
+            if (product.image) {
+                return `
+                    <div class="product-card p-5 rounded-3xl flex flex-col">
+                        <div class="product-media">
+                            <img src="${escapeHtml(product.image)}" alt="${escapeHtml(product.name)}" loading="lazy" class="product-photo">
+                            <div class="product-photo-overlay"></div>
+                            <div class="product-media-topline">
+                                <div class="product-badge product-badge--mini">${escapeHtml(product.badge)}</div>
+                                ${product.discount ? `<div class="discount-chip">${escapeHtml(product.discount)}</div>` : ""}
+                            </div>
+                        </div>
+                        ${product.audience ? `<div class="audience-copy mb-3">${escapeHtml(product.audience)}</div>` : ""}
+                        <h3 class="font-display text-2xl text-[#D4AF37] mb-2">${escapeHtml(product.name)}</h3>
+                        <div class="text-sm opacity-50 italic mb-3">${escapeHtml(product.style)} - ${escapeHtml(product.category)}</div>
+                        ${product.caption ? `<p class="product-caption text-sm mb-5">${escapeHtml(product.caption)}</p>` : ""}
+                        ${createPriceMarkup(product)}
+                        <button onclick="addToCart('${product.id}')" class="mt-auto w-full py-3 border border-[#D4AF37] text-[#D4AF37] text-[10px] uppercase tracking-[.2em] font-bold hover:bg-[#D4AF37] hover:text-black transition rounded-xl">Add to Bag</button>
+                    </div>
+                `;
+            }
+
             return `
                 <div class="product-card p-8 rounded-3xl flex flex-col items-center text-center">
                     <div class="product-badge mb-6">${escapeHtml(product.badge)}</div>
                     <h3 class="font-display text-2xl text-[#D4AF37] mb-2">${escapeHtml(product.name)}</h3>
                     <div class="text-sm opacity-50 italic mb-2">${escapeHtml(product.style)} - ${escapeHtml(product.category)}</div>
-                    <div class="text-xl font-bold mb-6">${formatPrice(product.price)}</div>
+                    ${createPriceMarkup(product)}
                     <button onclick="addToCart('${product.id}')" class="w-full py-3 border border-[#D4AF37] text-[#D4AF37] text-[10px] uppercase tracking-[.2em] font-bold hover:bg-[#D4AF37] hover:text-black transition rounded-xl">Add to Bag</button>
                 </div>
             `;
