@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Reyval - Luxury Fashion</title>
+    <title>Reyval | Men's Fashion</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link rel="preconnect" href="https://www.gstatic.com" crossorigin>
@@ -384,10 +384,7 @@
                 <button onclick="navigatePage('home')" class="font-display text-2xl md:text-3xl font-bold tracking-widest gold-gradient hover:opacity-80 transition whitespace-nowrap">REYVAL</button>
                 <div class="hidden md:flex items-center gap-8 text-sm tracking-wider uppercase flex-1" style="color:var(--cream)">
                     <button onclick="navigatePage('men')" class="hover:text-[#D4AF37] transition py-1">Men</button>
-                    <button onclick="navigatePage('women')" class="hover:text-[#D4AF37] transition py-1">Women</button>
-                    <button onclick="navigatePage('kids')" class="hover:text-[#D4AF37] transition py-1">Kids</button>
                     <button onclick="navigatePage('accessories')" class="hover:text-[#D4AF37] transition py-1">Accessories</button>
-                    <button onclick="navigatePage('cosmetics')" class="hover:text-[#D4AF37] transition py-1">Cosmetics</button>
                     <button onclick="navigatePage('search')" class="hover:text-[#D4AF37] transition py-1 flex items-center gap-1">
                         <i data-lucide="search" style="width:16px;height:16px"></i>Search
                     </button>
@@ -410,10 +407,7 @@
             <div id="mobileMenu" class="md:hidden hidden border-t border-white/5 px-6 pb-5">
                 <div class="flex flex-col gap-2 pt-4 text-sm uppercase tracking-[0.24em]">
                     <button onclick="navigatePage('men')" class="text-left py-2 hover:text-[#D4AF37] transition">Men</button>
-                    <button onclick="navigatePage('women')" class="text-left py-2 hover:text-[#D4AF37] transition">Women</button>
-                    <button onclick="navigatePage('kids')" class="text-left py-2 hover:text-[#D4AF37] transition">Kids</button>
                     <button onclick="navigatePage('accessories')" class="text-left py-2 hover:text-[#D4AF37] transition">Accessories</button>
-                    <button onclick="navigatePage('cosmetics')" class="text-left py-2 hover:text-[#D4AF37] transition">Cosmetics</button>
                     <button onclick="navigatePage('search')" class="text-left py-2 hover:text-[#D4AF37] transition">Search</button>
                     <button onclick="openOccasionStylist()" class="text-left py-2 hover:text-[#D4AF37] transition">Occasion AI</button>
                     <button onclick="navigatePage('login')" class="text-left py-2 hover:text-[#D4AF37] transition">Account</button>
@@ -435,7 +429,7 @@
                         <h1 class="font-display text-6xl md:text-9xl font-light tracking-wider anim-up-d1 gold-gradient">REYVAL</h1>
                         <p class="font-display text-xl md:text-3xl italic font-light mt-4 anim-up-d2 opacity-80">Redefine Your Elegance</p>
                         <p class="max-w-2xl mx-auto mt-6 text-white/70 leading-7 anim-up-d2">
-                            Explore the collection instantly, then use Gemini to find the best Reyval dress direction for weddings, parties, festive evenings, and more.
+                            Explore our complete men's wardrobe, then use Gemini to find the best Reyval outfit for weddings, parties, office events, and more.
                         </p>
                         <div class="mt-10 anim-up-d3 flex gap-4 flex-wrap justify-center">
                             <button onclick="navigatePage('men')" class="btn-gold px-10 py-4 text-sm tracking-widest uppercase font-medium">Explore Collection</button>
@@ -459,9 +453,9 @@
                     <div class="max-w-7xl mx-auto">
                         <div class="text-center mb-12">
                             <div class="tracking-[.4em] text-xs uppercase mb-3 text-[#D4AF37]">Gemini Occasion Stylist</div>
-                            <h2 class="font-display text-5xl md:text-6xl font-light mb-4">Find the best dress for the moment.</h2>
+                            <h2 class="font-display text-5xl md:text-6xl font-light mb-4">Find the best men's outfit for the moment.</h2>
                             <p class="max-w-3xl mx-auto text-white/60 leading-7">
-                                Skip the old style quiz. Tell Reyval who you are shopping for, what the occasion is, and Gemini will suggest the strongest dress direction from the catalog.
+                                Skip the old style quiz. Tell Reyval the occasion, mood, and preferred look, and Gemini will suggest the strongest men's outfit from the catalog.
                             </p>
                         </div>
 
@@ -469,9 +463,7 @@
                             <div class="grid xl:grid-cols-[.9fr_1.1fr] gap-8 items-start">
                                 <div>
                                     <div class="tracking-[.34em] text-xs uppercase text-[#D4AF37] mb-3">Gemini Stylist</div>
-                                    <h3 class="font-display text-4xl mb-4">Right dress, right occasion.</h3>
-                                    <p class="text-white/65 leading-7 mb-6">
-                                        Share the event, the mood, and the type of collection you want to browse. Gemini will turn that into a sharp Reyval outfit recommendation with matching add-ons.
+                                        <h3 class="font-display text-4xl mb-4">Right outfit, right occasion.</h3>
                                     </p>
 
                                     <div id="occasionStatus" class="hidden rounded-2xl px-4 py-3 text-sm leading-6"></div>
@@ -480,33 +472,31 @@
                                 <div class="grid gap-5">
                                     <div class="grid md:grid-cols-2 gap-4">
                                         <div>
-                                            <label for="shoppingForSelect" class="text-xs uppercase tracking-[.28em] text-white/40">Shopping For</label>
+                                            <label for="shoppingForSelect" class="text-xs uppercase tracking-[.28em] text-white/40">Collection</label>
                                             <select id="shoppingForSelect" class="mt-3 w-full bg-white/5 border border-white/10 px-4 py-3 rounded-xl text-cream focus:border-[#D4AF37] outline-none transition">
-                                                <option>Women</option>
                                                 <option>Men</option>
-                                                <option>Kids</option>
-                                                <option>All Collections</option>
+                                                <option>All Men's Collections</option>
                                             </select>
                                         </div>
                                         <div>
                                             <label for="occasionSelect" class="text-xs uppercase tracking-[.28em] text-white/40">Occasion</label>
                                             <select id="occasionSelect" class="mt-3 w-full bg-white/5 border border-white/10 px-4 py-3 rounded-xl text-cream focus:border-[#D4AF37] outline-none transition">
-                                                <option>Weddings & Ceremonies</option>
-                                                <option>Parties & Events</option>
-                                                <option>Daily Wear</option>
-                                                <option>Special Occasions</option>
-                                                <option>Reception Dinner</option>
-                                                <option>Festive Family Event</option>
+                                                <option>Office Event</option>
+                                                <option>Wedding Guest</option>
+                                                <option>Party Night</option>
+                                                <option>Weekend Casual</option>
+                                                <option>Formal Reception</option>
+                                                <option>Travel & Leisure</option>
                                             </select>
                                         </div>
                                         <div>
                                             <label for="dressCodeSelect" class="text-xs uppercase tracking-[.28em] text-white/40">Dress Code</label>
                                             <select id="dressCodeSelect" class="mt-3 w-full bg-white/5 border border-white/10 px-4 py-3 rounded-xl text-cream focus:border-[#D4AF37] outline-none transition">
-                                                <option>Elegant Formal</option>
-                                                <option>Festive Traditional</option>
-                                                <option>Cocktail Glam</option>
-                                                <option>Minimal Chic</option>
-                                                <option>Relaxed Luxe</option>
+                                                <option>Formal Suit</option>
+                                                <option>Business Casual</option>
+                                                <option>Street Luxe</option>
+                                                <option>Smart Casual</option>
+                                                <option>Relaxed Weekend</option>
                                             </select>
                                         </div>
                                         <div>
@@ -530,7 +520,7 @@
                                         </div>
                                         <div>
                                             <label for="dressMoodInput" class="text-xs uppercase tracking-[.28em] text-white/40">Desired Mood</label>
-                                            <input id="dressMoodInput" type="text" placeholder="Graceful, bold, effortless..." class="mt-3 w-full bg-white/5 border border-white/10 px-4 py-3 rounded-xl text-cream focus:border-[#D4AF37] outline-none transition">
+                                                                    <input id="dressMoodInput" type="text" placeholder="Bold, relaxed, sharp, confident..." class="mt-3 w-full bg-white/5 border border-white/10 px-4 py-3 rounded-xl text-cream focus:border-[#D4AF37] outline-none transition">
                                         </div>
                                     </div>
 
@@ -540,12 +530,12 @@
                                     </div>
 
                                     <button onclick="requestOccasionRecommendation()" class="btn-gold px-6 py-4 rounded-xl text-sm uppercase tracking-[.24em] font-medium">
-                                        Ask Gemini For The Best Dress
+                                        Ask Gemini For The Best Men's Outfit
                                     </button>
 
                                     <div id="occasionResult" class="rounded-[1.75rem] border border-white/10 bg-black/20 p-6 min-h-[19rem]">
                                         <div class="text-white/45 leading-7">
-                                            Choose the occasion and Gemini will suggest the best Reyval dress direction for it.
+                                            Choose the occasion and Gemini will suggest the best Reyval men's outfit direction for it.
                                         </div>
                                     </div>
                                 </div>
@@ -620,7 +610,7 @@
                     <div class="text-center mb-8">
                         <h2 class="font-display text-5xl font-light">Search</h2>
                     </div>
-                    <input type="text" id="searchInput" placeholder="Search by name, style or category..." class="w-full bg-white/5 border border-white/10 px-6 py-4 rounded-xl mb-8 text-cream focus:border-[#D4AF37] outline-none transition" onkeyup="performSearch()">
+                    <input type="text" id="searchInput" placeholder="Search men's style, category or product..." class="w-full bg-white/5 border border-white/10 px-6 py-4 rounded-xl mb-8 text-cream focus:border-[#D4AF37] outline-none transition" onkeyup="performSearch()">
                     <div id="searchResults" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
                         <p class="col-span-full text-center opacity-30 mt-12">Start typing to explore the collection...</p>
                     </div>
@@ -677,11 +667,8 @@
             : "";
 
         const categoryCopy = {
-            men: { title: "Men Collection", subtitle: "Fresh branded shirts, premium tees, and everyday denim with sale pricing" },
-            women: { title: "Women Collection", subtitle: "Drapes, gowns, and statement silhouettes" },
-            kids: { title: "Kids Collection", subtitle: "Occasion-ready styles for the youngest guests" },
-            accessories: { title: "Accessories Collection", subtitle: "Finishing pieces for a complete look" },
-            cosmetics: { title: "Cosmetics Collection", subtitle: "Beauty essentials and luxury makeup" }
+            men: { title: "Men's Collection", subtitle: "Top men's styles under Rs. 2,500" },
+            accessories: { title: "Men's Accessories", subtitle: "Finishing pieces for every men's look" }
         };
 
         const products = {
@@ -697,7 +684,7 @@
                     category: "Men",
                     audience: "Office / Smart casual / Dinner",
                     caption: "Sharp for office rotations, dinner plans, and shoppers who want a dependable black staple.",
-                    image: "https://rukminim2.flixcart.com/image/612/612/xif0q/shirt/k/x/6/-original-imahfnwyabzeav2r.jpeg?q=70"
+                    image: "https://m.media-amazon.com/images/I/619oYj15neL._AC_UL320_.jpg"
                 },
                 {
                     id: "m2",
@@ -710,7 +697,7 @@
                     category: "Men",
                     audience: "Workwear / Smart evenings / First-job fits",
                     caption: "Built for young professionals, semi-formal meetups, and men who want texture without loud prints.",
-                    image: "https://rukminim2.flixcart.com/image/612/612/xif0q/shirt/q/j/n/46-assfqmof199995-allen-solly-original-imag2md57rjzmjzt-bb.jpeg?q=70"
+                    image: "https://m.media-amazon.com/images/I/61qWtKmRWnL._AC_UL320_.jpg"
                 },
                 {
                     id: "m3",
@@ -723,7 +710,7 @@
                     category: "Men",
                     audience: "Weekend / Travel / Everyday",
                     caption: "A clean beige pick for brunch crowds, travel dressers, and easy everyday layering.",
-                    image: "https://cdn10.nnnow.com/web-images/medium/styles/067YNLGUI1L/1725358109601/1.jpg"
+                    image: "https://m.media-amazon.com/images/I/81mQLSwxBuL._AC_UL320_.jpg"
                 },
                 {
                     id: "m4",
@@ -736,36 +723,10 @@
                     category: "Men",
                     audience: "College / Casual office / Daily wear",
                     caption: "Made for college days, casual offices, and anyone after a polished dark-denim basic.",
-                    image: "https://rukminim2.flixcart.com/image/612/612/xif0q/jean/y/t/v/32-pjdnastfa24389-peter-england-resized-2-original-imagqp8jfbubcf9k.jpeg?q=70"
+                    image: "https://m.media-amazon.com/images/I/81GX2QpbMqL._AC_UL320_.jpg"
                 },
                 {
                     id: "m5",
-                    name: "The Souled Store Relaxed Fit Jeans",
-                    price: "2,699",
-                    oldPrice: "5,999",
-                    discount: "55% Off",
-                    badge: "TS",
-                    style: "Trendy",
-                    category: "Men",
-                    audience: "Streetwear / Weekend / Creators",
-                    caption: "Relaxed denim for creators, off-duty dressers, and men who want roomier street-led comfort.",
-                    image: "https://assets.myntassets.com/h_720,q_90,w_540/v1/assets/images/2026/FEBRUARY/6/ScTP6qt1_141c1e9bd65a45308f9d7514d117ad5a.jpg"
-                },
-                {
-                    id: "m6",
-                    name: "Levi's Indigo Slim Fit Shirt",
-                    price: "3,299",
-                    oldPrice: "6,999",
-                    discount: "53% Off",
-                    badge: "LV",
-                    style: "Elegant",
-                    category: "Men",
-                    audience: "Premium casual / Date night / Layering",
-                    caption: "An indigo staple for date nights, smart layering, and shoppers who prefer premium classics.",
-                    image: "https://levi.in/cdn/shop/files/006XG0001_01_Styleshot.jpg?v=1767002679"
-                },
-                {
-                    id: "m7",
                     name: "Puma Essential Raglan Tee",
                     price: "1,699",
                     oldPrice: "3,999",
@@ -775,10 +736,10 @@
                     category: "Men",
                     audience: "Gym / Campus / Athleisure",
                     caption: "Active-ready for gym commuters, campus wear, and sporty everyday wardrobes.",
-                    image: "https://assets.myntassets.com/h_720,q_90,w_540/v1/assets/images/2025/SEPTEMBER/10/2BkVLd78_e6dad485fece4a47b6edfcd870ea7389.jpg"
+                    image: "https://m.media-amazon.com/images/I/51QIZB2-tOL._AC_UL320_.jpg"
                 },
                 {
-                    id: "m8",
+                    id: "m6",
                     name: "Levi's Olive Slim Fit T-Shirt",
                     price: "1,499",
                     oldPrice: "3,499",
@@ -788,23 +749,10 @@
                     category: "Men",
                     audience: "Minimalists / Travel / Everyday",
                     caption: "Easy olive jersey for minimal dressers, travel packs, and repeat-wear casual days.",
-                    image: "https://assets.ajio.com/medias/sys_master/root/20250326/uvy3/67e3866055340d4b4f8a6c32/-473Wx593H-469698874-olive-MODEL.jpg"
+                    image: "https://m.media-amazon.com/images/I/61mh8CmCt3L._AC_UL320_.jpg"
                 },
                 {
-                    id: "m9",
-                    name: "Jack & Jones Floral Trucker Jacket",
-                    price: "3,799",
-                    oldPrice: "7,999",
-                    discount: "53% Off",
-                    badge: "JJ",
-                    style: "Trendy",
-                    category: "Men",
-                    audience: "Street style / Parties / Trend seekers",
-                    caption: "A bold layer for fashion-first buyers, concert nights, and statement streetwear looks.",
-                    image: "https://assets-jiocdn.ajio.com/medias/sys_master/root/20240807/dsHj/66b30b191d763220fa6541ce/jack_%26_jones_white_men_floral_print_regular_fit_trucker_jacket.jpg"
-                },
-                {
-                    id: "m10",
+                    id: "m7",
                     name: "Skinny Low-Rise Blue Jeans",
                     price: "1,999",
                     oldPrice: "4,699",
@@ -814,36 +762,10 @@
                     category: "Men",
                     audience: "Night out / Youth style / Fitted denim",
                     caption: "A sharper skinny fit for nightlife plans, younger shoppers, and close-cut denim fans.",
-                    image: "https://rukminim2.flixcart.com/image/612/612/xif0q/jean/4/m/m/-original-imahfupwjv2g7qzv.jpeg?q=70"
+                    image: "https://m.media-amazon.com/images/I/81UE7uTscSL._AC_UL320_.jpg"
                 },
                 {
-                    id: "m11",
-                    name: "Levi's 511 Light Fade Jeans",
-                    price: "3,499",
-                    oldPrice: "7,499",
-                    discount: "53% Off",
-                    badge: "LV",
-                    style: "Elegant",
-                    category: "Men",
-                    audience: "Friday casual / Premium basics / Smart denim",
-                    caption: "Clean light-fade denim for premium casual wardrobes, office Fridays, and effortless styling.",
-                    image: "https://assets.myntassets.com/h_720,q_90,w_540/v1/assets/images/2025/SEPTEMBER/23/uBLdLrp6_7ac51a1de46544de81c0293ab127debf.jpg"
-                },
-                {
-                    id: "m12",
-                    name: "Pepe Jeans Straight Fit Denim",
-                    price: "2,899",
-                    oldPrice: "6,299",
-                    discount: "54% Off",
-                    badge: "PJ",
-                    style: "Minimal",
-                    category: "Men",
-                    audience: "Commuters / Daily wear / Relaxed fit",
-                    caption: "Straight-fit comfort for all-day movers, daily commuters, and shoppers who avoid skinny cuts.",
-                    image: "https://adn-static1.nykaa.com/nykdesignstudio-images/pub/media/catalog/product/d/7/d7881a4PM2084796Q053000Blue_1.jpg"
-                },
-                {
-                    id: "m13",
+                    id: "m8",
                     name: "Peter England Casuals Slim Fit Jeans",
                     price: "2,399",
                     oldPrice: "5,499",
@@ -853,68 +775,67 @@
                     category: "Men",
                     audience: "Everyday / Budget upgrade / Slim fit",
                     caption: "Dependable slim denim for everyday wardrobes, budget-conscious buyers, and clean casual pairing.",
-                    image: "https://assets.myntassets.com/h_720,q_90,w_540/v1/assets/images/2025/FEBRUARY/4/O2XZttlK_ddf50fc9a12f4586a27a0367c191f4e4.jpg"
+                    image: "https://m.media-amazon.com/images/I/51ycAL7o01L._AC_UL320_.jpg"
+                },
+                {
+                    id: "m9",
+                    name: "Active Performance Polo",
+                    price: "1,899",
+                    oldPrice: "3,999",
+                    discount: "53% Off",
+                    badge: "AP",
+                    style: "Minimal",
+                    category: "Men",
+                    audience: "Golf / Smart casual / Travel",
+                    caption: "A breathable polo built for active days and relaxed evenings.",
+                    image: "https://m.media-amazon.com/images/I/614rjmZuTOL._AC_UL320_.jpg"
+                },
+                {
+                    id: "m10",
+                    name: "Denim Jogger Pants",
+                    price: "2,199",
+                    oldPrice: "4,499",
+                    discount: "51% Off",
+                    badge: "DJ",
+                    style: "Trendy",
+                    category: "Men",
+                    audience: "Streetwear / Weekends / Comfort",
+                    caption: "A modern denim pant with jogger ease for relaxed styling.",
+                    image: "https://m.media-amazon.com/images/I/41huLYVP82L._AC_UL320_.jpg"
                 }
             ],
-            women: [
-                { id: "w1", name: "Emerald Zari Saree", price: "38,000", badge: "EZ", style: "Traditional", category: "Women" },
-                { id: "w2", name: "Stardust Evening Gown", price: "55,000", badge: "SG", style: "Trendy", category: "Women" },
-                { id: "w3", name: "Chiffon Palazzo Set", price: "18,000", badge: "CP", style: "Minimal", category: "Women" },
-                { id: "w4", name: "Banarasi Silk Saree", price: "42,000", badge: "BS", style: "Traditional", category: "Women" },
-                { id: "w5", name: "Designer Lehenga", price: "65,000", badge: "DL", style: "Elegant", category: "Women" },
-                { id: "w6", name: "Cotton Salwar Kameez", price: "12,000", badge: "CS", style: "Minimal", category: "Women" },
-                { id: "w7", name: "Embroidered Anarkali", price: "48,000", badge: "EA", style: "Traditional", category: "Women" },
-                { id: "w8", name: "Party Wear Dress", price: "22,000", badge: "PD", style: "Trendy", category: "Women" },
-                { id: "w9", name: "Velvet Gown", price: "58,000", badge: "VG", style: "Elegant", category: "Women" },
-                { id: "w10", name: "Linen Kurti Set", price: "9,500", badge: "LK", style: "Minimal", category: "Women" }
-            ],
-            kids: [
-                { id: "k1", name: "Little Prince Tuxedo", price: "8,500", badge: "PT", style: "Elegant", category: "Kids" },
-                { id: "k2", name: "Lehenga Mini", price: "7,200", badge: "LM", style: "Traditional", category: "Kids" },
-                { id: "k3", name: "Princess Dress", price: "6,800", badge: "PD", style: "Elegant", category: "Kids" },
-                { id: "k4", name: "Kurta Pajama Set", price: "4,500", badge: "KP", style: "Traditional", category: "Kids" },
-                { id: "k5", name: "Casual T-Shirt", price: "2,200", badge: "CT", style: "Minimal", category: "Kids" },
-                { id: "k6", name: "Party Suit", price: "9,500", badge: "PS", style: "Trendy", category: "Kids" },
-                { id: "k7", name: "Sherwani Junior", price: "12,000", badge: "SJ", style: "Traditional", category: "Kids" },
-                { id: "k8", name: "Designer Frocks", price: "8,000", badge: "DF", style: "Elegant", category: "Kids" },
-                { id: "k9", name: "Cotton Playsuit", price: "3,500", badge: "CP", style: "Minimal", category: "Kids" },
-                { id: "k10", name: "Festive Outfit", price: "7,500", badge: "FO", style: "Trendy", category: "Kids" }
-            ],
+            women: [],
+            kids: [],
+            cosmetics: [],
             accessories: [
-                { id: "a1", name: "Premium Gold Clutch", price: "14,000", badge: "GC", style: "Trendy", category: "Accessories" },
-                { id: "a2", name: "Pashmina Shawl", price: "22,000", badge: "PS", style: "Elegant", category: "Accessories" },
-                { id: "a3", name: "Diamond Earrings", price: "35,000", badge: "DE", style: "Elegant", category: "Accessories" },
-                { id: "a4", name: "Leather Belt", price: "8,500", badge: "LB", style: "Minimal", category: "Accessories" },
-                { id: "a5", name: "Silk Scarf", price: "12,000", badge: "SS", style: "Traditional", category: "Accessories" },
-                { id: "a6", name: "Designer Watch", price: "28,000", badge: "DW", style: "Trendy", category: "Accessories" },
-                { id: "a7", name: "Gold Necklace", price: "45,000", badge: "GN", style: "Elegant", category: "Accessories" },
-                { id: "a8", name: "Cotton Handbag", price: "6,500", badge: "CH", style: "Minimal", category: "Accessories" },
-                { id: "a9", name: "Embroidered Dupatta", price: "18,000", badge: "ED", style: "Traditional", category: "Accessories" },
-                { id: "a10", name: "Party Clutch", price: "10,000", badge: "PC", style: "Trendy", category: "Accessories" }
+                { id: "a1", name: "Vegan Leather Belt", price: "1,299", oldPrice: "2,599", discount: "50% Off", badge: "VB", style: "Minimal", category: "Accessories", audience: "Everyday / Office / Layering", caption: "A versatile belt with clean hardware for structured looks.", image: "https://m.media-amazon.com/images/I/61aRAdQk9wL._AC_SR180,120_CB1169409_QL70_.jpg" },
+                { id: "a2", name: "Statement Sunglasses", price: "1,999", oldPrice: "3,999", discount: "50% Off", badge: "SS", style: "Trendy", category: "Accessories", audience: "Travel / Weekend outings", caption: "Bold tinted lenses with a fashion-forward silhouette.", image: "https://m.media-amazon.com/images/I/61gcB4wWrfL._AC_UL320_.jpg" },
+                { id: "a3", name: "Classic Wallet", price: "1,699", oldPrice: "3,499", discount: "51% Off", badge: "CW", style: "Minimal", category: "Accessories", audience: "Daily use / Travel", caption: "A slim wallet designed for everyday carry and simple organisation.", image: "https://m.media-amazon.com/images/I/619vlw0VKfL._AC_UL320_.jpg" },
+                { id: "a4", name: "Beaded Chain Necklace", price: "2,499", oldPrice: "4,999", discount: "50% Off", badge: "BC", style: "Trendy", category: "Accessories", audience: "Layering / Street style", caption: "A unique beaded chain built to add texture and edge to men's tailoring.", image: "https://m.media-amazon.com/images/I/41QGw9F4YaL._AC_UL320_.jpg" },
+                { id: "a5", name: "Gunmetal Bead Chain", price: "2,699", oldPrice: "5,299", discount: "49% Off", badge: "GC", style: "Trendy", category: "Accessories", audience: "Night out / Event styling", caption: "A sleek, masculine bead chain with gunmetal beads for refined attitude.", image: "https://m.media-amazon.com/images/I/61gO7W9Ekop._AC_UL320_.jpg" },
+                { id: "a6", name: "Beaded Bracelet Set", price: "1,399", oldPrice: "2,999", discount: "53% Off", badge: "BS", style: "Minimal", category: "Accessories", audience: "Layering / Weekend wear", caption: "A curated set of men's bead bracelets for low-key polish.", image: "https://m.media-amazon.com/images/I/31sDfgDVRzL._AC_SR160,134_CB1169409_QL70_.jpg" },
+                { id: "a7", name: "Leather & Bead Bracelet", price: "1,599", oldPrice: "3,299", discount: "52% Off", badge: "LB", style: "Trendy", category: "Accessories", audience: "Casual / Street styling", caption: "A rugged leather band paired with black beads for textured contrast.", image: "https://m.media-amazon.com/images/I/51-Vs3yBEmL._AC_UL320_.jpg" },
+                { id: "a8", name: "Phone Sling Bag", price: "999", oldPrice: "1,999", discount: "50% Off", badge: "PB", style: "Minimal", category: "Accessories", audience: "Travel / Street style", caption: "A compact sling bag built for hands-free outings.", image: "https://m.media-amazon.com/images/I/515b4Np8ODL._AC_SR250,250_QL65_.jpg" },
+                { id: "a9", name: "Minimal Cuff Bracelet", price: "1,499", oldPrice: "2,999", discount: "50% Off", badge: "CB", style: "Minimal", category: "Accessories", audience: "Work / Evening", caption: "A sleek cuff bracelet for subtle wrist layering with menswear.", image: "https://m.media-amazon.com/images/I/41fX4LJqQSL._AC_UL320_.jpg" },
+                { id: "a10", name: "Layered Bead Chain", price: "2,899", oldPrice: "5,799", discount: "50% Off", badge: "LB", style: "Trendy", category: "Accessories", audience: "Party / Evening", caption: "A layered men's bead chain with polished accents for standout styling.", image: "https://m.media-amazon.com/images/I/61K6KcV2COL._AC_UL320_.jpg" }
             ],
             cosmetics: [
-                { id: "c1", name: "Luxury Perfume Set", price: "8,500", badge: "LP", style: "Elegant", category: "Cosmetics" },
-                { id: "c2", name: "Gold Lipstick", price: "2,500", badge: "GL", style: "Trendy", category: "Cosmetics" },
-                { id: "c3", name: "Silk Foundation", price: "4,200", badge: "SF", style: "Minimal", category: "Cosmetics" },
-                { id: "c4", name: "Diamond Face Powder", price: "6,800", badge: "DF", style: "Elegant", category: "Cosmetics" },
-                { id: "c5", name: "Matte Lip Gloss", price: "1,800", badge: "ML", style: "Trendy", category: "Cosmetics" },
-                { id: "c6", name: "Natural Blush", price: "3,200", badge: "NB", style: "Minimal", category: "Cosmetics" },
-                { id: "c7", name: "Pearl Eyeshadow", price: "5,500", badge: "PE", style: "Elegant", category: "Cosmetics" },
-                { id: "c8", name: "Bold Mascara", price: "2,800", badge: "BM", style: "Trendy", category: "Cosmetics" },
-                { id: "c9", name: "Organic Face Cream", price: "7,200", badge: "OF", style: "Minimal", category: "Cosmetics" },
-                { id: "c10", name: "Luxury Nail Polish", price: "1,500", badge: "NP", style: "Trendy", category: "Cosmetics" },
-                { id: "c11", name: "Velvet Lipstick", price: "3,000", badge: "VL", style: "Elegant", category: "Cosmetics" },
-                { id: "c12", name: "Hydrating Moisturizer", price: "4,500", badge: "HM", style: "Minimal", category: "Cosmetics" },
-                { id: "c13", name: "Shimmer Highlighter", price: "3,800", badge: "SH", style: "Trendy", category: "Cosmetics" },
-                { id: "c14", name: "Matte Bronzer", price: "4,200", badge: "MB", style: "Elegant", category: "Cosmetics" },
-                { id: "c15", name: "Clear Lip Balm", price: "1,200", badge: "CL", style: "Minimal", category: "Cosmetics" },
-                { id: "c16", name: "Volume Mascara", price: "3,500", badge: "VM", style: "Trendy", category: "Cosmetics" },
-                { id: "c17", name: "Rose Face Mist", price: "2,800", badge: "RF", style: "Elegant", category: "Cosmetics" },
-                { id: "c18", name: "Nude Eyeshadow Palette", price: "6,500", badge: "NE", style: "Minimal", category: "Cosmetics" },
-                { id: "c19", name: "Glossy Lip Plumper", price: "2,200", badge: "GL", style: "Trendy", category: "Cosmetics" },
-                { id: "c20", name: "Satin Blush", price: "3,900", badge: "SB", style: "Elegant", category: "Cosmetics" }
+                { id: "c1", name: "Gold Lipstick", price: "2,500", oldPrice: "5,000", discount: "50% Off", badge: "GL", style: "Trendy", category: "Cosmetics", audience: "Parties / Evening glamour", caption: "A creamy gold shade made for bold party lips.", image: "https://m.media-amazon.com/images/I/41fEqPU0gTL._AC_SR250,250_QL65_.jpg" },
+                { id: "c2", name: "Matte Lip Gloss", price: "1,800", oldPrice: "3,499", discount: "49% Off", badge: "ML", style: "Trendy", category: "Cosmetics", audience: "Daywear / Night out", caption: "A smoothing matte gloss with longwear colour.", image: "https://m.media-amazon.com/images/I/71gjb1mt6PL._AC_SR160,134_CB1169409_QL70_.jpg" },
+                { id: "c3", name: "Luxury Nail Polish", price: "1,500", oldPrice: "2,999", discount: "50% Off", badge: "NP", style: "Elegant", category: "Cosmetics", audience: "Manicure / Parties", caption: "A rich, high-shine shade built to last through nights out.", image: "https://m.media-amazon.com/images/I/31OyG8jwxPL._AC_SR250,250_QL65_.jpg" },
+                { id: "c4", name: "Clear Lip Balm", price: "1,200", oldPrice: "2,399", discount: "50% Off", badge: "CL", style: "Minimal", category: "Cosmetics", audience: "Everyday / Travel", caption: "Light hydration with a barely-there glow for daily comfort.", image: "https://m.media-amazon.com/images/I/81bk7yMzOkL._AC_SR160,134_CB1169409_QL70_.jpg" },
+                { id: "c5", name: "Rose Face Mist", price: "2,400", oldPrice: "4,799", discount: "50% Off", badge: "RF", style: "Elegant", category: "Cosmetics", audience: "Refresh / Prep / Setting", caption: "A cooling floral mist to refresh makeup and skin throughout the day.", image: "https://m.media-amazon.com/images/I/41sgALFkUaL._AC_SR250,250_QL65_.jpg" },
+                { id: "c6", name: "Bold Mascara", price: "2,499", oldPrice: "4,999", discount: "50% Off", badge: "BM", style: "Trendy", category: "Cosmetics", audience: "Lashes / Evening", caption: "High-volume mascara for dramatic lift and definition.", image: "https://m.media-amazon.com/images/I/61b5rTf7eML._AC_UL320_.jpg" },
+                { id: "c7", name: "Natural Blush", price: "2,299", oldPrice: "4,599", discount: "50% Off", badge: "NB", style: "Minimal", category: "Cosmetics", audience: "Daily / Work looks", caption: "A soft matte blush that gives skin a healthy flush.", image: "https://m.media-amazon.com/images/I/61z3TxZNOyL._AC_SR160,134_CB1169409_QL70_.jpg" },
+                { id: "c8", name: "Soft Highlighter", price: "2,399", oldPrice: "4,799", discount: "50% Off", badge: "SH", style: "Elegant", category: "Cosmetics", audience: "Glow / Evening / Photos", caption: "A buildable highlighter with a luminous, silky finish.", image: "https://m.media-amazon.com/images/I/71aUwQocwML._AC_UL320_.jpg" },
+                { id: "c9", name: "Nude Eyeshadow Palette", price: "2,499", oldPrice: "5,299", discount: "53% Off", badge: "NE", style: "Minimal", category: "Cosmetics", audience: "Work / Day-to-night", caption: "A neutral palette with wearable shades for every occasion.", image: "https://m.media-amazon.com/images/I/61z3TxZNOyL._AC_SR160,134_CB1169409_QL70_.jpg" },
+                { id: "c10", name: "Satin Bronzer", price: "1,899", oldPrice: "3,999", discount: "52% Off", badge: "SB", style: "Trendy", category: "Cosmetics", audience: "Contour / Glow", caption: "A warm satin bronzer that sculpts and warms skin naturally.", image: "https://m.media-amazon.com/images/I/51DCLF9IBJL._AC_UL320_.jpg" }
             ]
         };
+
+        products.women = [];
+        products.kids = [];
+        products.cosmetics = [];
 
         const allProducts = Object.values(products).flat();
         const GEMINI_MODEL = "gemini-2.5-flash";
@@ -929,11 +850,11 @@
         };
 
         const dressCodeStyleMap = {
-            "Elegant Formal": ["Elegant", "Traditional"],
-            "Festive Traditional": ["Traditional", "Elegant"],
-            "Cocktail Glam": ["Trendy", "Elegant"],
-            "Minimal Chic": ["Minimal", "Elegant"],
-            "Relaxed Luxe": ["Minimal", "Trendy"]
+            "Formal Suit": ["Elegant", "Traditional"],
+            "Business Casual": ["Minimal", "Elegant"],
+            "Street Luxe": ["Trendy", "Minimal"],
+            "Smart Casual": ["Minimal", "Elegant"],
+            "Relaxed Weekend": ["Minimal", "Trendy"]
         };
 
         const timeStyleMap = {
@@ -1077,15 +998,15 @@
             const name = normalizeText(product.name);
             const tags = new Set(styleOccasionMap[product.style] || []);
 
-            if (/sherwani|lehenga|saree|anarkali|bandhgala|jodhpuri|achkan|banarasi|kurta/.test(name)) {
+            if (/suit|tuxedo|blazer|waistcoat|jacket|coat|shirt|trousers|formal/.test(name)) {
                 tags.add("Weddings & Ceremonies");
             }
 
-            if (/gown|dress|party|clutch|tuxedo|blazer|mascara|lipstick|highlighter/.test(name)) {
+            if (/party|night|street|denim|jacket|polo|hoodie|suit/.test(name)) {
                 tags.add("Parties & Events");
             }
 
-            if (/cotton|linen|casual|playsuit|kurti|shirt|moisturizer|cream|balm/.test(name)) {
+            if (/cotton|linen|casual|shirt|jeans|polo|sweater|tee|hoodie|lounge|travel/.test(name)) {
                 tags.add("Daily Wear");
             }
 
@@ -1138,7 +1059,7 @@
         }
 
         function isCoreOccasionProduct(product, shoppingFor) {
-            if (!shoppingFor || shoppingFor === "All Collections") {
+            if (!shoppingFor || shoppingFor === "All Collections" || shoppingFor === "All Men's Collections") {
                 return !["Accessories", "Cosmetics"].includes(product.category);
             }
 
@@ -1172,7 +1093,7 @@
             const category = product.category;
             const coreProduct = isCoreOccasionProduct(product, context.shoppingFor);
 
-            if (context.shoppingFor && context.shoppingFor !== "All Collections") {
+            if (context.shoppingFor && context.shoppingFor !== "All Collections" && context.shoppingFor !== "All Men's Collections") {
                 if (coreProduct) {
                     score += 34;
                     addReason(`Strong main look for ${normalizeText(context.shoppingFor)} occasion dressing.`);
@@ -1229,9 +1150,9 @@
                 addReason("Its details connect nicely with your mood and notes.");
             }
 
-            if (coreProduct && /dress|gown|lehenga|saree|anarkali|sherwani|bandhgala|kurta|tuxedo|frocks/.test(normalizeText(product.name))) {
+            if (coreProduct && /suit|tuxedo|blazer|jacket|coat|shirt|trousers|formal|polo/.test(normalizeText(product.name))) {
                 score += 8;
-                addReason("A strong dress-first silhouette for the occasion.");
+                addReason("A strong outfit-first silhouette for the occasion.");
             }
 
             if (category === "Accessories" && targetOccasion !== "Daily Wear") {
@@ -2095,7 +2016,7 @@
             currentPage = page;
             hideMenus();
 
-            if (["men", "women", "kids", "accessories", "cosmetics"].includes(page)) {
+            if (["men", "accessories"].includes(page)) {
                 setupCategoryPage(page);
                 setVisiblePage("categoryPage");
                 return;
