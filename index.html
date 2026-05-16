@@ -95,6 +95,49 @@
             transition: transform .45s ease;
         }
 
+        .product-placeholder {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            align-items: flex-end;
+            padding: 1.35rem;
+            background:
+                radial-gradient(circle at top left, rgba(240, 208, 96, 0.16), transparent 34%),
+                linear-gradient(160deg, rgba(15, 61, 46, 0.94), rgba(10, 10, 10, 0.98));
+        }
+
+        .product-placeholder::after {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background:
+                linear-gradient(180deg, rgba(255, 255, 255, 0.06), transparent 35%),
+                linear-gradient(0deg, rgba(6, 10, 8, 0.3), transparent 48%);
+            pointer-events: none;
+        }
+
+        .product-placeholder-copy {
+            position: relative;
+            z-index: 1;
+        }
+
+        .product-placeholder-label {
+            color: rgba(212, 175, 55, 0.82);
+            font-size: .68rem;
+            letter-spacing: .24em;
+            text-transform: uppercase;
+            margin-bottom: .75rem;
+        }
+
+        .product-placeholder-title {
+            font-family: "Cormorant Garamond", serif;
+            font-size: clamp(1.7rem, 4vw, 2.4rem);
+            line-height: 1.05;
+            color: rgba(245, 245, 220, 0.95);
+            max-width: 11rem;
+        }
+
         .product-card:hover .product-photo {
             transform: scale(1.05);
         }
@@ -601,6 +644,14 @@
                         <div id="cat-subtitle" class="tracking-[.3em] text-xs uppercase mb-2 crown-icon" style="color:var(--gold)"></div>
                         <h2 id="cat-title" class="font-display text-5xl md:text-6xl font-light"></h2>
                     </div>
+                    <div class="mb-10 flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-end">
+                        <label for="priceSorter" class="text-[11px] uppercase tracking-[0.28em] text-white/45">Sort by price</label>
+                        <select id="priceSorter" onchange="handlePriceSortChange()" class="rounded-xl border border-white/10 bg-white/5 px-4 py-3 text-sm text-cream outline-none transition focus:border-[#D4AF37] sm:min-w-56">
+                            <option value="featured" class="bg-[#0d1f16] text-cream">Featured</option>
+                            <option value="price-low" class="bg-[#0d1f16] text-cream">Price: Low to High</option>
+                            <option value="price-high" class="bg-[#0d1f16] text-cream">Price: High to Low</option>
+                        </select>
+                    </div>
                     <div id="productGrid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8"></div>
                 </div>
             </div>
@@ -675,17 +726,27 @@
             men: [
                 { id: "m1", name: "Allen Solly Black Shirt", price: "983", oldPrice: "1,799", badge: "AS", style: "Elegant", category: "Men", audience: "Office / Smart casual / Dinner", caption: "A black shirt that keeps weekday dressing sharp and easy.", image: "https://rukminim2.flixcart.com/image/612/612/xif0q/shirt/k/x/6/-original-imahfnwyabzeav2r.jpeg?q=70" },
                 { id: "m2", name: "Allen Solly Blue Shirt", price: "959", oldPrice: "1,399", badge: "AS", style: "Elegant", category: "Men", audience: "Workwear / Smart evenings / First-job fits", caption: "A textured blue pick for polished daily wear and semi-formal plans.", image: "https://rukminim2.flixcart.com/image/612/612/xif0q/shirt/q/j/n/46-assfqmof199995-allen-solly-original-imag2md57rjzmjzt-bb.jpeg?q=70" },
-                { id: "m3", name: "Polo Assn", price: "1,549", oldPrice: "2,299", badge: "UP", style: "Minimal", category: "Men", audience: "Weekend / Travel / Everyday", caption: "A clean beige shirt for easy layering and relaxed smart-casual looks.", image: "https://m.media-amazon.com/images/I/81mQLSwxBuL._AC_UL320_.jpg" },
+                { id: "m3", name: "Polo Assn", price: "1,549", oldPrice: "2,299", badge: "UP", style: "Minimal", category: "Men", audience: "Weekend / Travel / Everyday", caption: "A clean beige shirt for easy layering and relaxed smart-casual looks.", image: "https://img.tatacliq.com/images/i20//437Wx649H/MP000000024286043_437Wx649H_202411010905321.jpeg" },
                 { id: "m4", name: "Peter England Tapered Fit Jeans", price: "1,083", oldPrice: "1,799", badge: "PE", style: "Minimal", category: "Men", audience: "College / Casual office / Daily wear", caption: "Dark tapered denim built for repeat wear across campus and casual offices.", image: "https://rukminim1.flixcart.com/image/832/832/xif0q/jean/y/t/v/32-pjdnastfa24389-peter-england-original-imagqp8jfbubcf9k.jpeg?q=70" },
                 { id: "m5", name: "Souled Store Relaxed Fit Jeans", price: "1,999", oldPrice: "3,999", badge: "SS", style: "Trendy", category: "Men", audience: "Weekends / Streetwear / Relaxed fit", caption: "Relaxed denim with an easy silhouette for laid-back off-duty styling.", image: "https://assets.myntassets.com/dpr_2,q_60,w_210,c_limit,fl_progressive/assets/images/2026/FEBRUARY/6/ScTP6qt1_141c1e9bd65a45308f9d7514d117ad5a.jpg" },
-                { id: "m6", name: "Levis Indigo Slim Fit Shirt", price: "1,549", oldPrice: "2,799", badge: "LV", style: "Elegant", category: "Men", audience: "Smart casual / Dinner / Everyday", caption: "An indigo slim-fit shirt that sharpens up everyday plans without feeling formal.", image: "https://levi.in/cdn/shop/files/acfcbbe1-941b-467d-8ce3-dd2c0ac3e7be1741002461187-Mens-Solid-Slim-Fit-Shirt-1821741002460749-4_26f3a544-f06f-4122-99b6-7790d8f16e6f.jpg?v=1752158905" },
+                { id: "m6", name: "Levis Indigo Slim Fit Shirt", price: "1,549", oldPrice: "2,799", badge: "LV", style: "Elegant", category: "Men", audience: "Smart casual / Dinner / Everyday", caption: "An indigo slim-fit shirt that sharpens up everyday plans without feeling formal.", image: "https://levi.in/cdn/shop/files/acfcbbe1-941b-467d-8ce3-dd2c0ac3e7be1741002461187-Mens-Solid-Slim-Fit-Shirt-1821741002460749-4_26f3a544-f06f-4122-99b6-7790d8f16e6f_360x.jpg?v=1752158905&width=400" },
                 { id: "m7", name: "Puma T-shirt", price: "1,399", oldPrice: "1,999", badge: "PU", style: "Trendy", category: "Men", audience: "Gym / Campus / Athleisure", caption: "A sporty tee for active days, campus runs, and simple casual rotation.", image: "https://assets.myntassets.com/dpr_2,q_60,w_210,c_limit,fl_progressive/assets/images/2025/SEPTEMBER/10/2BkVLd78_e6dad485fece4a47b6edfcd870ea7389.jpg" },
                 { id: "m8", name: "Levis T-shirt", price: "892", oldPrice: "1,599", badge: "LV", style: "Minimal", category: "Men", audience: "Travel / Everyday / Basics", caption: "A clean everyday tee that works well for travel packs and repeat wear.", image: "https://assets-jiocdn.ajio.com/medias/sys_master/root/20250326/uvy3/67e3866055340d4b4f8a6c32/levi%27s_olive_green_men_slim_fit_crew-neck_t-shirt.jpg" },
                 { id: "m9", name: "Jack & Jones Mens Floral Fit", price: "3,650", oldPrice: "6,999", badge: "JJ", style: "Trendy", category: "Men", audience: "Layering / Weekend / Statement outerwear", caption: "A floral-fit layer that adds a bold edge to weekend outfits.", image: "https://assets-jiocdn.ajio.com/medias/sys_master/root/20240807/dsHj/66b30b191d763220fa6541ce/jack_%26_jones_white_men_floral_print_regular_fit_trucker_jacket.jpg" },
                 { id: "m10", name: "Mens Skinny Low Rise Blue Jeans", price: "1,199", oldPrice: "2,899", badge: "SL", style: "Trendy", category: "Men", audience: "Night out / Youth style / Fitted denim", caption: "Close-cut blue jeans for fitted looks and sharper casual styling.", image: "https://rukminim2.flixcart.com/image/612/612/xif0q/jean/4/m/m/-original-imahfupwjv2g7qzv.jpeg?q=70" },
-                { id: "m11", name: "Levis Slim Fit Stretchable Jeans", price: "1,589", oldPrice: "3,399", badge: "LV", style: "Minimal", category: "Men", audience: "Everyday / Commute / Stretch denim", caption: "Stretch denim built for all-day comfort and neat everyday fits.", image: "https://assets.myntassets.com/w_200,c_limit,fl_progressive,dpr_2.0/assets/images/2025/SEPTEMBER/23/uBLdLrp6_7ac51a1de46544de81c0293ab127debf.jpg" },
+                { id: "m11", name: "Levis Slim Fit Stretchable Jeans", price: "1,589", oldPrice: "3,399", badge: "LV", style: "Minimal", category: "Men", audience: "Everyday / Commute / Stretch denim", caption: "Stretch denim built for all-day comfort and neat everyday fits.", image: "https://assets.myntassets.com/h_560,q_90,w_420/v1/assets/images/2025/SEPTEMBER/23/uBLdLrp6_7ac51a1de46544de81c0293ab127debf.jpg" },
                 { id: "m12", name: "Pepe Straight Fit Jeans", price: "1,847", oldPrice: "3,299", badge: "PJ", style: "Minimal", category: "Men", audience: "Weekend / Smart casual / Straight fit", caption: "Straight-fit jeans with an easy structure that pairs well with tees and shirts.", image: "https://adn-static1.nykaa.com/nykdesignstudio-images/pub/media/catalog/product/d/7/d7881a4PM2084796Q053000Blue_1.jpg?rnd=20200526195200&tr=w-256" },
-                { id: "m13", name: "Mens Classic Jeans", price: "1,747", oldPrice: "1,999", badge: "CJ", style: "Minimal", category: "Men", audience: "Daily wear / Basics / Casual", caption: "Classic mid-rise denim for dependable everyday outfits.", image: "https://m.media-amazon.com/images/I/816XIEGbe8L._AC_UL320_FMwebp_QL65_.jpg" }
+                { id: "m13", name: "Mens Classic Jeans", price: "1,747", oldPrice: "1,999", badge: "CJ", style: "Minimal", category: "Men", audience: "Daily wear / Basics / Casual", caption: "Classic mid-rise denim for dependable everyday outfits.", image: "https://m.media-amazon.com/images/I/51hlxeNPIfL._AC_UL320_.jpg" },
+                { id: "m14", name: "White Fasion Hoodie", price: "453", oldPrice: "1999", badge: "WF", style: "Trendy", category: "Men", audience: "Campus / Layering / Weekend", caption: "A clean hoodie pick for casual layering, commute days, and cooler weekends.", supplier: "Meesho", costPrice: "353", sourceLink: "https://www.meesho.com/urbane-ravishing-men-sweatshirts/p/76g1q9", image: "https://images.meesho.com/images/products/434089660/yukqs_512.avif?width=512" },
+                { id: "m15", name: "Bat Man Theme Hoodie", price: "437", oldPrice: "1499", badge: "BM", style: "Trendy", category: "Men", audience: "Streetwear / Casual / Statement", caption: "A graphic sweatshirt that adds a playful statement edge to off-duty looks.", supplier: "Meesho", costPrice: "333", sourceLink: "https://www.meesho.com/men-printed-round-neck-sweatshirt-by-hip-hop-fashion/p/4y4mwi", image: "https://images.meesho.com/images/products/299187954/j32uc_512.avif?width=512" },
+                { id: "m16", name: "Mens Trendy Sweat Shirt", price: "397", oldPrice: "1081", badge: "TS", style: "Trendy", category: "Men", audience: "Daily wear / Layering / Casual", caption: "A simple sweatshirt option for relaxed styling and easy everyday wear.", supplier: "Meesho", costPrice: "314", sourceLink: "https://www.meesho.com/men-sweatshirt-sweatshirt-for-men-winter-wear-warm-hoodie-green-hoodie/p/awi93m", image: "https://images.meesho.com/images/products/659261074/ktor7_512.avif?width=512" },
+                { id: "m17", name: "Mens Stylish Green Hoodie", price: "387", oldPrice: "1021", badge: "SG", style: "Trendy", category: "Men", audience: "Travel / Off-duty / Layering", caption: "A green hoodie layer that brings color into laid-back weekend outfits.", supplier: "Meesho", costPrice: "318", sourceLink: "https://www.meesho.com/keesor-men-sweatshirtmen-jacketmen-cotton-hooded-neck-sweatshirt/p/7q1nam", image: "https://images.meesho.com/images/products/467010094/fhwvj_512.avif?width=512" },
+                { id: "m18", name: "Mens grey formal pant", price: "361", oldPrice: "999", badge: "GF", style: "Elegant", category: "Men", audience: "Office / Smart casual / Workwear", caption: "Light grey formal pants that keep office outfits polished and easy to style.", supplier: "Meesho", costPrice: "261", sourceLink: "https://www.meesho.com/men-regular-fit-formal-stretchable-with-expandable-waist-light-gray-pant/p/9h1nf4", image: "https://images.meesho.com/images/products/572826064/hpfwd_512.avif?width=512" },
+                { id: "m19", name: "Black Business formal trousers", price: "287", oldPrice: "1099", badge: "BF", style: "Elegant", category: "Men", audience: "Office / Meetings / Formal", caption: "Black formal trousers built for sharper workwear and evening plans.", supplier: "Meesho", costPrice: "239", sourceLink: "https://www.meesho.com/men-slim-fit-ankle-length-black-best-premium-quality-low-price-formal-wear-trouser-or-pant/p/d10d9g", image: "https://images.meesho.com/images/products/787757092/s6zq3_512.avif?width=512" },
+                { id: "m20", name: "Mens formal Blue Pants", price: "401", oldPrice: "1299", badge: "BP", style: "Elegant", category: "Men", audience: "Office / Formal / Commute", caption: "Blue formal pants that balance clean tailoring with everyday office use.", supplier: "Meesho", costPrice: "345", sourceLink: "https://www.meesho.com/mens-formal-pants-for-men-mens-slimm-fit-formal-pant-non-stretchable-trouser-office-wear-trousers/p/abmain", image: "https://images.meesho.com/images/products/624177599/tbsg0_512.avif?width=512" },
+                { id: "m21", name: "Mens street ware pants", price: "291", oldPrice: "999", badge: "SW", style: "Trendy", category: "Men", audience: "Weekend / Streetwear / Casual", caption: "Streetwear pants designed for casual movement and relaxed daily styling.", supplier: "Meesho", costPrice: "261", sourceLink: "https://www.meesho.com/men-printed-black-tranding-track-pants-fabric-cotton-pack-of-1/p/fjf39g", image: "https://images.meesho.com/images/products/939609412/ymzio_512.avif?width=512" },
+                { id: "m22", name: "Mens printed pants", price: "387", oldPrice: "899", badge: "MP", style: "Trendy", category: "Men", audience: "Streetwear / Travel / Off-duty", caption: "Printed track-style pants that give casual outfits a more expressive finish.", supplier: "Meesho", costPrice: "303", sourceLink: "https://www.meesho.com/kezual-black-oversized-track-pant-l-best-track-pant-for-street-wear-fashion-l-comfort-with-style/p/ff8aaq", image: "https://images.meesho.com/images/products/932573474/plhfz_512.avif?width=512" },
+                { id: "m23", name: "Mens Texured Shirt", price: "493", oldPrice: "1299", badge: "TX", style: "Elegant", category: "Men", audience: "Smart casual / Office / Dinner", caption: "A textured shirt that works well for smart-casual dressing and dinner plans.", supplier: "Meesho", costPrice: "407", sourceLink: "https://www.meesho.com/shirt-for-men/p/8yk31j", image: "https://images.meesho.com/images/products/541773415/3ezes_512.avif?width=512" }
             ],
             women: [],
             kids: [],
@@ -775,6 +836,7 @@
             productGrid: document.getElementById("productGrid"),
             catTitle: document.getElementById("cat-title"),
             catSubtitle: document.getElementById("cat-subtitle"),
+            priceSorter: document.getElementById("priceSorter"),
             searchInput: document.getElementById("searchInput"),
             searchResults: document.getElementById("searchResults"),
             profileContent: document.getElementById("profile-content"),
@@ -801,6 +863,7 @@
 
         let currentPage = "home";
         let currentAuthMode = "signin";
+        let currentSort = "featured";
         let cart = [];
         let latestCheckoutMessage = "";
         let firebaseServices = null;
@@ -1602,44 +1665,59 @@
         function createCard(product) {
             const fallbackImage = getFallbackImage(product);
             const imageSrc = product.image || fallbackImage;
-
-            if (imageSrc) {
-                return `
-                    <div class="product-card p-5 rounded-3xl flex flex-col">
-                        <div class="product-media">
-                            <img src="${escapeHtml(imageSrc)}" alt="${escapeHtml(product.name)}" loading="lazy" class="product-photo" data-fallback="${escapeHtml(fallbackImage)}" onerror="handleCardImageError(this)">
-                            <div class="product-photo-overlay"></div>
-                            <div class="product-media-topline">
-                                <div class="product-badge product-badge--mini">${escapeHtml(product.badge)}</div>
-                                ${product.discount ? `<div class="discount-chip">${escapeHtml(product.discount)}</div>` : ""}
-                            </div>
+            const mediaMarkup = imageSrc
+                ? `
+                    <img src="${escapeHtml(imageSrc)}" alt="${escapeHtml(product.name)}" loading="lazy" class="product-photo" data-fallback="${escapeHtml(fallbackImage)}" onerror="handleCardImageError(this)">
+                    <div class="product-photo-overlay"></div>
+                `
+                : `
+                    <div class="product-placeholder">
+                        <div class="product-placeholder-copy">
+                            <div class="product-placeholder-label">${escapeHtml(product.supplier || "Reyval Edit")}</div>
+                            <div class="product-placeholder-title">${escapeHtml(product.name)}</div>
                         </div>
-                        ${product.audience ? `<div class="audience-copy mb-3">${escapeHtml(product.audience)}</div>` : ""}
-                        <h3 class="font-display text-2xl text-[#D4AF37] mb-2">${escapeHtml(product.name)}</h3>
-                        <div class="text-sm opacity-50 italic mb-3">${escapeHtml(product.style)} - ${escapeHtml(product.category)}</div>
-                        ${product.caption ? `<p class="product-caption text-sm mb-5">${escapeHtml(product.caption)}</p>` : ""}
-                        ${createPriceMarkup(product)}
-                        <button onclick="addToCart('${product.id}')" class="mt-auto w-full py-3 border border-[#D4AF37] text-[#D4AF37] text-[10px] uppercase tracking-[.2em] font-bold hover:bg-[#D4AF37] hover:text-black transition rounded-xl">Add to Bag</button>
                     </div>
                 `;
-            }
 
             return `
-                <div class="product-card p-8 rounded-3xl flex flex-col items-center text-center">
-                    <div class="product-badge mb-6">${escapeHtml(product.badge)}</div>
+                <div class="product-card p-5 rounded-3xl flex flex-col">
+                    <div class="product-media">
+                        ${mediaMarkup}
+                        <div class="product-media-topline">
+                            <div class="product-badge product-badge--mini">${escapeHtml(product.badge)}</div>
+                            ${product.discount ? `<div class="discount-chip">${escapeHtml(product.discount)}</div>` : ""}
+                        </div>
+                    </div>
+                    ${product.audience ? `<div class="audience-copy mb-3">${escapeHtml(product.audience)}</div>` : ""}
                     <h3 class="font-display text-2xl text-[#D4AF37] mb-2">${escapeHtml(product.name)}</h3>
-                    <div class="text-sm opacity-50 italic mb-2">${escapeHtml(product.style)} - ${escapeHtml(product.category)}</div>
+                    <div class="text-sm opacity-50 italic mb-3">${escapeHtml(product.style)} - ${escapeHtml(product.category)}</div>
+                    ${product.caption ? `<p class="product-caption text-sm mb-5">${escapeHtml(product.caption)}</p>` : ""}
                     ${createPriceMarkup(product)}
-                    <button onclick="addToCart('${product.id}')" class="w-full py-3 border border-[#D4AF37] text-[#D4AF37] text-[10px] uppercase tracking-[.2em] font-bold hover:bg-[#D4AF37] hover:text-black transition rounded-xl">Add to Bag</button>
+                    <button onclick="addToCart('${product.id}')" class="mt-auto w-full py-3 border border-[#D4AF37] text-[#D4AF37] text-[10px] uppercase tracking-[.2em] font-bold hover:bg-[#D4AF37] hover:text-black transition rounded-xl">Add to Bag</button>
                 </div>
             `;
+        }
+
+        function sortProductsForDisplay(items = []) {
+            const sorted = [...items];
+
+            if (currentSort === "price-low") {
+                sorted.sort((left, right) => parsePrice(left.price) - parsePrice(right.price) || left.name.localeCompare(right.name));
+            } else if (currentSort === "price-high") {
+                sorted.sort((left, right) => parsePrice(right.price) - parsePrice(left.price) || left.name.localeCompare(right.name));
+            }
+
+            return sorted;
         }
 
         function setupCategoryPage(category) {
             const copy = categoryCopy[category];
             ui.catTitle.textContent = copy.title;
             ui.catSubtitle.textContent = copy.subtitle;
-            ui.productGrid.innerHTML = products[category].map(createCard).join("");
+            if (ui.priceSorter) {
+                ui.priceSorter.value = currentSort;
+            }
+            ui.productGrid.innerHTML = sortProductsForDisplay(products[category]).map(createCard).join("");
             refreshIcons();
         }
 
@@ -2020,6 +2098,14 @@
             ui.searchResults.innerHTML = filtered.length
                 ? filtered.map(createCard).join("")
                 : '<p class="col-span-full text-center opacity-40 mt-12">No products found matching your search.</p>';
+        };
+
+        window.handlePriceSortChange = () => {
+            currentSort = ui.priceSorter?.value || "featured";
+
+            if (["men", "accessories"].includes(currentPage)) {
+                setupCategoryPage(currentPage);
+            }
         };
 
         window.requestOccasionRecommendation = async () => {
